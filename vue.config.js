@@ -1,7 +1,4 @@
 module.exports = {
-    publicPath: process.env.NODE_ENV === 'production'
-    ? '/src/client/'
-    : '/',
     pages: {
         index: {
           // page 的入口
