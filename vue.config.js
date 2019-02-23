@@ -1,3 +1,10 @@
+
+const path = require('path')
+ 
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
     // baseUrl  type:{string} default:'/' 
     // 将部署应用程序的基本URL
@@ -58,5 +65,9 @@ module.exports = {
         //         target: '<other_url>'
         //     }
         // },  // 配置多个代理
-    }
+    },
+    // chainWebpack: (config) => {
+    //     config.resolve.alias
+    //         .set('@', resolve('src'))
+    // }
 }
