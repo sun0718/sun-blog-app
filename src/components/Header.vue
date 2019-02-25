@@ -173,7 +173,7 @@ export default {
         .site-info{
             text-align: center;
             padding: 10px 0;
-            margin: 10px 0px 40px 0px;
+            margin: 10px 0px 30px 0px;
             h1{
                 font-family: "Stalemate",cursive;
                 font-size: 72px;
