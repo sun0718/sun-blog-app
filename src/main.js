@@ -1,14 +1,20 @@
 import Vue from "vue";
 import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import router from "./router/router";
+import store from "./store/store";
+import axiosApi from './api/axios';
+import 'element-ui/lib/theme-chalk/display.css';
+// import axios from 'axios';
 // 安装babel-plugin-components插件控制ele按需引入
-import { Button, Select, Row, Col, Menu, MenuItem, Submenu, Carousel, CarouselItem} from 'element-ui';
+import { Button, Select, Row, Col, Menu, MenuItem, Submenu, Carousel, CarouselItem, Scrollbar} from 'element-ui';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import '../public/common.css'
 
 Vue.config.productionTip = false;
+
+Vue.use(axiosApi);
+// Vue.prototype.axios = axios;
 
 Vue.component(Button.name, Button);
 Vue.component(Select.name, Select);
@@ -19,6 +25,7 @@ Vue.component(MenuItem.name, MenuItem);
 Vue.component(Submenu.name, Submenu);
 Vue.component(Carousel.name, Carousel);
 Vue.component(CarouselItem.name, CarouselItem);
+Vue.component(Scrollbar.name, Scrollbar);
 
 new Vue({
   router,

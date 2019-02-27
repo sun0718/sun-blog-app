@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-    <sunHeader />
-    <router-view />
+    <el-scrollbar style="height:100%">
+      <sunHeader />
+      <router-view />
+    </el-scrollbar>
   </div>
 </template>
 <script>
 export default {
   name:'',
-  components:{
-
-  }
 }
 </script>
 
@@ -21,5 +20,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
 </style>
