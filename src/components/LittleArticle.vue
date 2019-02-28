@@ -46,11 +46,11 @@
                 width: 300px;
                 transform: scale(1);
                 transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-                @media (max-width: 1199px) and (min-width: 560px){
+                @media (max-width: 1199px) and (min-width: 860px){
                     width: 175px;
                 }
-                @media (max-width: 550px) and (min-width: 0px){
-                    width: 100%;
+                @media (max-width: 860px) and (min-width: 768px){
+                    width: 130px;
                 }
             }
         }
