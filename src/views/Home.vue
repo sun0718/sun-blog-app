@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <el-carousel indicator-position="outside" class="general-banner" :height="carouselHeight" trigger="click" >
+    <el-carousel class="general-banner" :height="carouselHeight" trigger="click"  :interval = '5000'>
       <el-carousel-item v-for="(item,index) in 3" :key="index">
           <ul class="general-banner-inner">
-            <li v-for="(item,index) in 3" :key="index">
+            <li v-for="(item,index) in show" :key="index">
                 <img ref="imgHeight" alt="myself" src="@public/img/two.jpg" />
                 <div class="content-holder">
                     <div class="content-meta">
@@ -21,10 +21,28 @@
           </ul>
       </el-carousel-item>
     </el-carousel>
+    <div class="container">
+      <div class="main-wrapper">
+        <el-row>
+          <el-col :lg="16" :md="16" :sm="12" :xs="24">
+              <Article></Article>
+          </el-col>
+          <el-col :lg="8" :md="8" :sm="12" :xs="24">
+              <aside class="sidebar">
+                  <AboutMe></AboutMe>
+              </aside>
+          </el-col>
+        </el-row>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+
+import Article from '@/components/Article.vue'
+import AboutMe from '@/components/AboutMe.vue'
+
 export default {
   name: "home",
   data(){
@@ -32,19 +50,23 @@ export default {
       item: {
 
       },
-      carouselHeight:'500px'
+      carouselHeight:'500px',
+      show:3
     }
+  },
+  components:{
+    Article,
+    AboutMe
   },
   mounted(){
     // 可用于设置自适应屏幕，根据获得的可视宽度（兼容性）判断是否显示
     let offsetW = document.documentElement.offsetWidth || document.body.offsetWidth;
     this.show = offsetW < 600 ? 1 : offsetW<1024 ?  2 :  3
-    console.log('img-----:'+this.$refs.imgHeight[0].height + 'px');
-    let hhh = this.$refs.imgHeight[0].height + 'px'
-    console.log(hhh)
-    // this.carouselHeight = this.$refs.imgHeight[0].height + 'px';
+    setTimeout(()=>{
+        console.log('img-----:'+this.$refs.imgHeight[0].height + 'px');
+        this.carouselHeight = this.$refs.imgHeight[0].height + 'px';
+    },10)
     this.$nextTick(()=>{
-      // let self = this;
       window.onresize = function(){
         let offsetW = document.documentElement.offsetWidth || document.body.offsetWidth;
         this.show = offsetW < 600 ? 1 : offsetW<1024 ?  2 :  3;
@@ -56,12 +78,13 @@ export default {
 </script>
 
 <style lang="less">
+
+.home{
   .el-carousel__item ul{
     overflow: hidden;
     height: 100%;
     display: flex;
-  }
-  .el-carousel__item li{
+    & li{
     position: relative;
     overflow: hidden;
     &:hover > .mask{
@@ -115,5 +138,19 @@ export default {
       }
     }
   }
+  }
+  .container{
+    max-width: 1170px;
+    width: 100%;
+    margin: 0 auto;
+    .main-wrapper{
+      padding: 60px 0;
+      .el-col{
+        padding: 0 15px;
+        overflow: hidden;
+      }
+    }
+  }
+}
 </style>
 

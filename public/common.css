@@ -22,9 +22,11 @@ html, body {
 }
 
 body {
-    font-family: "Microsoft YaHei";
-    font-size:14px;
-    color:#333;
+    font-family: "Montserrat",sans-serif;
+    line-height: 1.6;
+    font-weight: 400;
+    font-size: 16px;
+    color: #111;
 }
 h1, h2, h3, h4, h5, h6{font-weight:normal;}
 ul,ol {
@@ -38,7 +40,9 @@ img {
 
 a {
     text-decoration: none;
-    color: #232323;
+    color: #337ab7;
+    font-family: "Montserrat",sans-serif;
+    transition: all 0.7s ease;
 }
 
 table {

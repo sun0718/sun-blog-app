@@ -4,6 +4,7 @@ import router from "./router/router";
 import store from "./store/store";
 import axiosApi from './api/axios';
 import 'element-ui/lib/theme-chalk/display.css';
+import '@public/font-awesome/css/font-awesome.min.css';
 // import axios from 'axios';
 // 安装babel-plugin-components插件控制ele按需引入
 import { Button, Select, Row, Col, Menu, MenuItem, Submenu, Carousel, CarouselItem, Scrollbar} from 'element-ui';
