@@ -21,6 +21,9 @@
                             <li>
                                 <a href="https://weibo.com/p/1005051846702114/home"></a>
                             </li>
+                            <li>
+                                <a href="https://weibo.com/p/1005051846702114/home"></a>
+                            </li>
                         </ul>
                     </el-col>
                 </el-row>
@@ -73,6 +76,15 @@
                 <el-menu-item index="3" >IMAGES</el-menu-item>
                 <el-menu-item index="4" >ABOUT</el-menu-item>
                 <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">MESSAGEBOARD</a></el-menu-item>
+                <div class="social_share_btn">
+                    <h3 class="widget-title">Subscribe</h3>
+                    <ul>
+                        <li class="li-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></li>
+                        <li class="li-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
+                        <li class="li-google-plus"><a href="#" target="_blank"><i class="fa fa-google-plus"></i> Google +</a></li>
+                        <li class="li-pinterest"><a href="#" target="_blank"><i class="fa fa-pinterest-p"></i> Pinterest</a></li>
+                    </ul>
+                </div>
             </el-menu>
         </nav>
     </header>
@@ -173,24 +185,55 @@ header{
                             display: inline-block;
                             text-align: center;
                             line-height: 20px;
-                            &:hover{
-                                background: @mainColor
+                            &:before{
+                                font-family: 'FontAwesome';
+                                font-size: 16px;
+                                color: #111;
+                                transition: all 0.7s ease;
                             }
                             &:hover::before{
-                                content: '';
-                                display: inline-block;
-                                width: 35px;
-                                height: 35px;
-                                position: absolute;
-                                top: 0px;
-                                left: 0px;
+                                color:#fff
                             }
                         }
-                        & a:first-child::before{
-                            background: url(../assets/images/qq.png)
+                        &:first-child a{
+                            &::before{
+                                content: "\f09a";
+                            }
+                            &:hover{
+                               background-color: #4267B2;
+                            }
                         }
-                        & a:last-child::before{
-                            background: url(..//assets/images/sina.png)
+                        &:nth-child(2) a{
+                            &::before{
+                                content: "\f099";
+                            }
+                            &:hover{
+                               background-color: #1DA1F2;
+                            }
+                        }
+                        &:nth-child(3) a{
+                            &::before{
+                                content: "\f16d";
+                            }
+                            &:hover{
+                               background-color: #8A33A4;
+                            }
+                        }
+                        &:nth-child(4) a{
+                            &::before{
+                                content: "\f16a";
+                            }
+                            &:hover{
+                               background-color: red;
+                            }
+                        }
+                        &:last-child a{
+                            &::before{
+                                content: "\f2ac";
+                            }
+                            &:hover{
+                               background-color: #FFD600;
+                            }
                         }
                     }
                 }
@@ -277,6 +320,75 @@ header{
                     text-transform: uppercase;
                     text-decoration: none;
                     font-size: 18px;
+                }
+                .social_share_btn{
+                    margin: 20px 0 30px;
+                    font-size: 30px;
+                    ul{
+                        margin-top: 20px;
+                        li{
+                            display: block;
+                            margin: 0;
+                            float: left;
+                            width: 25%;
+                            a{
+                                display: block;
+                                padding: 10px 4px;
+                                text-align: center;
+                                color: #fff;
+                                cursor: pointer;
+                                -ms-transition: all .3s ease-out;
+                                transition: all .3s ease-out;
+                                text-decoration: none;
+                                font-size: 12px;
+                                text-transform: uppercase;
+                                font-weight: 600;
+                                border: 1px solid transparent;
+                                i{
+                                    display: block;
+                                    height: 32px;
+                                    width: 32px;
+                                    margin: 0 auto 5px;
+                                    border-radius: 25px;
+                                    line-height: 32px;
+                                    font-size: 16px;
+                                    text-align: center;
+                                }
+                            }
+                            &:nth-child(1) a{
+                                background: #3b5998;
+                                border-color: #3b5998;
+                                i{
+                                    background: #486dba;
+                                    text-shadow: #283d6c 1px 1px, #283d6c 2px 2px, #283d6c 3px 3px, #293f6f 4px 4px, #2a4173 5px 5px, #2b4376 6px 6px, #2d457a 7px 7px, #2e477d 8px 8px, #2f4981 9px 9px, #314b84 10px 10px, #324d88 11px 11px, #334f8b 12px 12px, #35518f 13px 13px, #365392 14px 14px, #375596 15px 15px, #39579a 16px 16px;
+                                }
+                            }
+                            &:nth-child(2) a{
+                                background: #50abf0;
+                                border-color: #50abf0;
+                                i{
+                                    background: #6fbaf3;
+                                    text-shadow: #3878a8 1px 1px, #3878a8 2px 2px, #3878a8 3px 3px, #397bad 4px 4px, #3b7fb3 5px 5px, #3d83b8 6px 6px, #3f87be 7px 7px, #418bc3 8px 8px, #438fc9 9px 9px, #4493ce 10px 10px, #4697d4 11px 11px, #489bd9 12px 12px, #4a9fdf 13px 13px, #4ca3e4 14px 14px, #4ea7ea 15px 15px, #50abf0 16px 16px;
+                                }
+                            }
+                            &:nth-child(3) a{
+                                background: #df4a32; 
+                                border-color: #df4a32;
+                                i{
+                                    background: #e76454;
+                                    text-shadow: #9c3423 1px 1px, #9c3423 2px 2px, #9c3423 3px 3px, #a13524 4px 4px, #a63725 5px 5px, #ab3926 6px 6px, #b03a27 7px 7px, #b53c28 8px 8px, #ba3e29 9px 9px, #c03f2b 10px 10px, #c5412c 11px 11px, #ca432d 12px 12px, #cf442e 13px 13px, #d4462f 14px 14px, #d94830 15px 15px, #df4a32 16px 16px;
+                                }
+                            }
+                            &:nth-child(4) a{
+                                background: #cc2127;
+                                border-color: #cc2127;
+                                i{
+                                    background: #e1373d;
+                                    text-shadow: #901415 1px 1px, #901415 2px 2px, #901415 3px 3px, #941415 4px 4px, #991516 5px 5px, #9e1617 6px 6px, #a21617 7px 7px, #a71718 8px 8px, #ac1819 9px 9px, #b01819 10px 10px, #b5191a 11px 11px, #ba1a1b 12px 12px, #be1a1b 13px 13px, #c31b1c 14px 14px, #c81c1d 15px 15px, #cd1d1e 16px 16px;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

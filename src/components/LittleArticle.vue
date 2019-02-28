@@ -14,7 +14,7 @@
                 </div>
                 <!-- /.Post meta -->
             </div>
-            <p class="hidden-md-and-down">There are many variations of passages of Lorem Ipsum available, but the majority.</p>
+            <p class="hidden-md-only">There are many variations of passages of Lorem Ipsum available, but the majority.</p>
             <div class="element-block">
                 <a href="#" class="btn">Reading ⇾</a>
                 <!-- /.Post button -->
@@ -111,6 +111,9 @@
                     @media screen and (min-width: 768px){
                         font-size: 10px
                     }
+                }
+                i{
+                    margin-right: 5px;
                 }
             }
         }

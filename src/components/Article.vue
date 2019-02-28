@@ -108,6 +108,16 @@ article.article{
         h2{
             padding: 30px 0 15px 0;
             font-size: 30px;
+            max-height: 130px;
+            overflow : hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            @media (max-width: 768px) {
+                line-height: 1;
+                max-height: 90px;
+            }
         }
     }
     .article-content{
@@ -207,6 +217,11 @@ article.article{
                     font-size: 14px;
                     text-transform: uppercase;
                     transition: color 200ms ease-in-out;
+                }
+            }
+            @media screen and (max-width: 768px){
+                .article-author,.article-comment-count{
+                    text-align: center;
                 }
             }
     }

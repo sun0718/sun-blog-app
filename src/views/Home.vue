@@ -41,7 +41,7 @@
                 </el-col>
               </el-row>
           </el-col>
-          <el-col :lg="8" :md="8" :sm="12" :xs="24">
+          <el-col style="padding-left:20px;" :lg="8" :md="8" :sm="12" :xs="24">
               <aside class="sidebar">
                   <AboutMe></AboutMe>
               </aside>
@@ -162,7 +162,6 @@ export default {
     .main-wrapper{
       padding: 60px 0;
       &>.el-row>.el-col{
-        padding: 0 15px;
         overflow: hidden;
       }
     }
