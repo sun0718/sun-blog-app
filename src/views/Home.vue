@@ -26,6 +26,20 @@
         <el-row>
           <el-col :lg="16" :md="16" :sm="12" :xs="24">
               <Article></Article>
+              <el-row>
+                <el-col :lg="24" :md="24" :sm="24" :xs="24">
+                    <LittleArticle></LittleArticle>
+                </el-col>
+                <el-col :lg="24" :md="24" :sm="24" :xs="24">
+                    <LittleArticle></LittleArticle>
+                </el-col>
+                <el-col :lg="24" :md="24" :sm="24" :xs="24">
+                    <LittleArticle></LittleArticle>
+                </el-col>
+                <el-col :lg="24" :md="24" :sm="24" :xs="24">
+                    <LittleArticle></LittleArticle>
+                </el-col>
+              </el-row>
           </el-col>
           <el-col :lg="8" :md="8" :sm="12" :xs="24">
               <aside class="sidebar">
@@ -41,6 +55,7 @@
 <script>
 
 import Article from '@/components/Article.vue'
+import LittleArticle from '@/components/LittleArticle.vue'
 import AboutMe from '@/components/AboutMe.vue'
 
 export default {
@@ -56,7 +71,8 @@ export default {
   },
   components:{
     Article,
-    AboutMe
+    AboutMe,
+    LittleArticle
   },
   mounted(){
     // 可用于设置自适应屏幕，根据获得的可视宽度（兼容性）判断是否显示
@@ -145,7 +161,7 @@ export default {
     margin: 0 auto;
     .main-wrapper{
       padding: 60px 0;
-      .el-col{
+      &>.el-row>.el-col{
         padding: 0 15px;
         overflow: hidden;
       }
