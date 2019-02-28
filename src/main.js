@@ -7,7 +7,7 @@ import 'element-ui/lib/theme-chalk/display.css';
 import '@public/font-awesome/css/font-awesome.min.css';
 // import axios from 'axios';
 // 安装babel-plugin-components插件控制ele按需引入
-import { Button, Select, Row, Col, Menu, MenuItem, Submenu, Carousel, CarouselItem, Scrollbar} from 'element-ui';
+import { Button, Select, Row, Col, Menu, MenuItem, Submenu, Carousel, CarouselItem, Scrollbar ,Pagination} from 'element-ui';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import '../public/common.css'
@@ -27,6 +27,7 @@ Vue.component(Submenu.name, Submenu);
 Vue.component(Carousel.name, Carousel);
 Vue.component(CarouselItem.name, CarouselItem);
 Vue.component(Scrollbar.name, Scrollbar);
+Vue.component(Pagination.name, Pagination);
 
 new Vue({
   router,
