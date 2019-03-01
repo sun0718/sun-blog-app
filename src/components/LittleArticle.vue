@@ -1,32 +1,34 @@
 <template>
-    <div class="media">
-        <div class="media-left">
-            <a href="#"><img src="@public/img/370x300-2.jpg" alt=""></a>
-        </div>
-        <!-- /.Post image -->
-        <div class="media-body">
-            <div class="media-body-header">
-                <div class="media-body-cat"><span>In</span> <a href="#">Lifestyle</a></div>
-                <h3 class="media-body-heading"><a href="#">that a reader will be distracted.</a></h3>
-                <div class="entry-meta">
-                    <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
-                    <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
-                </div>
-                <!-- /.Post meta -->
+    <el-row class="media">
+        <el-col :lg="24" :md="24" :sm="24" :xs="24">
+            <div class="media-left">
+                <a href="#"><img src="@public/img/370x300-2.jpg" alt=""></a>
             </div>
-            <p class="hidden-md-only">There are many variations of passages of Lorem Ipsum available, but the majority.</p>
-            <div class="element-block">
-                <a href="#" class="btn">Reading ⇾</a>
-                <!-- /.Post button -->
-                <div class="media-body-share">
-                    <a class="smedia facebook fa fa-facebook" href="#"></a>
-                    <a class="smedia twitter fa fa-twitter" href="#"></a>
-                    <a class="smedia googleplus fa fa-google-plus" href="#"></a>
+            <!-- /.Post image -->
+            <div class="media-body">
+                <div class="media-body-header">
+                    <div class="media-body-cat"><span>In</span> <a href="#">Lifestyle</a></div>
+                    <h3 class="media-body-heading"><a href="#">that a reader will be distracted.</a></h3>
+                    <div class="entry-meta">
+                        <span class="entry-date"><i class="fa fa-calendar-o" aria-hidden="true"></i><time datetime="2018-01-21T19:00">Jan 21, 2018</time></span> 
+                        <span class="comment-link"><a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i>9 Comments</a></span>
+                    </div>
+                    <!-- /.Post meta -->
                 </div>
-                <!-- /.Post social share -->
+                <p class="hidden-md-only">There are many variations of passages of Lorem Ipsum available, but the majority.</p>
+                <div class="element-block">
+                    <a href="#" class="btn">Reading ⇾</a>
+                    <!-- /.Post button -->
+                    <div class="media-body-share">
+                        <a class="smedia facebook fa fa-facebook" href="#"></a>
+                        <a class="smedia twitter fa fa-twitter" href="#"></a>
+                        <a class="smedia googleplus fa fa-google-plus" href="#"></a>
+                    </div>
+                    <!-- /.Post social share -->
+                </div>
             </div>
-        </div>
-    </div>
+        </el-col>
+    </el-row>
 </template>
 
 <style lang="less">

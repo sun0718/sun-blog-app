@@ -72,11 +72,11 @@ footer{
                 padding: 25px 0;
                 .copyrights{
                     p{
-                        text-align: left;
+                        text-align: center;
                     }
                 }
                 .footer-navigation{
-                    text-align: right;
+                    text-align: center;
                     li{
                         display: inline-block;
                         padding-right: 15px;

@@ -42,7 +42,6 @@ export default {
         position: relative;
         overflow: hidden;
         img{
-            max-width: 100%;
             transition: all 0.6s;
             &:hover{
                 transform: scale(1.3)

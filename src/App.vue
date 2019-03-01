@@ -3,6 +3,7 @@
     <el-scrollbar style="height:100%">
       <sunHeader />
       <router-view />
+      <sunFooter />
     </el-scrollbar>
   </div>
 </template>

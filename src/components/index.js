@@ -1,9 +1,11 @@
 import Header from './Header'
 import Footer from './Footer'
+import Wrapper from './Wrapper'
 
 const components = [
     Header,
-    Footer
+    Footer,
+    Wrapper
 ]
 
 export default {

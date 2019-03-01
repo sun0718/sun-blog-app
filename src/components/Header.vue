@@ -77,7 +77,7 @@
                 <el-menu-item index="4" >ABOUT</el-menu-item>
                 <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">MESSAGEBOARD</a></el-menu-item>
                 <div class="social_share_btn">
-                    <h3 class="widget-title">Subscribe</h3>
+                    <h3 class="">Subscribe</h3>
                     <ul>
                         <li class="li-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i> Facebook</a></li>
                         <li class="li-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></li>
@@ -119,7 +119,6 @@ export default {
 @border : rgba(0,0,0,0.15);
 
 .container{
-    width: 1170px;
     margin: 0 -15px;
     padding-right: 15px;
     padding-left: 15px;
@@ -267,7 +266,7 @@ header{
         }
     }
     .main-nav{
-        padding: 20px 10px;
+        padding: 0 10px;
         overflow: hidden;
         letter-spacing: 1px;
         .menu-toggle{

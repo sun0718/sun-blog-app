@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "../views/Home.vue";
+import About from "../views/About.vue";
+import DetailPage from "../views/DetailPage.vue";
 
 import componentUI from '../components/index'
 
@@ -24,6 +26,11 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () =>
         import(/* webpackChunkName: "about" */ "../views/About.vue")
+    },
+    {
+      path: "/DetailPage",
+      name: "DetailPage",
+      component: DetailPage
     }
   ]
 });

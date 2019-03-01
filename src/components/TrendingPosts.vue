@@ -70,7 +70,6 @@
                             position: relative;
                             overflow: hidden;
                             img{
-                                max-width: 100%;
                                 vertical-align: middle;
                             }
                         }

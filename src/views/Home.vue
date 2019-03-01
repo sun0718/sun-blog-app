@@ -21,50 +21,35 @@
           </ul>
       </el-carousel-item>
     </el-carousel>
-    <div class="container">
-      <div class="main-wrapper">
-        <el-row>
-          <el-col :lg="16" :md="16" :sm="12" :xs="24" class="wrapper-left">
-              <Article></Article>
-              <el-row>
-                <el-col :lg="24" :md="24" :sm="24" :xs="24">
-                    <LittleArticle></LittleArticle>
-                </el-col>
-                <el-col :lg="24" :md="24" :sm="24" :xs="24">
-                    <LittleArticle></LittleArticle>
-                </el-col>
-                <el-col :lg="24" :md="24" :sm="24" :xs="24">
-                    <LittleArticle></LittleArticle>
-                </el-col>
-                <el-col :lg="24" :md="24" :sm="24" :xs="24">
-                    <LittleArticle></LittleArticle>
-                </el-col>
-              </el-row>
+    <sunWrapper>
+      <div slot="left">
+              <BigArticle></BigArticle>
+              <LittleArticle></LittleArticle>
+              <LittleArticle></LittleArticle>
+              <LittleArticle></LittleArticle>
+              <LittleArticle></LittleArticle>
               <el-pagination
                 background
                 layout="prev, pager, next"
                 :total="1000">
               </el-pagination>
-          </el-col>
-          <el-col :lg="8" :md="8" :sm="12" :xs="24" class="wrapper-right">
-              <aside class="sidebar">
+      </div>
+      <div slot="right">
+          <aside class="sidebar">
                   <AboutMe></AboutMe>
                   <Social></Social>
                   <PecentPost></PecentPost>
                   <Categroy></Categroy>
                   <TrendingPosts></TrendingPosts>
               </aside>
-          </el-col>
-        </el-row>
       </div>
-    </div>
-    <sun-footer></sun-footer>
+    </sunWrapper>
   </div>
 </template>
 
 <script>
-
-import Article from '@/components/Article.vue'
+import Wrapper from '@/components/Wrapper.vue'
+import BigArticle from '@/components/BigArticle.vue'
 import LittleArticle from '@/components/LittleArticle.vue'
 import AboutMe from '@/components/AboutMe.vue'
 import Social from '@/components/Social.vue'
@@ -84,7 +69,8 @@ export default {
     }
   },
   components:{
-    Article,
+    Wrapper,
+    BigArticle,
     AboutMe,
     LittleArticle,
     Social,
@@ -123,9 +109,6 @@ export default {
     overflow: hidden;
     &:hover > .mask{
       background-color: transparent;
-    }
-    img {
-      max-width: 100%;
     }
     .mask{
       position: absolute;
@@ -172,30 +155,6 @@ export default {
       }
     }
   }
-  }
-  .container{
-    max-width: 1170px;
-    width: 100%;
-    margin: 0 auto;
-    .main-wrapper{
-      padding: 50px 10px;
-      &>.el-row>.el-col{
-        overflow: hidden;
-      }
-      .wrapper-left{
-        padding-bottom: 40px;
-      }
-      .wrapper-right{
-        padding: 0 20px;
-      }
-    }
-  }
-
-  aside{
-    padding-left: 20px;
-    @media screen and (max-width: 768px){
-      padding-left: 0;
-    }
   }
 }
 </style>
