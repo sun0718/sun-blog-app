@@ -1,6 +1,5 @@
 
 const path = require('path')
-console.log(isProd)
 
 module.exports = {
     // baseUrl  type:{string} default:'/'
