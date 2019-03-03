@@ -1,10 +1,11 @@
 
 const path = require('path')
-const isProd=process.env.NODE_ENV==='production';
 console.log(isProd)
 
 module.exports = {
-    // baseUrl  type:{string} default:'/' 
+    // baseUrl  type:{string} default:'/'
+    // 关闭eslint
+    lintOnSave:false,
     publicPath: '/',
     devServer: {
         proxy: {
