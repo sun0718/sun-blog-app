@@ -99,7 +99,7 @@ export default {
       };
     },
     mounted(){
-        this.$get('/apis/string')
+        this.$get('/string')
     },
     methods: {
       handleSelect(key, keyPath) {

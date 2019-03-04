@@ -5,6 +5,8 @@ var config = require('../config')
 
 const baseURL = config.host.baseURL
 
+
+console.log(baseURL)
 var servers = axios.create();
 
 // 添加请求拦截器
@@ -13,7 +15,9 @@ servers.interceptors.request.use(function (config) {
     // 显示loading
     const token = localStorage.getItem('token')
     const uid = localStorage.getItem('uid')
-    console.log('url------:'+config.url)
+
+    config.url = `${baseURL}${config['url']}`
+    console.log(config.url)
     if(config.method === 'POST' || config.method === 'PUT'){
         let data = qs.parse(config.data)
         config.data = qs.stringify({

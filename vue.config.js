@@ -1,15 +1,18 @@
 
 const path = require('path')
 
+console.log(process.env.NODE_ENV)
+
 module.exports = {
-    // baseUrl  type:{string} default:'/'
+    // publicPath  type:{string} default:'/'
+    // 开发环境指向当前目录，线上环境绝对值
+    publicPath:process.env.NODE_ENV === 'production' ? './' : '/',
     // 关闭eslint
     lintOnSave:false,
-    publicPath: '/',
     devServer: {
         proxy: {
             '/apis': {
-                target: 'http://192.168.40.1:9000/',  // target host
+                target: 'http://localhost:9000/',  // target host
                 ws: true,  // proxy websockets 
                 changeOrigin: true,  // needed for virtual hosted sites
                 pathRewrite: {

@@ -61,6 +61,15 @@
                     <!-- // single-page-information-holder -->
                 </article>
             </div>
+            <div slot="right">
+                <aside class="sidebar">
+                    <AboutMe></AboutMe>
+                    <Social></Social>
+                    <PecentPost></PecentPost>
+                    <Categroy></Categroy>
+                    <TrendingPosts></TrendingPosts>
+                </aside>
+            </div>
         </sunWrapper>
     </div>
 </template>

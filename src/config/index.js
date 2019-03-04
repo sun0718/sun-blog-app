@@ -1,6 +1,7 @@
+
 module.exports = {
-    host:{
-        baseURL: 'localhost:9000'
+    host:{ 
+        baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:8080/apis' : 'http://localhost:9000'
     },
     mongoDB:{
         hostname:'203.195.175.18', 

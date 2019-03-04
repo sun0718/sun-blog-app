@@ -29,8 +29,6 @@ Vue.component(CarouselItem.name, CarouselItem);
 Vue.component(Scrollbar.name, Scrollbar);
 Vue.component(Pagination.name, Pagination);
 
-console.log(process.env.VUE_APP_URL)
-
 new Vue({
   router,
   store,
