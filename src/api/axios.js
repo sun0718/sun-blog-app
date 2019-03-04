@@ -5,8 +5,8 @@ var config = require('../config')
 
 const baseURL = config.host.baseURL
 
-
-console.log(baseURL)
+console.log(process.env.NODE_ENV)
+console.log('baseURL:'+baseURL)
 var servers = axios.create();
 
 // 添加请求拦截器
