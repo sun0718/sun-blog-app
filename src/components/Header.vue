@@ -41,22 +41,24 @@
                 Menu
             </a>
             <el-menu :default-active="activeIndex" class="main-nav-menu" mode="horizontal" @select="handleSelect">
-                <el-menu-item index="1">HOME</el-menu-item>
+                <el-menu-item index="/">主页</el-menu-item>
                 <el-submenu index="2">
-                    <template slot="title">ARTICLE</template>
-                    <el-menu-item index="2-1">选项1</el-menu-item>
-                    <el-menu-item index="2-2">选项2</el-menu-item>
-                    <el-menu-item index="2-3">选项3</el-menu-item>
-                    <el-submenu index="2-4">
-                    <template slot="title">IMAGES</template>
-                    <el-menu-item index="2-4-1">选项1</el-menu-item>
-                    <el-menu-item index="2-4-2">选项2</el-menu-item>
-                    <el-menu-item index="2-4-3">选项3</el-menu-item>
-                    </el-submenu>
+                    <template slot="title">前端</template>
+                    <el-menu-item index="/article-list?1">HTML5、CSS3</el-menu-item>
+                    <el-menu-item index="/article-list?2">JAVASCRIPT</el-menu-item>
+                    <el-menu-item index="/article-list?3">NODEJS</el-menu-item>
+                    <el-menu-item index="/article-list?4">VUE</el-menu-item>
+                    <el-menu-item index="/article-list?5">REACT</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="3" >IMAGES</el-menu-item>
-                <el-menu-item index="4" >ABOUT</el-menu-item>
-                <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">MESSAGEBOARD</a></el-menu-item>
+                <el-submenu index="3">
+                    <template slot="title">生活</template>
+                    <el-menu-item index="/article-list?6">平安</el-menu-item>
+                    <el-menu-item index="/article-list?7">生活</el-menu-item>
+                    <el-menu-item index="/article-list?8">爱情</el-menu-item>
+                </el-submenu>
+                <el-menu-item index="/article-list?9" >工作</el-menu-item>
+                <el-menu-item index="/article-list?10" >简介</el-menu-item>
+                <el-menu-item index="6"><a href="https://www.baidu.com/s?wd=一个优秀的员工" target="_blank">终极跳转</a></el-menu-item>
             </el-menu>
             <el-menu v-if="menuShow" default-active="activeIndex" class="main-nav-menu-vertical" @select="handleSelect">
                 <a href="#" class="close-menu" @click="menuClick"><i class="el-icon-close"></i> <span>Close</span></a>
@@ -100,10 +102,12 @@ export default {
     },
     mounted(){
         this.$get('/string')
+        this.$get('/json')
     },
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+        this.$router.push(key)
       },
       menuClick(){
         this.menuShow = !this.menuShow
@@ -136,10 +140,11 @@ export default {
 
 header{
     .header-top-wrapper{
+        padding: 20px 0;
+        margin: 0 auto;
         border-bottom: 1px solid #e0e0e0;
-        margin-bottom: 20px;
-        padding: 15px 0 15px 0;
         .container{
+            max-width: 1170px;
             .search{
                 float: left;
                 text-align: left;

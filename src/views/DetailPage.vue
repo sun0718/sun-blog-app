@@ -64,7 +64,7 @@
             <div slot="right">
                 <aside class="sidebar">
                     <AboutMe></AboutMe>
-                    <Social></Social>
+                    <RightSocial></RightSocial>
                     <PecentPost></PecentPost>
                     <Categroy></Categroy>
                     <TrendingPosts></TrendingPosts>
@@ -79,11 +79,22 @@
 import AriticlSocial from '@/components/AriticlSocial.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 
+import AboutMe from '@/components/AboutMe.vue'
+import RightSocial from '@/components/RightSocial.vue'
+import PecentPost from '@/components/PecentPost.vue'
+import Categroy from '@/components/RightCategroy.vue'
+import TrendingPosts from '@/components/TrendingPosts.vue'
+
 export default {
     name:'DetailPage',
     components:{
         Breadcrumb,
-        AriticlSocial
+        AriticlSocial,
+        TrendingPosts,
+        Categroy,
+        PecentPost,
+        RightSocial,
+        AboutMe
     }
 }
 </script>

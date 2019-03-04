@@ -41,9 +41,13 @@ img {
 
 a {
     text-decoration: none;
-    color: #337ab7;
+    color: #000;
     font-family: "Montserrat",sans-serif;
     transition: all 0.7s ease;
+}
+
+a:hover{
+    color: #337ab7;
 }
 
 table {

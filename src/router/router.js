@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "../views/Home.vue";
 import About from "../views/About.vue";
 import DetailPage from "../views/DetailPage.vue";
+import SearchPage from "../views/ArticleList.vue";
 
 import componentUI from '../components/index'
 
@@ -31,6 +32,16 @@ export default new Router({
       path: "/DetailPage",
       name: "DetailPage",
       component: DetailPage
+    },
+    {
+      path: "/Search",
+      name: "Search",
+      component: SearchPage
+    },
+    {
+      path: "/article-list",
+      name: "article-list",
+      component: SearchPage
     }
   ]
 });

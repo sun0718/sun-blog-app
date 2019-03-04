@@ -37,7 +37,7 @@
       <div slot="right">
           <aside class="sidebar">
                   <AboutMe></AboutMe>
-                  <Social></Social>
+                  <RightSocial></RightSocial>
                   <PecentPost></PecentPost>
                   <Categroy></Categroy>
                   <TrendingPosts></TrendingPosts>
@@ -52,9 +52,9 @@ import Wrapper from '@/components/Wrapper.vue'
 import BigArticle from '@/components/BigArticle.vue'
 import LittleArticle from '@/components/LittleArticle.vue'
 import AboutMe from '@/components/AboutMe.vue'
-import Social from '@/components/Social.vue'
+import RightSocial from '@/components/RightSocial.vue'
 import PecentPost from '@/components/PecentPost.vue'
-import Categroy from '@/components/Categroy.vue'
+import Categroy from '@/components/RightCategroy.vue'
 import TrendingPosts from '@/components/TrendingPosts.vue'
 
 export default {
@@ -73,7 +73,7 @@ export default {
     BigArticle,
     AboutMe,
     LittleArticle,
-    Social,
+    RightSocial,
     PecentPost,
     Categroy,
     TrendingPosts,
@@ -93,6 +93,11 @@ export default {
         this.carouselHeight = this.$refs.imgHeight[0].height + 'px';
       }.bind(this);
     })
+  },
+  methods:{
+    goBack(){
+      window.history.length > 1 ?this.$router.go(-1):this.$router.push('/')
+    }
   }
 };
 </script>
