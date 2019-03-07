@@ -1,15 +1,20 @@
 <template>
   <div id="app">
     <el-scrollbar style="height:100%">
-      <sunHeader />
-      <router-view />
-      <sunFooter />
+        <router-view />
     </el-scrollbar>
   </div>
 </template>
 <script>
 export default {
   name:'',
+  data:function(){
+    return {
+      admin:false
+    }
+  },
+  mounted(){
+  }
 }
 </script>
 
@@ -22,5 +27,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   height: 100%;
+  .el-scrollbar {
+    overflow-x: hidden;
+  }
 }
 </style>

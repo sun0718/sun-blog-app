@@ -23,7 +23,7 @@
                             <el-row>
                                 <el-col :lg="12" :md="12" :sm="12" :xs="24">
                                     <div class="detail-author">
-                                        <img src="@/assets/images/author.jpg" alt="....">
+                                        <img src="@/assets/img/author.jpg" alt="....">
                                         <span><a href="#">Sparkle Themes</a></span>
                                     </div>
                                 </el-col>
@@ -76,14 +76,13 @@
 
 <script>
 
-import AriticlSocial from '@/components/AriticlSocial.vue'
-import Breadcrumb from '@/components/Breadcrumb.vue'
-
-import AboutMe from '@/components/AboutMe.vue'
-import RightSocial from '@/components/RightSocial.vue'
-import PecentPost from '@/components/PecentPost.vue'
-import Categroy from '@/components/RightCategroy.vue'
-import TrendingPosts from '@/components/TrendingPosts.vue'
+import AriticlSocial from '@/components/blog/AriticlSocial.vue'
+import Breadcrumb from '@/components/blog/Breadcrumb.vue'
+import AboutMe from '@/components/blog/AboutMe.vue'
+import RightSocial from '@/components/blog/RightSocial.vue'
+import PecentPost from '@/components/blog/PecentPost.vue'
+import Categroy from '@/components/blog/RightCategroy.vue'
+import TrendingPosts from '@/components/blog/TrendingPosts.vue'
 
 export default {
     name:'DetailPage',

@@ -21,7 +21,7 @@
         background-attachment: fixed !important;
         background-size: cover !important;
         background-position: center center !important;
-        background-image: url(../assets/images/two.jpeg);
+        background-image: url(../../assets/img/two.jpeg);
         .breadcrumb-listing{
             position: relative;
             z-index: 2;

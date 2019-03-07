@@ -91,4 +91,6 @@ export default {
         Vue.prototype.$put = (url ,params) => apiAxios('PUT',url ,params)
         Vue.prototype.$delete = (url ,params) => apiAxios('DELETE',url ,params)
     }
+    // 使用prototype直接挂载
+    // get : (url ,params) => apiAxios('GET',url ,params)
 }

@@ -271,7 +271,7 @@ header{
         }
     }
     .main-nav{
-        padding: 0 10px;
+        padding: 20px 10px;
         overflow: hidden;
         letter-spacing: 1px;
         .menu-toggle{

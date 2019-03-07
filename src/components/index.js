@@ -1,6 +1,6 @@
-import Header from './Header'
-import Footer from './Footer'
-import Wrapper from './Wrapper'
+import Header from './blog/common/Header'
+import Footer from './blog/common/Footer'
+import Wrapper from './blog/common/Wrapper'
 
 const components = [
     Header,

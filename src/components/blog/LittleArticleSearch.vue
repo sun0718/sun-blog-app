@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import AriticlSocial from '@/components/AriticlSocial.vue'
+import AriticlSocial from '@/components/blog/AriticlSocial.vue'
 export default {
     name:'',
     components:{

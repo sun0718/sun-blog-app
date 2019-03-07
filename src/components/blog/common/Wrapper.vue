@@ -31,7 +31,7 @@ export default {
     width: 100%;
     margin: 0 auto;
     .main-wrapper{
-      padding: 50px 10px;
+      padding: 0 10px;
       &>.el-row>.el-col{
         overflow: hidden;
       }

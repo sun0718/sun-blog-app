@@ -27,13 +27,13 @@
     </div>
 </template>
 <script>
-import AboutMe from '@/components/AboutMe.vue'
-import RightSocial from '@/components/RightSocial.vue'
-import PecentPost from '@/components/PecentPost.vue'
-import Categroy from '@/components/RightCategroy.vue'
-import TrendingPosts from '@/components/TrendingPosts.vue'
-import AriticlSocial from '@/components/AriticlSocial.vue'
-import LittleArticleSearch from '@/components/LittleArticleSearch.vue'
+import AboutMe from '@/components/blog/AboutMe.vue'
+import RightSocial from '@/components/blog/RightSocial.vue'
+import PecentPost from '@/components/blog/PecentPost.vue'
+import Categroy from '@/components/blog/RightCategroy.vue'
+import TrendingPosts from '@/components/blog/TrendingPosts.vue'
+import AriticlSocial from '@/components/blog/AriticlSocial.vue'
+import LittleArticleSearch from '@/components/blog/LittleArticleSearch.vue'
 export default {
     name:'articleList',
     components:{
