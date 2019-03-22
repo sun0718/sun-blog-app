@@ -1,11 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "../views/Home.vue";
-import About from "@/components/blog/About.vue";
-import DetailPage from "@/components/blog/DetailPage.vue";
-import SearchPage from "@/components/blog/ArticleList.vue";
+import Blog from "../views/Blog.vue";
+import Home from "@/components/blog/Home.vue";
 
-import componentUI from '../components/index'
+import componentUI from '@/components/index'
 
 Vue.use(Router);
 Vue.use(componentUI);
@@ -16,48 +14,51 @@ export default new Router({
   routes: [
     {
       path: "/",
-      redirect : '/home'
+      redirect : '/blog'
     },
     {
-      path: '/home',
-      component: Home,
+      path: '/blog',
+      component: Blog,
       meta: { title : '博客首页'},
       children:[
         {
-          path: "/home",
+          path: "/",
           name: "home",
-          component: resolve => require(['../components/blog/Dashborad.vue'], resolve),
+          component: Home,
           meta: { title: '博客首页' }
         },
         {
-          path: "/about",
-          name: "about",
+          path: "/post",
+          name: "post",
           meta: { title: '自我简介' },
+          component: resolve => require(['@/components/blog/common/PostDetail.vue'], resolve),
           // route level code-splitting
           // this generates a separate chunk (about.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
-          component: About
+          // component: About
         },
         {
-          path: "/detailPage",
-          name: "DetailPage",
-          component: DetailPage
+          path: "/some",
+          name: "some",
+          component: resolve => require(['@/components/blog/common/Classification.vue'], resolve),
+          // component: DetailPage
         },
         {
           path: "/search",
           name: "Search",
-          component: SearchPage
+          // component: SearchPage
         },
         {
           path: "/article-list",
           name: "article-list",
-          component: SearchPage
+          // component: SearchPage
         }
       ]
     },
     {
       path: '/admin',
       component: resolve => require(['@/views/Admin.vue'], resolve),
+      redirect:'/admin/dashboard',
       meta: { title: '自述文件' },
       children:[
           {
