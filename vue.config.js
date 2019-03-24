@@ -1,4 +1,4 @@
-
+var webpack = require('webpack');
 const path = require('path')
 
 console.log(process.env.NODE_ENV)
@@ -25,5 +25,14 @@ module.exports = {
         config.resolve.alias
             .set('@public',path.join(__dirname, 'public'))
             .set('@assets',path.join(__dirname, 'src/assets'))
-    }
+    },
+    // quill-image-resize-module  error https://github.com/surmon-china/vue-quill-editor/issues/272
+    configureWebpack: {
+        plugins: [
+          new webpack.ProvidePlugin({
+            'window.Quill': 'quill/dist/quill.js',
+            'Quill': 'quill/dist/quill.js'
+          }),
+        ]
+      }
 }

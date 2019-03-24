@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar style="height:100%;" ref="elscrollbar">
+  <el-scrollbar style="height:100%;" ref="elscrollbar" class="flex">
     <el-main class="main">
       <div class="container">
         <el-row class="con-top d-flex-row mr-N-half ml-N-half">
@@ -285,11 +285,14 @@ export default {
                   };
             }
         }else{
-          if(afterY < this.sliderBarHeight - this.box.height && afterY > this.box.offsetT){   //底部位于临界点和盒子中间
+          console.log(afterY)
+          console.log(this.sliderBarHeight - this.box.height )
+          console.log(this.box.offsetT)
+          if(afterY < this.sliderBarHeight - this.box.height  && afterY > this.box.offsetT){   //底部位于临界点和盒子中间
             this.fixedStyle = {
-              position: "absolute",
-              bottom: "0",
-              transform: `translateY(-20px)`,
+              position: "fixed",
+              top: "0",
+              transform: `translateY(20px)`,
               width: this.box.outwidth + "px"
             };
           }else if(afterY<this.box.offsetT){    //滚动到顶部和盒子初始位置之间
@@ -298,6 +301,8 @@ export default {
                 top: "0",
                 width: this.box.outwidth + "px"
               };
+          }else if(afterY>this.sliderBarHeight - this.box.height){    //滚动到顶部和盒子初始位置之间
+              return;
           }else{
               this.fixedStyle = {
                 position: "fixed",

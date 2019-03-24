@@ -20,7 +20,7 @@
     <!-- main menu -->
     <div class="main-menu">
       <el-menu
-        default-active="1-4-1"
+        default-active="dashboard"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
@@ -80,13 +80,11 @@ export default {
     return {
       navList: [
         {
-          icon: "el-icon-lx-home",
           index: "dashboard",
           title: "博客首页"
         },
         {
-          icon: "el-icon-lx-calendar",
-          index: "2",
+          index: "article",
           title: "文章分类",
           subs: [
             {
@@ -94,57 +92,17 @@ export default {
               title: "基本表单"
             },
             {
-              index: "3-2",
-              title: "三级菜单",
-              subs: [
-                {
-                  index: "editor",
-                  title: "富文本编辑器"
-                },
-                {
-                  index: "markdown",
-                  title: "markdown编辑器"
-                }
-              ]
-            },
-            {
               index: "upload",
               title: "文件上传"
             }
           ]
         },
         {
-          icon: "el-icon-lx-calendar",
-          index: "3",
+          index: "timeline",
           title: "时间轴线",
-          subs: [
-            {
-              index: "form",
-              title: "基本表单"
-            },
-            {
-              index: "3-2",
-              title: "三级菜单",
-              subs: [
-                {
-                  index: "editor",
-                  title: "富文本编辑器"
-                },
-                {
-                  index: "markdown",
-                  title: "markdown编辑器"
-                }
-              ]
-            },
-            {
-              index: "upload",
-              title: "文件上传"
-            }
-          ]
         },
         {
-          icon: "el-icon-lx-emoji",
-          index: "icon",
+          index: "aboutme",
           title: "个人简介"
         }
       ]

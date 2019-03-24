@@ -2,7 +2,7 @@
     <div class="header">
         <!-- 折叠按钮 -->
         <div class="collapse-btn" @click="collapseChage">
-            <i class="el-icon-menu"></i>
+            <i class="fa fa-th-large"></i>
         </div>
         <div class="logo">后台管理系统</div>
         <div class="header-right">
@@ -23,9 +23,9 @@
                     <span class="btn-bell-badge" v-if="message"></span>
                 </div>
                 <!-- 用户头像 -->
-                <div class="user-avator"><img src="@/assets/img/img.jpg"></div>
+                <div class="user-avator ml-1x"><img src="@/assets/img/img.jpg"></div>
                 <!-- 用户名下拉菜单 -->
-                <el-dropdown class="user-name" trigger="click" @command="handleCommand">
+                <el-dropdown class="user-name ml-half" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
                         {{username}} <i class="el-icon-caret-bottom"></i>
                     </span>
@@ -71,9 +71,10 @@
             // 侧边栏折叠
             collapseChage(){
                 this.collapse = !this.collapse;
+                console.log('header:',this.collapse)
                 bus.$emit('collapse', this.collapse);
             },
-            // 全屏事件
+            // 全屏事件 
             handleFullScreen(){
                 let element = document.documentElement;
                 if (this.fullscreen) {
@@ -113,68 +114,61 @@
         position: relative;
         box-sizing: border-box;
         width: 100%;
-        height: 70px;
-        font-size: 22px;
+        height: 4rem;
+        font-size: 1.2rem;
         color: #fff;
-        background-color: #07c4a8;
+        background-color: #283149;
     }
     .collapse-btn{
         float: left;
-        padding: 0 21px;
+        padding: 0 .875rem;
         cursor: pointer;
-        line-height: 70px;
-        background: #00d1b2;
+        line-height: 4rem;
     }
     .header .logo{
         float: left;
-        width:250px;
-        line-height: 70px;
+        width: 200px;
+        line-height: 4rem;
     }
     .header-right{
         float: right;
-        padding-right: 50px;
+        padding-right: 3rem;
     }
     .header-user-con{
         display: flex;
-        height: 70px;
+        height: 4rem;
         align-items: center;
     }
     .btn-fullscreen{
         transform: rotate(45deg);
         margin-right: 5px;
-        font-size: 24px;
+        font-size: 1.5rem;
     }
     .btn-bell, .btn-fullscreen{
         position: relative;
-        width: 30px;
-        height: 30px;
+        width: 2rem;
+        height: 2rem;
         text-align: center;
-        border-radius: 15px;
+        border-radius: 1rem;
         cursor: pointer;
     }
     .btn-bell-badge{
         position: absolute;
         right: 0;
         top: -2px;
-        width: 8px;
-        height: 8px;
-        border-radius: 4px;
+        width: .5rem;
+        height: .5rem;
+        border-radius: 50%;
         background: #f56c6c;
         color: #fff;
     }
     .btn-bell .el-icon-bell{
         color: #fff;
     }
-    .user-name{
-        margin-left: 10px;
-    }
-    .user-avator{
-        margin-left: 20px;
-    }
     .user-avator img{
         display: block;
-        width:40px;
-        height:40px;
+        width: 2.5rem;
+        height:2.5rem;
         border-radius: 50%;
     }
     .el-dropdown-link{

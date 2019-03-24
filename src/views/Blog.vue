@@ -1,5 +1,5 @@
 <template>
-    <el-container style="height:100%">
+    <el-container style="height:100%" v-loading.fullscreen.lock="fullscreenLoading">
         <v-Menu></v-Menu>
         <transition name="move" mode="out-in">
             <keep-alive>
@@ -16,6 +16,22 @@ export default {
     name:'',
     components:{
         vMenu
+    },
+    data(){
+        return{
+            fullscreenLoading:false
+        }
+    },
+    created(){
+        this.fullscreenLoading= true;
+    },
+    mounted(){
+        setTimeout(()=>{
+            this.$get('/string').then((res)=>{
+                console.log(res.data)
+                this.fullscreenLoading = false
+            })
+        },2000)
     }
 }
 </script>

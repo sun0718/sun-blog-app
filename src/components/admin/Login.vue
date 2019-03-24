@@ -45,7 +45,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         localStorage.setItem('ms_username',this.ruleForm.username);
-                        this.$router.push('/');
+                        this.$router.push('/admin');
                     } else {
                         console.log('error submit!!');
                         return false;

@@ -32,10 +32,6 @@ export default new Router({
           name: "post",
           meta: { title: '自我简介' },
           component: resolve => require(['@/components/blog/common/PostDetail.vue'], resolve),
-          // route level code-splitting
-          // this generates a separate chunk (about.[hash].js) for this route
-          // which is lazy-loaded when the route is visited.
-          // component: About
         },
         {
           path: "/some",
@@ -56,6 +52,10 @@ export default new Router({
       ]
     },
     {
+      path: '/login',
+      component: resolve => require(['@/components/admin/Login.vue'], resolve)
+    },
+    {
       path: '/admin',
       component: resolve => require(['@/views/Admin.vue'], resolve),
       redirect:'/admin/dashboard',
@@ -63,88 +63,61 @@ export default new Router({
       children:[
           {
               path: 'dashboard',
+              name: '',
               component: resolve => require(['@/components/admin/Dashboard.vue'], resolve),
               meta: { title: '系统首页' }
           },
           {
-              path: 'icon',
-              component: resolve => require(['@/components/admin/Icon.vue'], resolve),
-              meta: { title: '自定义图标' }
+              path: 'post',
+              name: '',
+              component: resolve => require(['@/components/admin/Post.vue'], resolve),
+              meta: { title: '文章管理' }
           },
           {
-              path: 'table',
-              component: resolve => require(['@/components/admin/BaseTable.vue'], resolve),
-              meta: { title: '基础表格' }
+              path: 'post/:id',
+              name: 'post-article',
+              component: resolve => require(['@/components/admin/PostEditor.vue'], resolve),
+              meta: { title: '新建文章' }
           },
           {
-              path: 'tabs',
-              component: resolve => require(['@/components/admin/Tabs.vue'], resolve),
-              meta: { title: 'tab选项卡' }
+              path: 'user',
+              name: 'user',
+              component: resolve => require(['@/components/admin/User.vue'], resolve),
+              meta: { title: '用户管理' }
           },
           {
-              path: 'form',
-              component: resolve => require(['@/components/admin/BaseForm.vue'], resolve),
-              meta: { title: '基本表单' }
-          },
-          {
-              // 富文本编辑器组件
-              path: 'editor',
-              component: resolve => require(['@/components/admin/VueEditor.vue'], resolve),
-              meta: { title: '富文本编辑器' }
-          },
-          {
-              // markdown组件
-              path: 'markdown',
-              component: resolve => require(['@/components/admin/Markdown.vue'], resolve),
-              meta: { title: 'markdown编辑器' }    
+              path: 'msg',
+              name: 'msg',
+              component: resolve => require(['@/components/admin/MsgCenter.vue'], resolve),
+              meta: { title: '消息管理' }
           },
           {
               // 图片上传组件
-              path: 'upload',
+              path: 'form/upload',
+              name: 'upload',
               component: resolve => require(['@/components/admin/Upload.vue'], resolve),
               meta: { title: '文件上传' }   
           },
           {
-              // vue-schart组件
-              path: 'charts',
-              component: resolve => require(['@/components/admin/BaseCharts.vue'], resolve),
-              meta: { title: 'schart图表' }
-          },
-          {
-              // 拖拽列表组件
-              path: 'drag',
-              component: resolve => require(['@/components/admin/DragList.vue'], resolve),
-              meta: { title: '拖拽列表' }
-          },
-          {
-              // 拖拽Dialog组件
-              path: 'dialog',
-              component: resolve => require(['@/components/admin/DragDialog.vue'], resolve),
-              meta: { title: '拖拽弹框' }
-          },
-          {
               // 权限页面
               path: 'permission',
+              name: '',
               component: resolve => require(['@/components/admin/Permission.vue'], resolve),
               meta: { title: '权限测试', permission: true }
           },
           {
-              path: '/404',
+              path: '404',
               component: resolve => require(['@/components/admin/404.vue'], resolve),
               meta: { title: '404' }
           },
           {
-              path: '/403',
+              path: '403',
               component: resolve => require(['@/components/admin/403.vue'], resolve),
               meta: { title: '403' }
           },
           {
-            path: '/login',
-            component: resolve => require(['@/components/admin/Login.vue'], resolve)
-          },
-          {
               path: '*',
-              redirect: '/404'
+              redirect: '/admin/404'
           }
         ]
     }

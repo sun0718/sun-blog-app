@@ -62,13 +62,14 @@
                     return item.path === route.fullPath;
                 })
                 if(!isExist){
+                    // 超过8标签个删掉第一个
                     if(this.tagsList.length >= 8){
                         this.tagsList.shift();
                     }
+                    // 添加标签信息
                     this.tagsList.push({
                         title: route.meta.title,
                         path: route.fullPath,
-                        name: route.matched[1].components.default.name
                     })
                 }
                 bus.$emit('tags', this.tagsList);
@@ -83,11 +84,13 @@
             }
         },
         watch:{
+            // 原理，监听route
             $route(newValue, oldValue){
                 this.setTags(newValue);
             }
         },
         created(){
+            console.log(this.$route)
             this.setTags(this.$route);
             // 监听关闭当前页面的标签页
             bus.$on('close_current_tags', () => {
@@ -118,6 +121,7 @@
         overflow: hidden;
         background: #fff;
         padding-right: 120px;
+        padding-left: 10px;
         box-shadow: 0 5px 10px #ddd;
     }
 
