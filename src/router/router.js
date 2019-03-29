@@ -1,14 +1,14 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Blog from "../views/Blog.vue";
-import Home from "@/components/blog/Home.vue";
+import Blog from "@/views/blog/Blog.vue";
+import Home from "@/views/blog/home/Home.vue";
 
 import componentUI from '@/components/index'
 
 Vue.use(Router);
 Vue.use(componentUI);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -24,95 +24,102 @@ export default new Router({
         {
           path: "/",
           name: "home",
-          component: Home,
-          meta: { title: '博客首页' }
+          component: Home
+        },{
+          path: "home",
+          name: "home",
+          component: Home
         },
         {
-          path: "/post",
+          path: "post",
           name: "post",
-          meta: { title: '自我简介' },
-          component: resolve => require(['@/components/blog/common/PostDetail.vue'], resolve),
+          component: resolve => require(['@/views/blog/article/PostDetail.vue'], resolve),
         },
         {
-          path: "/some",
+          path: "some",
           name: "some",
-          component: resolve => require(['@/components/blog/common/Classification.vue'], resolve),
+          component: resolve => require(['@/views/blog/class/Classification.vue'], resolve),
           // component: DetailPage
         },
         {
-          path: "/search",
-          name: "Search",
+          path: "search",
+          name: "search",
           // component: SearchPage
         },
         {
-          path: "/article-list",
-          name: "article-list",
+          path: "about",
+          name: "about ",
           // component: SearchPage
+        },
+        {
+          path: "timeline",
+          name: "timelinet",
+          component: resolve => require(['@/views/blog/timeline/TimeLine.vue'], resolve),
         }
       ]
     },
     {
       path: '/login',
-      component: resolve => require(['@/components/admin/Login.vue'], resolve)
+      component: resolve => require(['@/views/admin/user/Login.vue'], resolve)
     },
     {
       path: '/admin',
-      component: resolve => require(['@/views/Admin.vue'], resolve),
+      component: resolve => require(['@/views/admin/Admin.vue'], resolve),
       redirect:'/admin/dashboard',
       meta: { title: '自述文件' },
       children:[
           {
               path: 'dashboard',
               name: '',
-              component: resolve => require(['@/components/admin/Dashboard.vue'], resolve),
+              component: resolve => require(['@/views/admin/dashboard/Index.vue'], resolve),
               meta: { title: '系统首页' }
           },
           {
               path: 'post',
               name: '',
-              component: resolve => require(['@/components/admin/Post.vue'], resolve),
+              component: resolve => require(['@/views/admin/post/Post.vue'], resolve),
               meta: { title: '文章管理' }
           },
           {
               path: 'post/:id',
               name: 'post-article',
-              component: resolve => require(['@/components/admin/PostEditor.vue'], resolve),
+              component: resolve => require(['@/views/admin/post/PostEditor.vue'], resolve),
               meta: { title: '新建文章' }
           },
           {
               path: 'user',
               name: 'user',
-              component: resolve => require(['@/components/admin/User.vue'], resolve),
+              component: resolve => require(['@/views/admin/user/User.vue'], resolve),
               meta: { title: '用户管理' }
           },
           {
               path: 'msg',
               name: 'msg',
-              component: resolve => require(['@/components/admin/MsgCenter.vue'], resolve),
+              component: resolve => require(['@/views/admin/msg/MsgCenter.vue'], resolve),
               meta: { title: '消息管理' }
           },
           {
               // 图片上传组件
               path: 'form/upload',
               name: 'upload',
-              component: resolve => require(['@/components/admin/Upload.vue'], resolve),
+              component: resolve => require(['@/views/admin/post/Upload.vue'], resolve),
               meta: { title: '文件上传' }   
           },
           {
               // 权限页面
               path: 'permission',
               name: '',
-              component: resolve => require(['@/components/admin/Permission.vue'], resolve),
+              component: resolve => require(['@/views/admin/error/Permission.vue'], resolve),
               meta: { title: '权限测试', permission: true }
           },
           {
               path: '404',
-              component: resolve => require(['@/components/admin/404.vue'], resolve),
+              component: resolve => require(['@/views/admin/error/404.vue'], resolve),
               meta: { title: '404' }
           },
           {
               path: '403',
-              component: resolve => require(['@/components/admin/403.vue'], resolve),
+              component: resolve => require(['@/views/admin/error/403.vue'], resolve),
               meta: { title: '403' }
           },
           {
@@ -123,3 +130,23 @@ export default new Router({
     }
   ]
 });
+
+// router.beforeEach((to, from, next)=>{
+//   const nextRoute = ['home', 'list'];
+//   let isLogin = localStorage.getItem['SUN-WEB-TOKEN'];  // 是否登录
+//   // 未登录状态；当路由到route指定页时，跳转至login
+//   if (nextRoute.indexOf(to.name) >= 0) {  
+//     if (!isLogin) {
+//       this.$router.push({ path:'/login',});
+//     }
+//   }
+//   // 已登录状态；当路由到login时，跳转至home 
+//   if (to.name === 'login') {
+//     if (isLogin) {
+//       this.$router.push({ path:'/home',});;
+//     }
+//   }
+//   next();
+// })
+
+export default router;
