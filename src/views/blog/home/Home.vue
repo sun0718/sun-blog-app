@@ -104,7 +104,52 @@ export default {
         top: "",
         left: "",
         width: ""
+      },
+      postData:[
+      {
+        "createTime": "1553864902523",
+        "_id": "5c9e18caa9daf422f4e5f70d",
+        "id": 1,
+        "title": "MongoDB安装与配置",
+        "like": "86",
+        "categorie": "markdown"
+      },
+      {
+        "createTime": "1553865555301",
+        "_id": "5c9e1b56f0141d3e20e18298",
+        "id": 3,
+        "title": "MarkDown的学习",
+        "like": "102",
+        "categorie": "markdown"
+      },
+      {
+        "createTime": "1553877570547",
+        "_id": "5c9e4ce7a0ae0a4ad4ab3a60",
+        "id": 4,
+        "title": "MarkDown的学习",
+        "like": "102",
+        "categorie": "markdown",
+        "imageShow": "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1553888273642&di=22a28ef1f928acd85d12c4cab1e34097&imgtype=0&src=http%3A%2F%2Fp.ssl.qhimg.com%2Ft0183ace9a5dc7d817e.jpg"
+      },
+      {
+        "createTime": "1553879552014",
+        "_id": "5c9e5a1a081c00339cb8c8ef",
+        "id": 5,
+        "title": "朴信惠（박신혜，Park Shin Hye），1990年2月18日出生于韩国光州，韩国女演员，毕业于首尔中央大学戏剧电影学系",
+        "like": "199",
+        "categorie": "markdown",
+        "imageShow": "https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike180%2C5%2C5%2C180%2C60/sign=8de7d69cb87eca80060831b5f04afcb8/e61190ef76c6a7eff1edd899f5faaf51f2de6641.jpg"
+      },
+      {
+        "createTime": "1553879552014",
+        "_id": "5c9e5cab081c00339cb8c8f0",
+        "id": 6,
+        "title": "金容仙，艺名Solar（ 颂乐），1991年2月21日出生于韩国首尔，韩国流行乐女歌手，女子演唱组合MAMAMOO成员。",
+        "like": "199",
+        "categorie": "韩国",
+        "imageShow": "https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike150%2C5%2C5%2C150%2C50/sign=58a535e22af5e0fefa1581533d095fcd/c8177f3e6709c93dd875340c983df8dcd0005441.jpg"
       }
+    ]
     };
   },
   components: {
