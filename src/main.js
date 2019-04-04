@@ -19,7 +19,7 @@ Vue.use(ElementUI)
 Vue.use(axiosApi);
 // Vue.prototype.$axios = axiosApi;
 
-new Vue({
+window.Vue =  new Vue({
   router,
   store,
   render: h => h(App)

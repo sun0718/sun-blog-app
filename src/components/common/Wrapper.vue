@@ -1,6 +1,6 @@
 <template>
   <el-scrollbar style="height:100%;" ref="elscrollbar" class="flex">
-    <el-main class="main postDetail">
+    <el-main class="main">
       <div class="container">
         <slot></slot>
         <sun-footer></sun-footer>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import bus from '@/store/bus';
+import bus from "@/store/bus";
 
 export default {
   name: "sunWrapper",
@@ -33,9 +33,8 @@ export default {
     };
   },
   mounted() {
-
     // 获取元素
-    var sliderBar = this.$slots.default[1].context.$refs['sliderBar'].$el;
+    var sliderBar = this.$slots.default[1].context.$refs["sliderBar"].$el;
     var aside = this.$slots.default[1].context.$refs["aside"];
     // 获取滚动的盒子
     var wrap = this.$refs["elscrollbar"].$refs["wrap"];
@@ -56,24 +55,24 @@ export default {
     this.beforeY = wrap.scrollTop;
     // 获取屏幕高度
     this.screenY = document.body.clientHeight;
-
-    // 监听滚动事件
-    window.addEventListener("scroll", this.handleScroll, true);
-
-    // 监听resize事件
-    window.addEventListener("resize", this.handleResize);
+    if (this.sliderBarHeight !== this.box.offsetY) {
+      // 监听滚动事件
+      window.addEventListener("scroll", this.handleScroll, true);
+      this.wrap.addEventListener("scroll", this.handleScroll, true);
+      // 监听resize事件
+      window.addEventListener("resize", this.handleResize);
+    }
   },
   methods: {
     handleScroll(e) {
       // console.log(e)
       // 判断上滚还是下滚
       var afterY = this.wrap.scrollTop,
-         delta = afterY - this.beforeY;
+        delta = afterY - this.beforeY;
       if (delta == 0) return false;
       var end = delta > 0 ? "down" : "up";
       this.beforeY = afterY;
       // // 获取当前位置
-      // var pos = sliderBar.getBoundingClientRect().left + 8
       if (end == "down") {
         // 滚动开始--------
         if (this.screenY < this.box.height) {
@@ -152,7 +151,7 @@ export default {
             this.fixedStyle = {
               position: "absolute",
               bottom: "0",
-              transform: `translateY(-20px)`,
+              transform: `translateY(-40px)`,
               width: this.box.outwidth + "px"
             };
           }
@@ -221,12 +220,9 @@ export default {
             };
           }
         } else {
-          console.log(afterY);
-          console.log(this.sliderBarHeight - this.box.height);
-          console.log(this.box.offsetT);
           if (
-            afterY < this.sliderBarHeight - this.box.height &&
-            afterY > this.box.offsetT
+            afterY > this.box.offsetT &&
+            afterY < this.sliderBarHeight - this.screenY
           ) {
             //底部位于临界点和盒子中间
             this.fixedStyle = {
@@ -257,7 +253,7 @@ export default {
         }
       }
 
-      bus.$emit('fixedStyle', this.fixedStyle);
+      bus.$emit("fixedStyle", this.fixedStyle);
     },
     handleResize() {
       var self = this;
@@ -287,10 +283,21 @@ export default {
   padding-top: 2rem !important;
   .container {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
+    background: #fff;
+    padding-top: 2rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
     margin-right: auto;
     margin-left: auto;
+    @media (min-width: 576px) {
+        max-width: 540px;
+    }
+    @media (min-width: 768px) {
+        max-width: 720px;
+    }
+    @media (min-width: 992px) {
+        max-width: 860px;
+    }
   }
 }
 </style>

@@ -3,14 +3,12 @@
         <div class="ms-login">
             <div class="ms-title">后台管理系统</div>
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content">
-                <el-form-item prop="username">
-                    <el-input v-model="ruleForm.username" placeholder="username">
-                        <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
+                <el-form-item prop="acountName">
+                    <el-input v-model="ruleForm.acountName" placeholder="acountName" prefix-icon="fa fa-user">
                     </el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input type="password" placeholder="password" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')">
-                        <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
+                    <el-input type="password" placeholder="password"  prefix-icon="fa fa-lock" v-model="ruleForm.password" @keyup.enter.native="submitForm('ruleForm')">
                     </el-input>
                 </el-form-item>
                 <div class="login-btn">
@@ -27,11 +25,11 @@
         data: function(){
             return {
                 ruleForm: {
-                    username: '',
+                    acountName: '',
                     password: ''
                 },
                 rules: {
-                    username: [
+                    acountName: [
                         { required: true, message: '请输入用户名', trigger: 'blur' }
                     ],
                     password: [
@@ -44,8 +42,7 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        console.log(this.$put('/signin',this.ruleForm))
-                        this.$put('/signin',this.ruleForm).then((res)=>{
+                        this.$post('/signin',this.ruleForm).then((res)=>{
                             console.log(res)
                             if(res.code == '0000'){
                                 sessionStorage.setItem('SUN_WEB_TOKEN',res.result.token);
@@ -105,4 +102,15 @@
         line-height:30px;
         color:#fff;
     }
+</style>
+
+<style lang="less">
+.login-wrap{
+    i{
+        width: 50px;
+    }
+    input{
+        padding-left: 55px !important;
+    }
+}
 </style>

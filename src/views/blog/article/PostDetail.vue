@@ -82,6 +82,14 @@
                     </a>
           </div>
           <ArticleComment />
+          <div class="blog-router">
+            <div v-if="1">下一篇：
+              <router-link :to="{path:'/blog',query:{id:blog.nextBlog.id}}">{{blog.nextBlog.title}}</router-link>
+            </div>
+            <div v-if="2">上一篇：
+              <router-link :to="{path:'/blog',query:{id:blog.prevBlog.id}}">{{blog.prevBlog.title}}</router-link>
+            </div>
+          </div>
         </div>
     </sun-Wrapper>
 </template>
@@ -99,8 +107,10 @@ export default {
 
 
 <style lang="less">
-.postDetail {
+.post {
   background-color: #fff;
+  margin: 0 auto 3rem;
+  padding: 2rem 2rem 3rem;
   .content-style{
     overflow: hidden;
     img {
@@ -122,12 +132,7 @@ export default {
         box-shadow: 0px 5px 20px -3px rgba(228, 93, 106, 0.55) !important;
   }
   @media (min-width: 992px) {
-    .container {
       max-width: 850px;
-      .content{
-          padding: 0;
-      }
-    }
   }
 }
 </style>

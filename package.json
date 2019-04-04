@@ -9,17 +9,18 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "core-js": "^2.0.0",
     "element-ui": "^2.5.4",
     "mavon-editor": "^2.6.17",
+    "qs": "^6.6.0",
+    "quill-image-drop-module": "^1.0.3",
+    "quill-image-resize-module": "^3.0.0",
     "vue": "^2.5.22",
     "vue-cropperjs": "^3.0.0",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
     "vue-schart": "^1.0.0",
-    "vuex": "^3.0.1",
-    "qs": "^6.6.0",
-    "quill-image-drop-module": "^1.0.3",
-    "quill-image-resize-module": "^3.0.0"
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.4.0",

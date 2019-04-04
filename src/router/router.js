@@ -31,7 +31,7 @@ const router = new Router({
           component: Home
         },
         {
-          path: "post",
+          path: "post/:id",
           name: "post",
           component: resolve => require(['@/views/blog/article/PostDetail.vue'], resolve),
         },
@@ -49,7 +49,7 @@ const router = new Router({
         {
           path: "about",
           name: "about ",
-          // component: SearchPage
+          component: resolve => require(['@/views/blog/about/AboutMe.vue'], resolve)
         },
         {
           path: "timeline",
@@ -81,10 +81,16 @@ const router = new Router({
               meta: { title: '文章管理' }
           },
           {
-              path: 'post/:id',
+              path: 'post/post-article',
               name: 'post-article',
               component: resolve => require(['@/views/admin/post/PostEditor.vue'], resolve),
               meta: { title: '新建文章' }
+          },
+          {
+            path: 'post/detail/:id',
+            name: 'post-detail',
+            component: resolve => require(['@/views/admin/post/PostDetail.vue'], resolve),
+            meta: { title: '文章预览' }
           },
           {
               path: 'user',
@@ -130,23 +136,5 @@ const router = new Router({
     }
   ]
 });
-
-// router.beforeEach((to, from, next)=>{
-//   const nextRoute = ['home', 'list'];
-//   let isLogin = localStorage.getItem['SUN-WEB-TOKEN'];  // 是否登录
-//   // 未登录状态；当路由到route指定页时，跳转至login
-//   if (nextRoute.indexOf(to.name) >= 0) {  
-//     if (!isLogin) {
-//       this.$router.push({ path:'/login',});
-//     }
-//   }
-//   // 已登录状态；当路由到login时，跳转至home 
-//   if (to.name === 'login') {
-//     if (isLogin) {
-//       this.$router.push({ path:'/home',});;
-//     }
-//   }
-//   next();
-// })
 
 export default router;

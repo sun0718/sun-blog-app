@@ -89,12 +89,16 @@ export default {
           title: "文章分类",
           subs: [
             {
-              index: "/form",
-              title: "基本表单"
+              index: "/blog/calss/work",
+              title: "工作相关"
             },
             {
-              index: "/upload",
-              title: "文件上传"
+              index: "/blog/calss/life",
+              title: "生活旅游"
+            },
+            {
+              index: "/blog/calss/html",
+              title: "前端学习"
             }
           ]
         },
@@ -103,7 +107,7 @@ export default {
           title: "时间轴线",
         },
         {
-          index: "/blog/aboutme",
+          index: "/blog/about",
           title: "个人简介"
         }
       ]

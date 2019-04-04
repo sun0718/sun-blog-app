@@ -12,8 +12,7 @@ var httpServers = axios.create();
 httpServers.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
   // 显示loading
-  const token = sessionStorage.getItem('SUN-WEB-TOKEN')
-
+  const token = sessionStorage.getItem('SUN_WEB_TOKEN')
   config.url = `${baseURL}${config['url']}`
 
   if (token) {
@@ -93,25 +92,25 @@ httpServers.interceptors.response.use(
     return Promise.reject(err.response)
   })
 
-function apiAxios(method, url, params) {
-  let httpDefault = {
-    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+function apiAxios(method, url, params, config) {
+  let httpDefault = Object.assign({
+    headers: { 'X-Requested-With': 'XMLHttpRequest'},
     method: method,
     url: url,
     params: method === 'GET' || method === 'DELETE' ? params : null,
-    data: method === 'POST' || method === 'PUT' ? qs.stringify(params) : null,
+    data: method === 'POST' || method === 'PUT' ? params : null,
     timeout: 10000,
     // 是否携带cookie信息
     withCredentials: false, // default
-  }
+  },config)
   return httpServers(httpDefault)
 }
 
 export default {
   install: function (Vue) {
-    Vue.prototype.$get = (url, params) => apiAxios('GET', url, params)
-    Vue.prototype.$post = (url, params) => apiAxios('POST', url, params)
-    Vue.prototype.$put = (url, params) => apiAxios('PUT', url, params)
-    Vue.prototype.$delete = (url, params) => apiAxios('DELETE', url, params)
+    Vue.prototype.$get = (url, params, config) => apiAxios('GET', url, params, config)
+    Vue.prototype.$post = (url, params, config) => apiAxios('POST', url, params, config)
+    Vue.prototype.$put = (url, params, config) => apiAxios('PUT', url, params, config)
+    Vue.prototype.$delete = (url, params, config) => apiAxios('DELETE', url, params, config)
   }
 }

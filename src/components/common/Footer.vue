@@ -2,7 +2,7 @@
   <footer class="border-top text-xs text-center">
     Copyright © 2019
     <a href="https://sunfafa.cn" title="sunfafa" rel="home">sunjilong</a>
-    All Rights Reserved. Record No. 粤ICP备19016435号-1
+    All Rights Reserved. Record No. 粤ICP备19014387号-1
   </footer>
 </template>
 

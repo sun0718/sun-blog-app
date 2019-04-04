@@ -1,19 +1,46 @@
 <template>
-  <div id="aboutme" class="widget">
-    <a href="https://www.nicetheme.cn/">
-      <img
-        width="300"
-        height="225"
-        src="https://demo.nicetheme.xyz/ashley-style-2/wp-content/uploads/sites/23/2019/02/2019020318251621-300x225.png"
-        class="image wp-image-172 attachment-medium size-medium"
-        alt
-        style="max-width: 100%; height: auto;"
-        srcset="https://demo.nicetheme.xyz/ashley-style-2/wp-content/uploads/sites/23/2019/02/2019020318251621-300x225.png 300w, https://demo.nicetheme.xyz/ashley-style-2/wp-content/uploads/sites/23/2019/02/2019020318251621-200x150.png 200w, https://demo.nicetheme.xyz/ashley-style-2/wp-content/uploads/sites/23/2019/02/2019020318251621.png 400w"
-        sizes="(max-width: 300px) 100vw, 300px"
-      >
-    </a>
-  </div>
+  <sun-wrapper>
+    <article class="article">
+      
+      <div class="post-header">
+        <h2 class="post-title">关于博主</h2>
+      </div>
+      <div class="post-content">
+          <p>你好，欢迎来到我的个人博客。</p>
+          <p>我的姓名是「孙继龙」，今年25岁。我是一名前端程序员，目前居住在广东深圳。</p>
+          <p>2016年 6月我本科毕业于湖南科技学院。</p>
+          <p>毕业之后，转战互联网，开始从事前端相关工作，开始主要是负责企业网站的开发和维护。16年9月份来深，目前供职于平安金融科技[平安壹账通]，主要从事战略平台贸易系统的前端开发。</p>
+          <p>我有轻微的强迫症和代码洁癖；我喜欢跑步，听音乐。</p>
+          <p>这就是我：</p>
+          <p>
+            <img src="@/assets/img/itsme.jpg">
+          </p>
+      </div>
+    </article>
+  </sun-wrapper>
 </template>
 
 <style lang="less">
+.post-header {
+    margin: 0 0 3rem;
+    line-height: 32px;
+    font-size: 18px;
+    display: block;
+    .post-title {
+        font-weight: 700;
+        color: #16a085;
+    }
+}
+
+.post-content{
+    img {
+        border-radius: 10px;
+        max-width: 400px;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+}
+
 </style>

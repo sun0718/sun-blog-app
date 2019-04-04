@@ -80,10 +80,6 @@ export default {
           title: "表单相关",
           subs: [
             {
-              index: "/admin/form/form",
-              title: "基本表单"
-            },
-            {
               index: "/admin/form/upload",
               title: "文件上传"
             }
@@ -166,10 +162,6 @@ export default {
       .el-menu-item:hover span,
       .el-submenu .el-submenu__title:hover span {
         color: #00818a !important;
-      }
-      .el-submenu__title {
-        padding: 0 !important;
-        margin: 0 20px;
       }
     }
   }

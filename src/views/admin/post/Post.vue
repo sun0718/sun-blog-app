@@ -20,16 +20,16 @@
             </div>
             <el-table :data="datalist" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column prop="category" label="分类" align="center" width="120"></el-table-column>
-                <el-table-column prop="createTime" label="创建日期" align="center" sortable width="150"></el-table-column>
+                <el-table-column prop="categorie" label="分类" align="center" width="120"></el-table-column>
+                <el-table-column prop="createTime" label="创建日期" align="center" sortable width="150" :formatter="formatCreateTime"></el-table-column>
                 <el-table-column prop="title" label="标题"  align="center">
                     <template slot-scope="scope">
-                        <router-link :to="{ name: 'user', params: { userId: 123 }}">{{ scope.row.title  }}</router-link>
+                        <router-link :to="{path:'detail/'+scope.row.id}" append>{{ scope.row.title  }}</router-link>
                     </template>
                 </el-table-column>
                 <el-table-column prop="autor" label="作者" width="120" align="center">
                     <template slot-scope="scope">
-                        {{scope.row.autor || 'sun'}}
+                        {{scope.row.author || 'sun'}}
                     </template>
                 </el-table-column>
                 <el-table-column prop="like" label="热度"  sortable align="center" width="120"></el-table-column>
@@ -39,11 +39,11 @@
                             <div slot="content">编辑</div>
                             <el-button type="text" icon="fa fa-pencil" @click="handleEdit(scope.$index, scope.row)"></el-button>
                         </el-tooltip>
-                        <el-tooltip v-if="scope.row.disable" placement="bottom" content="顶置">
-                            <el-button type="text" icon="fa fa-lock" @click="handleEdit(scope.$index, scope.row)"></el-button>
+                        <el-tooltip v-if="scope.row.disable" placement="bottom" content="取消顶置">
+                            <el-button type="text" icon="fa fa-caret-square-o-down " @click="handleEdit(scope.$index, scope.row)"></el-button>
                         </el-tooltip>
-                        <el-tooltip v-if="!scope.row.disable" placement="bottom" content="普通">
-                            <el-button type="text" icon="fa fa-unlock" @click="handleEdit(scope.$index, scope.row)"></el-button>
+                        <el-tooltip v-if="!scope.row.disable" placement="bottom" content="顶置">
+                            <el-button type="text" icon="fa fa-caret-square-o-up" @click="handleEdit(scope.$index, scope.row)"></el-button>
                         </el-tooltip>
                         <el-tooltip placement="bottom" content="删除">
                             <el-button type="text" class="red" icon="fa fa-trash-o" @click="handleDelete(scope.$index, scope.row)"></el-button>
@@ -97,7 +97,6 @@ export default {
     },
     data() {
         return {
-            url: '@public/vuetable.json',
             tableData: [],
             cur_page: 1,
             multipleSelection: [],
@@ -116,11 +115,8 @@ export default {
             idx: -1
         }
     },
-    created() {
-        this.getData();
-    },
     mounted(){
-        // console.log(this.$route)
+        this.getData()
     },
     computed: {
         datalist() {
@@ -151,42 +147,22 @@ export default {
             this.getData();
         },
         getData() {
-            this.tableData = [{
-                title:'nginx介绍',
-                createTime:'2019-12-13',
-                id:'sundada',
-                autor:'',
-                category:'sundada',
-                like:5
-            },{
-                title:'Jenkins在前端的自动构建(一)',
-                createTime:'2018-12-13',
-                id:'sundada',
-                autor:'junjun',
-                category:'sundada',
-                like:23
-            },{
-                title:'Vue keep-alive的理解',
-                createTime:'2017-12-13',
-                id:'sundada',
-                autor:'',
-                category:'sundada',
-                like:54
-            },{
-                title:'Vue keep-alive的理解',
-                createTime:'2017-12-13',
-                id:'sundada',
-                autor:'',
-                category:'sundada',
-                like:56
-            },{
-                title:'Vue keep-alive的理解',
-                createTime:'2017-12-13',
-                id:'sundada',
-                autor:'',
-                category:'sundada',
-                like:578
-            }];
+            this.$get('/postList').then((res)=>{
+                this.tableData = [].concat(res.result.list.overHead, res.result.list.allPost)
+                console.log(res.result.list.overHead)
+                console.log(res.result.list.allPost)
+                console.log(this.tableData)
+            })
+        },
+        formatCreateTime(row){
+            var now = new Date(Number(row.createTime)),
+                y = now.getFullYear(),
+                m = now.getMonth() + 1,
+                d = now.getDate();
+                console.log(y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " ")
+            return (
+                y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " "
+            );
         },
         search() {
             this.is_search = true;
@@ -256,6 +232,11 @@ export default {
 .post-m .container .el-table{
     th,td{
         padding: 0;
+        div{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
     }
 }
 </style>

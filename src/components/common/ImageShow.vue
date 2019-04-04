@@ -2,32 +2,32 @@
     <div class="list-item d-flex-column mb-1x">
         <div v-if="num==1" class="d-flex-row flex">
             <div class="media flex-height-1">
-                <a href="" target="_blank" class="media-content" :style="{backgroundImage:'url('+ postData.imageShow +')'}">
+                <a class="media-content" :style="{backgroundImage:'url('+ postData.imageShow +')'}">
                     <span class="overlay"></span>
                 </a>
             </div>
             <div class="list-item-content">
-                <a target="_blank">
+                <router-link :to="'post/some/'+postData.categorie">
                     <span class="badge badge-md text-uppercase bg-white-overlay">{{postData.categorie}}</span>
-                </a>
-                <a target="_blank" class="list-body" :class="showTitle?'':'hidden'">
-                    <div class="list-title text-white h-2x">{{postData.title}}</div>
-                </a>
+                </router-link>
+                <router-link :to="'/blog/post/'+postData.id" class="list-body"  :class="showTitle?'':'hidden'">
+                        <div class="list-title text-white h-2x">{{postData.title}}</div>
+                </router-link>
             </div>
         </div>
         <div v-if="num==2" class="d-flex-row flex">
             <div class="media flex-height-2">
-                <a href="" target="_blank" class="media-content" style="background-image:url(https://demo.nicetheme.xyz/ashley-style-2/wp-content/uploads/sites/23/2019/02/2019020319280481-600x400.jpg)">
+                <a class="media-content" style="background-image:url(https://demo.nicetheme.xyz/ashley-style-2/wp-content/uploads/sites/23/2019/02/2019020319280481-600x400.jpg)">
                     <span class="overlay"></span>
                 </a>
             </div>
             <div class="list-item-content">
-                <a target="_blank">
+                <router-link>
                     <h2 class="d-inline-block text-uppercase text-white">旅行日志</h2>
-                </a>
-                <a target="_blank" class="list-body">
+                </router-link>
+                <router-link class="list-body">
                     <div class="list-title text-white text-xs">12篇文章</div>
-                </a>
+                </router-link>
             </div>
         </div>
         <div v-if="num==3" class="d-flex-row flex">
@@ -60,10 +60,18 @@ export default {
         }
     },
     mounted(){
-        // console.log(this.num)
+        console.log(this.showTitle)
         // console.log(this.half)
     },
-    props:['num','half','postData']
+    props:{
+        num:Number,
+        half:String,
+        postData:[],
+        showTitle:{
+            type:Boolean,
+            default: true
+        }
+    }
 }
 </script>
 
@@ -96,7 +104,7 @@ export default {
             padding-top: 60%;
         }
         &.flex-height-2:after{
-            padding-top: 40%;
+            padding-top: 30%;
         }
         &::after{
             content: '';
@@ -159,7 +167,7 @@ export default {
                 // margin-top: auto;
                 margin-top: auto;
             }
-            .hidden{
+            &.hidden{
                 visibility: hidden;
             }
         }
