@@ -30,6 +30,31 @@
             </li>
           </ul>
         </div>
+        <div class="archives_item">
+          <h2>2018年07月</h2>
+          <ul class="archives_list">
+            <li>
+              30日
+              <a href="http://www.ptbird.cn/weex-module-dom.html">weex 内置模块 dom</a>
+            </li>
+            <li>
+              29日
+              <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
+            </li>
+            <li>
+              29日
+              <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
+            </li>
+            <li>
+              29日
+              <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
+            </li>
+            <li>
+              29日
+              <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </sun-wrapper>
@@ -76,6 +101,7 @@ export default {
                 }
                 a{
                     color: #2eabfd;
+                    padding-left: 1rem;
                 }
             }
         }
