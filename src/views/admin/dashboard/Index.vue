@@ -89,23 +89,10 @@
                 </el-card>
             </el-col>
         </el-row>
-        <el-row :gutter="20">
-            <el-col :span="12">
-                <el-card shadow="hover">
-                    <schart ref="bar" class="schart" canvasId="bar" :data="data" type="bar" :options="options"></schart>
-                </el-card>
-            </el-col>
-            <el-col :span="12">
-                <el-card shadow="hover">
-                    <schart ref="line" class="schart" canvasId="line" :data="data" type="line" :options="options2"></schart>
-                </el-card>
-            </el-col>
-        </el-row>
     </div>
 </template>
 
 <script>
-    import Schart from 'vue-schart';
     import bus from '@/store/bus';
     export default {
         name: 'dashboard',
@@ -164,27 +151,8 @@
                         name: '2018/09/10',
                         value: 1065
                     }
-                ],
-                options: {
-                    title: '最近七天每天的用户访问量',
-                    showValue: false,
-                    fillColor: 'rgb(45, 140, 240)',
-                    bottomPadding: 30,
-                    topPadding: 30
-                },
-                options2: {
-                    title: '最近七天用户访问趋势',
-                    fillColor: '#FC6FA1',
-                    axisColor: '#008ACD',
-                    contentColor: '#EEEEEE',
-                    bgColor: '#F5F8FD',
-                    bottomPadding: 30,
-                    topPadding: 30
-                }
+                ]
             }
-        },
-        components: {
-            Schart
         },
         computed: {
             role() {
@@ -214,15 +182,6 @@
                 bus.$on('collapse', this.handleBus);
                 // 调用renderChart方法对图表进行重新渲染
                 window.addEventListener('resize', this.renderChart)
-            },
-            handleBus(msg){
-                setTimeout(() => {
-                    this.renderChart()
-                }, 300);
-            },
-            renderChart(){
-                this.$refs.bar.renderChart();
-                this.$refs.line.renderChart();
             }
         }
     }
@@ -333,11 +292,6 @@
     .todo-item-del {
         text-decoration: line-through;
         color: #999;
-    }
-
-    .schart {
-        width: 100%;
-        height: 300px;
     }
 
 </style>

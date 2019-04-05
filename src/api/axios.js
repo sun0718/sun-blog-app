@@ -83,12 +83,13 @@ httpServers.interceptors.response.use(
           msg = `连接错误${err.response.status}`
       }
     } else {
-      msg = '连接到服务器失败'
+        msg = '连接到服务器失败'
     }
     Vue.prototype.$message({
       type: 'error',
       message: msg
     })
+    this.$router.push({ path: 'login' })
     return Promise.reject(err.response)
   })
 

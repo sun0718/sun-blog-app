@@ -73,36 +73,6 @@ export default {
           icon: "fa fa-envelope-square",
           index: "/admin/msg",
           title: "消息中心"
-        },
-        {
-          icon: "el-icon-lx-calendar",
-          index: "/admin/form",
-          title: "表单相关",
-          subs: [
-            {
-              index: "/admin/form/upload",
-              title: "文件上传"
-            }
-          ]
-        },
-        {
-          icon: "el-icon-lx-warn",
-          index: "7",
-          title: "错误处理",
-          subs: [
-            {
-              index: "permission",
-              title: "权限测试"
-            },
-            {
-              index: "404",
-              title: "404页面"
-            },
-            {
-              index: "403",
-              title: "403页面"
-            }
-          ]
         }
       ]
     };

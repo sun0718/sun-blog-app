@@ -60,7 +60,7 @@ export default {
         }
     },
     mounted(){
-        console.log(this.showTitle)
+        console.log(this.postData)
         // console.log(this.half)
     },
     props:{

@@ -58,6 +58,15 @@ export default {
     border: 1px solid #ddd;
     border-radius: 5px;
     margin: 0 auto;
+    @media (min-width: 576px) {
+        max-width: 540px;
+    }
+    @media (min-width: 768px) {
+        max-width: 720px;
+    }
+    @media (min-width: 992px) {
+        max-width: 992px;
+    }
   }
 }
 .content-box {

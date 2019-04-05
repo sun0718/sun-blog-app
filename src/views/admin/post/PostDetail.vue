@@ -1,7 +1,7 @@
 <template>
-        <div class="post">
-            <div class="container">
-                <h2>{{title}}</h2>
+        <div class="post container">
+                <h2 class="post-title">{{title}}</h2>
+                <blockquote>{{preface}}</blockquote>
                 <div v-html="article"></div>
             </div>
         </div>
@@ -24,6 +24,7 @@ export default {
         getData(){
             this.$get('/postArticle/'+this.$route.params.id).then((res)=>{
                 this.title = res.data.title
+                this.preface = res.data.preface
                 this.article = res.data.con
             }).catch((err)=>{
                 console.log(err)
@@ -35,7 +36,11 @@ export default {
 
 
 <style lang="less">
-.post {
+.post.container {
+    .post-title{
+        color: #16a085;
+        font-size: 2rem;
+    }
     .code, pre {
         background: #48484a;
         padding: 20px 20px 20px;
@@ -53,10 +58,17 @@ export default {
         margin: 0 0 1.5rem
     }
     h2{
-        font-size: 2rem;
+        font-size: 1.5rem;
         margin-top: 3rem;
         margin-bottom: 3rem;
         font-weight: bold;
+    }
+    blockquote{
+        margin-left: 1em;
+        margin-right: 1em;
+        padding: 0.25em 1em;
+        color: #777;
+        border-left: 0.25em solid #ddd;
     }
 }
 </style>

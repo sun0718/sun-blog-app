@@ -360,7 +360,7 @@ ul,ol {
 
 body, input, button, select, optgroup, option, textarea, pre {
     font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', "Hiragino Sans GB", "Microsoft YaHei", Helvetica, Arial, "WenQuanYi Micro Hei", SimSun, sans-serif;
-    background-color: #ebf0f6;
+    background-color: #fff;
 }
 
 *, ::after, ::before {

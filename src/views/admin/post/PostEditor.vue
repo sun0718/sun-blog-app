@@ -8,16 +8,20 @@
         </div>
         <div class="container">
             <el-form ref="form" class="showInfo" :model="form" label-width="80px">
-                <el-row style="width:60%">
-                    <el-col>
                         <el-form-item label="文章标题">
                             <el-input v-model="form.title"></el-input>
                         </el-form-item>
-                        <el-form-item label="文章摘要">
-                            <el-input type="textarea" v-model="form.summary"></el-input>
+                        <el-form-item label="文章分类">
+                                <el-cascader
+                                    placeholder="请输入"
+                                    :options="options"
+                                    v-model="form.categorie"
+                                    filterable
+                                ></el-cascader>
                         </el-form-item>
-                    </el-col>
-                    <el-col>
+                        <el-form-item label="文章摘要">
+                            <el-input type="textarea" v-model="form.preface"></el-input>
+                        </el-form-item>
                         <el-upload
                             class="upload-demo"
                             action="/apis/uploadImage"
@@ -29,8 +33,6 @@
                             <el-button size="small" type="primary">点击上传封面</el-button>
                             <span slot="tip" class="el-upload__tip ml-1x">只能上传jpg/png/gif文件，且不超过500kb</span>
                         </el-upload>
-                    </el-col>
-                </el-row>
             </el-form>
             <el-switch
                 v-model="form.switchValue"
@@ -40,8 +42,8 @@
                 inactive-text="富文本"
                 class="d-inline-block mb-1x">
             </el-switch>
-            <quill-editor v-if="!form.switchValue" ref="myTextEditor" v-model="form.quillCon" @change="onEditorChange($event)" :options="editorOption" ></quill-editor>
-            <mavon-editor v-else ref="md" v-model="form.mavonCon" :ishljs = "true" @imgAdd="$imgAdd" @change="change" style="min-height: 600px"/>
+            <quill-editor v-if="!form.switchValue" ref="myTextEditor" v-model="quillCon" @change="onEditorChange($event)" :options="editorOption" ></quill-editor>
+            <mavon-editor v-else ref="md" v-model="mavonCon" :ishljs="true" @imgAdd="$imgAdd" @change="change" style="min-height: 600px"/>
             <div class="text-right">
                 <el-button class="editor-btn mt-1x" type="primary" @click="submit">提交</el-button>
             </div>
@@ -62,6 +64,7 @@
     Quill.register('modules/imageDrop', ImageDrop)
     Quill.register('modules/imageResize', ImageResize)
 
+    import config from '@/config/index'
     export default {
         name: 'editor',
         data: function(){
@@ -81,20 +84,21 @@
                 },
                 form:{
                     title:'',
-                    con:'',
-                    autor:'',
-                    createTime:'',
-                    quillCon: '',  // 富文本
-                    mavonhtml: '',  // markdown
+                    con: '',
+                    autor: sessionStorage.getItem('acountName'),
+                    categorie:[],
                     mavonCon: '',
                     preface:'',
                     imageShow: ''
                 },
-                // markdown初始
+                quillCon: '',  // 富文本
+                mavonhtml: '',  // markdown
+                // markdown初始配置
                 configs: {
                 },
+                // 封面图片
                 fileList: [],
-                formData:''
+                options: config.categorie
             }
         },
         components: {
@@ -120,8 +124,6 @@
             $imgAdd(pos, $file){
                 var formData = new FormData();
                 formData.append('file', $file);
-                console.log('file', formData.get('file'));
-                this.formData = formData
                 this.$post('/uploadImage',formData,{
                     headers:{'Content-Type': 'multipart/form-data'}
                 }).then((res) => {
@@ -130,7 +132,7 @@
             },
             change(value, render){
                 // render 为 markdown 解析后的结果
-                this.form.mavonhtml = render;
+                this.mavonhtml = render;
             },
             // 文章主图片上传-----------------------------------------------------------
             // 文件列表移除文件时的钩子
@@ -143,27 +145,24 @@
             },
             // 上传图片
             handleChange(file, fileList) {
+                console.log(file)
                 this.fileList = fileList.slice(-1);
-                this.form.imageShow = file.url;
+                if(file.status == "success"){
+                    this.form.imageShow = file.response.result.path;
+                }
+                // console.log(this.form.imageShow)
             },
             submit(){
+                this.form.con= this.switchValue ? this.mavonhtml : this.quillCon
                 let params = {
-                    title: this.form.title,
-                    author: 'sun',
                     like: 0,
                     discuss: [],
-                    categorie : 'NODEJS',
                     tags:[],
-                    imageShow: '',
-                    oldEditTimeAndEvent:[],
-                    mavonCon:this.mavonCon,
-                    goTop:false
+                    oldEditTimeAndEvent: [],
+                    goTop:false,
+                    ...this.form
                 }
-                if(this.switchValue){
-                    params.con = this.form.mavonhtml
-                }else{
-                    params.con = this.form.quillCon
-                }
+                debugger
                 this.$post('/postArticle',params).then((res)=>{
                     console.log(res)
                     this.$message.success('提交成功！');

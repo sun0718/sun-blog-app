@@ -74,6 +74,7 @@ export default {
       this.beforeY = afterY;
       // // 获取当前位置
       if (end == "down") {
+        debugger
         // 滚动开始--------
         if (this.screenY < this.box.height) {
           //1 屏幕小于盒子高度
@@ -283,7 +284,6 @@ export default {
   padding-top: 2rem !important;
   .container {
     width: 100%;
-    background: #fff;
     padding-top: 2rem;
     padding-right: 2rem;
     padding-left: 2rem;
@@ -296,7 +296,24 @@ export default {
         max-width: 720px;
     }
     @media (min-width: 992px) {
-        max-width: 860px;
+        max-width: 960px;
+    }
+    @media (min-width: 992px) {
+        max-width: 1140px;
+    }
+    .other-inner{
+      width: 100%;
+      padding: 2rem;
+      margin: auto;
+      @media (min-width: 576px) {
+        max-width: 540px;
+      }
+      @media (min-width: 768px) {
+          max-width: 720px;
+      }
+      @media (min-width: 992px) {
+          max-width: 860px;
+      }
     }
   }
 }

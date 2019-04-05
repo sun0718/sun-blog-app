@@ -51,7 +51,7 @@
 
 <script>
 import ArticleShow from "@/views/blog/home/children/ArticleShow.vue";
-import AboutMe from "@/views/blog/about/AboutMe.vue";
+import AboutMe from "@/views/blog/about/AboutImage.vue";
 import RecentPosts from "@/views/blog/home/children/RecentPosts.vue";
 import TagCloud from "@/views/blog/home/children/TagCloud.vue";
 import ThreeImageShow from "@/views/blog/home/children/ThreeImageShow.vue";
