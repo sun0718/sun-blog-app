@@ -28,7 +28,7 @@
         background-color="#283149"
         text-color="#7a8b9a"
         active-text-color="#00818a"
-      >>
+      >
         <template v-for="item in navList">
           <template v-if="item.subs">
             <el-submenu :index="item.index" :key="item.index">

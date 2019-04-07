@@ -217,7 +217,7 @@ export default {
         ? "Admin"
         : "guest";
     },
-    formatCreateTime(row, column) {
+    formatCreateTime(row) {
       var now = new Date(Number(row.createTime)),
         y = now.getFullYear(),
         m = now.getMonth() + 1,

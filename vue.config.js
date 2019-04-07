@@ -4,7 +4,6 @@ const path = require('path')
 console.log(process.env.NODE_ENV)
 
 module.exports = {
-    // publicPath  type:{string} default:'/'
     // 开发环境指向当前目录，线上环境绝对值
     publicPath:process.env.NODE_ENV === 'development' ? '/' : '../',
     // 关闭eslint

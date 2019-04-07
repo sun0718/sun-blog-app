@@ -26,6 +26,7 @@ export default {
 
 <style lang="less">
 .el-container{
+    background-color: #f5f5f5;
     @media screen and (max-width: 992px){
         &{
             flex-direction: column !important;

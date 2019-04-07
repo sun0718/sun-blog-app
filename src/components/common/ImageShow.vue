@@ -22,12 +22,12 @@
                 </a>
             </div>
             <div class="list-item-content">
-                <router-link>
+                <a>
                     <h2 class="d-inline-block text-uppercase text-white">旅行日志</h2>
-                </router-link>
-                <router-link class="list-body">
+                </a>
+                <a class="list-body">
                     <div class="list-title text-white text-xs">12篇文章</div>
-                </router-link>
+                </a>
             </div>
         </div>
         <div v-if="num==3" class="d-flex-row flex">
@@ -66,9 +66,9 @@ export default {
     props:{
         num:Number,
         half:String,
-        postData:[],
+        postData:{},
         showTitle:{
-            type:Boolean,
+            type: Boolean,
             default: true
         }
     }

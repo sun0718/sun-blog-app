@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import axios from "axios"
-import qs from "qs"
+import Router from "vue-router";
 
 var config = require('../config')
 
 const baseURL = config.host.baseURL
+
+console.log(baseURL)
 
 var httpServers = axios.create();
 
@@ -29,9 +31,10 @@ httpServers.interceptors.request.use(function (config) {
 httpServers.interceptors.response.use(
   response => {
     let data = response.data
+    // 状态等于'0000'
     if (data.code == '0000') {
       return Promise.resolve(data)
-    } else {
+    } else {  // 状态等于'0001'
       Vue.prototype.$message({
         type: 'error',
         message: data.msg
@@ -39,6 +42,7 @@ httpServers.interceptors.response.use(
       return Promise.reject(data)
     }
   },
+  //请求错误
   err => {
     let msg = ''
     if (err && err.response) {
@@ -85,11 +89,11 @@ httpServers.interceptors.response.use(
     } else {
         msg = '连接到服务器失败'
     }
+    
     Vue.prototype.$message({
       type: 'error',
       message: msg
     })
-    this.$router.push({ path: 'login' })
     return Promise.reject(err.response)
   })
 

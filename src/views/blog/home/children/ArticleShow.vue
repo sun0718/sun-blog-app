@@ -16,7 +16,7 @@
                     <div class="text-xs text-muted">
                         <span class="d-inline-block text-dark" v-if="postData.overHead">置顶</span>
                         <i class="text-primary pl-half pr-half" v-if="postData.overHead">•</i>                
-                        <span class="d-inline-block">{{postData.createTime|formattr}}</span>
+                        <span class="d-inline-block">{{ postData.createTime|formatCreateTime }}</span>
                     </div>
                     <div class="ml-auto text-xs">
                         <a href="javascript:" class="d-inline-block pl-half text-dark">
@@ -37,7 +37,19 @@ export default {
     mounted(){
         console.log(this.postData)
     },
-    props:['postData']
+    props:['postData'],
+    filters:{
+        formatCreateTime(value){
+            var now = new Date(Number(value)),
+                y = now.getFullYear(),
+                m = now.getMonth() + 1,
+                d = now.getDate();
+                console.log(y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " ")
+            return (
+                y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " "
+            );
+        },
+    }
 }
 </script>
 

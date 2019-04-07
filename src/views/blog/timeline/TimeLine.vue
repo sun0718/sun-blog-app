@@ -2,7 +2,7 @@
   <sun-wrapper>
     <div class="other-inner">
       <div class="post-header">
-        <h2 class="post-title">時間軸綫</h2>
+        <h2 class="post-title">时间轴线</h2>
       </div>
       <div class="post-content">
         <div class="archives">

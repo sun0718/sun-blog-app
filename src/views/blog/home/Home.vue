@@ -12,7 +12,7 @@
     <el-row class="con-center d-flex-row mr-N-half ml-N-half">
       <el-col :xs="24" :sm="24" :md="18" :lg="18">
         <ArticleShow v-for="(item) in postData" :key="item.id" :postData="item">
-          <sun-imageShow :key="item.id" :postData="item" :showTitle="0" :num="1"></sun-imageShow>
+          <sun-imageShow :key="item.id" :postData="item" :showTitle='false' :num="1"></sun-imageShow>
         </ArticleShow>
         <el-col :xs="24" :sm="24" :md="24" :lg="24" style="display: flex;justify-content: center;">
           <el-pagination :page-size="10" :pager-count="6" layout="prev, pager, next" :total="205"></el-pagination>
@@ -68,6 +68,7 @@ export default {
         left: "",
         width: ""
       },
+      searchData:'',
       postData: [],
       adList: []
     };
@@ -84,7 +85,7 @@ export default {
       this.fixedStyle = msg;
     });
     var self = this;
-    this.$get("/post", {
+    this.$get("/getPosts", {
       getAd: true
     }).then(res => {
       var allList = res.result.list;
@@ -100,8 +101,6 @@ export default {
         self.adList = res.result.list.overHead;
         self.postData = res.result.list.allPost;
       }
-      console.log(self.adList);
-      console.log(self.postData);
     });
   },
   watch: {}
@@ -135,6 +134,7 @@ export default {
   }
 }
 .con-center {
+  margin-top: 2rem;
   & > .el-col {
     padding: 0 0.5rem;
     display: flex;

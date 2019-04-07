@@ -34,33 +34,35 @@ export default {
   },
   mounted() {
     // 获取元素
-    var sliderBar = this.$slots.default[1].context.$refs["sliderBar"].$el;
-    var aside = this.$slots.default[1].context.$refs["aside"];
-    // 获取滚动的盒子
-    var wrap = this.$refs["elscrollbar"].$refs["wrap"];
+    if(this.$slots.default[1]){
+      var sliderBar = this.$slots.default[1].context.$refs["sliderBar"].$el;
+        var aside = this.$slots.default[1].context.$refs["aside"];
+        // 获取滚动的盒子
+        var wrap = this.$refs["elscrollbar"].$refs["wrap"];
 
-    this.sliderBar = sliderBar;
-    this.wrap = wrap;
-    this.aside = aside;
-    // 获取元素数据和初始位置
-    this.box.height = aside.offsetHeight;
-    this.box.width = aside.offsetWidth;
-    this.box.outwidth = sliderBar.offsetWidth - 16;
-    this.box.offsetY = aside.getBoundingClientRect().bottom;
-    this.box.offsetT = aside.getBoundingClientRect().top;
-    this.box.offsetX = aside.getBoundingClientRect().left;
-    // 临界点
-    this.sliderBarHeight = sliderBar.getBoundingClientRect().bottom;
-    // 获取滚动初始位置
-    this.beforeY = wrap.scrollTop;
-    // 获取屏幕高度
-    this.screenY = document.body.clientHeight;
-    if (this.sliderBarHeight !== this.box.offsetY) {
-      // 监听滚动事件
-      window.addEventListener("scroll", this.handleScroll, true);
-      this.wrap.addEventListener("scroll", this.handleScroll, true);
-      // 监听resize事件
-      window.addEventListener("resize", this.handleResize);
+        this.sliderBar = sliderBar;
+        this.wrap = wrap;
+        this.aside = aside;
+        // 获取元素数据和初始位置
+        this.box.height = aside.offsetHeight;
+        this.box.width = aside.offsetWidth;
+        this.box.outwidth = sliderBar.offsetWidth - 16;
+        this.box.offsetY = aside.getBoundingClientRect().bottom;
+        this.box.offsetT = aside.getBoundingClientRect().top;
+        this.box.offsetX = aside.getBoundingClientRect().left;
+        // 临界点
+        this.sliderBarHeight = sliderBar.getBoundingClientRect().bottom;
+        // 获取滚动初始位置
+        this.beforeY = wrap.scrollTop;
+        // 获取屏幕高度
+        this.screenY = document.body.clientHeight;
+        if (this.sliderBarHeight !== this.box.offsetY) {
+          // 监听滚动事件
+          window.addEventListener("scroll", this.handleScroll, true);
+          this.wrap.addEventListener("scroll", this.handleScroll, true);
+          // 监听resize事件
+          window.addEventListener("resize", this.handleResize);
+        }
     }
   },
   methods: {
@@ -74,7 +76,6 @@ export default {
       this.beforeY = afterY;
       // // 获取当前位置
       if (end == "down") {
-        debugger
         // 滚动开始--------
         if (this.screenY < this.box.height) {
           //1 屏幕小于盒子高度
@@ -290,18 +291,18 @@ export default {
     margin-right: auto;
     margin-left: auto;
     @media (min-width: 576px) {
-        max-width: 540px;
+      max-width: 540px;
     }
     @media (min-width: 768px) {
-        max-width: 720px;
+      max-width: 720px;
     }
     @media (min-width: 992px) {
-        max-width: 960px;
+      max-width: 960px;
     }
     @media (min-width: 992px) {
-        max-width: 1140px;
+      max-width: 1140px;
     }
-    .other-inner{
+    .other-inner {
       width: 100%;
       padding: 2rem;
       margin: auto;
@@ -309,10 +310,10 @@ export default {
         max-width: 540px;
       }
       @media (min-width: 768px) {
-          max-width: 720px;
+        max-width: 720px;
       }
       @media (min-width: 992px) {
-          max-width: 860px;
+        max-width: 860px;
       }
     }
   }

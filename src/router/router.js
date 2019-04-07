@@ -66,19 +66,19 @@ const router = new Router({
       path: '/admin',
       component: resolve => require(['@/views/admin/Admin.vue'], resolve),
       redirect:'/admin/dashboard',
-      meta: { title: '自述文件' },
+      meta: { requireAuth: true },
       children:[
           {
               path: 'dashboard',
               name: '',
               component: resolve => require(['@/views/admin/dashboard/Index.vue'], resolve),
-              meta: { title: '系统首页' }
+              meta: { requireAuth: true }
           },
           {
               path: 'post',
               name: '',
               component: resolve => require(['@/views/admin/post/Post.vue'], resolve),
-              meta: { title: '文章管理' }
+              meta: { requireAuth: true }
           },
           {
               path: 'post/post-article',
@@ -96,13 +96,13 @@ const router = new Router({
               path: 'user',
               name: 'user',
               component: resolve => require(['@/views/admin/user/User.vue'], resolve),
-              meta: { title: '用户管理' }
+              meta: { requireAuth: true }
           },
           {
               path: 'msg',
               name: 'msg',
               component: resolve => require(['@/views/admin/msg/MsgCenter.vue'], resolve),
-              meta: { title: '消息管理' }
+              meta: { requireAuth: true }
           },
           {
               // 图片上传组件
@@ -136,5 +136,18 @@ const router = new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    const token = sessionStorage.getItem('SUN_WEB_TOKEN')
+    if (token && token !== 'null') {
+      next()
+    } else {
+      next('/login')
+    }
+  } else {
+     next()
+  }
+})
 
 export default router;

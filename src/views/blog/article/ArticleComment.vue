@@ -29,7 +29,7 @@
                 id="comment"
                 :autosize="{ minRows: 2, maxRows: 4}"
                 placeholder="请输入内容"
-                v-model="textarea"
+                v-model="content"
               ></el-input>
             </div>
             <el-row class="d-flex-row mb-1x">
@@ -78,7 +78,11 @@
             <!-- .comment-content -->
             <div class="text-xs text-muted pt-2">
               <time class="comment-date mr-1x">2019-03-03</time>
-              <el-button type="text" icon="fa fa-repeat" onclick="return addComment.moveForm( 'comment-12','12', 'respond','37' ) ">回复</el-button>
+              <el-button
+                type="text"
+                icon="fa fa-repeat"
+                onclick="return addComment.moveForm( 'comment-12','12', 'respond','37' ) "
+              >回复</el-button>
             </div>
           </div>
           <!-- .comment-text -->
@@ -90,31 +94,47 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: "",
+  data() {
+    return {
+      content: "",
+      name: "",
+      email: "",
+      url: ""
+    };
+  }
+};
+</script>
+
+
 <style lang="less">
 #comments {
-    .d-flex-row {
-      flex-wrap: inherit;
-      .common-submmit {
-        a {
-          button {
-            background-color: #00818a;
-            border-color: #00818a;
-            box-shadow: 0px 5px 20px -3px rgba(0, 129, 138, 1.55) !important;
-          }
-          &:hover button{
-                color: #fff;
-                background-color: #283149;
-                border-color: #283149;
-                box-shadow: 0px 5px 20px -3px rgba(37, 44, 65, .33) !important;
-                        }
+  margin-top: 4rem;
+  .d-flex-row {
+    flex-wrap: inherit;
+    .common-submmit {
+      a {
+        button {
+          background-color: #00818a;
+          border-color: #00818a;
+          box-shadow: 0px 5px 20px -3px rgba(0, 129, 138, 1.55) !important;
+        }
+        &:hover button {
+          color: #fff;
+          background-color: #283149;
+          border-color: #283149;
+          box-shadow: 0px 5px 20px -3px rgba(37, 44, 65, 0.33) !important;
         }
       }
-        .comment-content{
-            background-color: #eef1f7;
-            border-radius: .25rem;
-            padding: .5rem;
-            overflow: hidden;
-        }
+    }
+    .comment-content {
+      background-color: #eef1f7;
+      border-radius: 0.25rem;
+      padding: 0.5rem;
+      overflow: hidden;
+    }
   }
 }
 </style>
