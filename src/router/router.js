@@ -66,19 +66,19 @@ const router = new Router({
       path: '/admin',
       component: resolve => require(['@/views/admin/Admin.vue'], resolve),
       redirect:'/admin/dashboard',
-      meta: { requireAuth: true },
+      meta: { requireAuth: true,title: '系统首页' },
       children:[
           {
               path: 'dashboard',
               name: '',
               component: resolve => require(['@/views/admin/dashboard/Index.vue'], resolve),
-              meta: { requireAuth: true }
+              meta: { requireAuth: true,title: '系统首页' }
           },
           {
               path: 'post',
               name: '',
               component: resolve => require(['@/views/admin/post/Post.vue'], resolve),
-              meta: { requireAuth: true }
+              meta: { requireAuth: true,title: '文章管理' }
           },
           {
               path: 'post/post-article',
@@ -96,13 +96,13 @@ const router = new Router({
               path: 'user',
               name: 'user',
               component: resolve => require(['@/views/admin/user/User.vue'], resolve),
-              meta: { requireAuth: true }
+              meta: { requireAuth: true ,title: '用户管理'}
           },
           {
               path: 'msg',
               name: 'msg',
               component: resolve => require(['@/views/admin/msg/MsgCenter.vue'], resolve),
-              meta: { requireAuth: true }
+              meta: { requireAuth: true,title: '消息中心' }
           },
           {
               // 图片上传组件
