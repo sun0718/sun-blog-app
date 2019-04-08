@@ -47,6 +47,7 @@
                             if(res.code == '0000'){
                                 sessionStorage.setItem('SUN_WEB_TOKEN',res.result.token);
                                 sessionStorage.setItem('Autor',res.result.id);
+                                sessionStorage.setItem('AcountName',res.result.acountName);
                                 this.$router.push('/admin');
                             }
                         })

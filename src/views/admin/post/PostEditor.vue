@@ -354,7 +354,7 @@ export default {
     submit() {
       this.form.con = this.switchValue ? this.mavonhtml : this.quillCon;
       let params = {
-        aId:sessionStorage.get('Autor'),
+        aId:sessionStorage.getItem('Autor'),
         ...this.form
       };
       this.$post("/postArticle", params).then(res => {
