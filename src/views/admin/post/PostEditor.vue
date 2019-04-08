@@ -55,7 +55,7 @@
         </el-form-item>
         <el-upload
           class="upload-demo"
-          action="/apis/uploadImage"
+          action="/api/uploadImage"
           :on-preview="handlePreview"
           :on-change="handleChange"
           :on-remove="handleRemove"
