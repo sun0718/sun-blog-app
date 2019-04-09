@@ -31,13 +31,24 @@ const router = new Router({
           component: Home
         },
         {
+          path: "post",
+          name: "post",
+          component: resolve => require(['@/views/blog/article/PostDetail.vue'], resolve),
+        },
+        {
           path: "post/:id",
           name: "post",
           component: resolve => require(['@/views/blog/article/PostDetail.vue'], resolve),
         },
         {
-          path: "some",
-          name: "some",
+          path: "class",
+          name: "class",
+          component: resolve => require(['@/views/blog/class/Classification.vue'], resolve),
+          // component: DetailPage
+        },
+        {
+          path: "class/:cate",
+          name: "class",
           component: resolve => require(['@/views/blog/class/Classification.vue'], resolve),
           // component: DetailPage
         },
@@ -53,7 +64,7 @@ const router = new Router({
         },
         {
           path: "timeline",
-          name: "timelinet",
+          name: "timeline",
           component: resolve => require(['@/views/blog/timeline/TimeLine.vue'], resolve),
         }
       ]

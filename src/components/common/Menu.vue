@@ -63,10 +63,10 @@
         <a href="javascript:" class="pr-2 text-light single-popup">
           <i class="fa fa-weibo"></i>
         </a>
-        <a href="https://www.nicetheme.cn" target="_blank" class="pr-2 text-light">
+        <a href="https://www.weixin.com" target="_blank" class="pr-2 text-light">
           <i class="fa fa-weixin"></i>
         </a>
-        <a class="btn-search text-light">
+        <a class="btn-search text-light" @click="showSearch">
           <i class="fa fa-search"></i>
         </a>
       </div>
@@ -89,15 +89,15 @@ export default {
           title: "文章分类",
           subs: [
             {
-              index: "/blog/calss/work",
+              index: "/blog/class/work",
               title: "工作相关"
             },
             {
-              index: "/blog/calss/life",
+              index: "/blog/class/life",
               title: "生活旅游"
             },
             {
-              index: "/blog/calss/html",
+              index: "/blog/class/study",
               title: "前端学习"
             }
           ]

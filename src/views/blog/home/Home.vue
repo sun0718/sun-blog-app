@@ -14,9 +14,16 @@
         <ArticleShow v-for="(item) in postData" :key="item.id" :postData="item">
           <sun-imageShow :key="item.id" :postData="item" :showTitle='false' :num="1"></sun-imageShow>
         </ArticleShow>
-        <el-col :xs="24" :sm="24" :md="24" :lg="24" style="display: flex;justify-content: center;">
-          <el-pagination :page-size="10" :pager-count="6" layout="prev, pager, next" :total="205"></el-pagination>
-        </el-col>
+        <div class="mt-2x">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="currentPage"
+            :page-size="10"
+            layout="prev, pager, next"
+            :total="94">
+          </el-pagination>
+        </div>
       </el-col>
       <el-col ref="sliderBar" class="sliderBar" :xs="24" :sm="24" :md="6" :lg="6">
         <aside ref="aside" :style="fixedStyle">
