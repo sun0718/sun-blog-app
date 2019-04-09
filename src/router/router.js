@@ -1,7 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Blog from "@/views/blog/Blog.vue";
-import Home from "@/views/blog/home/Home.vue";
 
 import componentUI from '@/components/index'
 
@@ -18,17 +16,17 @@ const router = new Router({
     },
     {
       path: '/blog',
-      component: Blog,
+      component: resolve => require(['@/views/blog/Blog.vue'], resolve),
       meta: { title : '博客首页'},
       children:[
         {
           path: "/",
           name: "home",
-          component: Home
+          component: resolve => require(['@/views/blog/home/Home.vue'], resolve)
         },{
           path: "home",
           name: "home",
-          component: Home
+          component: resolve => require(['@/views/blog/home/Home.vue'], resolve)
         },
         {
           path: "post",
