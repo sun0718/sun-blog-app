@@ -8,7 +8,7 @@
             </div>
             <div class="list-item-content">
                 <router-link :to="'post/some/'+postData.categorie">
-                    <span class="badge badge-md text-uppercase bg-white-overlay">{{postData.categorie}}</span>
+                    <span class="badge badge-md text-uppercase bg-white-overlay">{{postData.categorie.pop()}}</span>
                 </router-link>
                 <router-link :to="'/blog/post/'+postData.id" class="list-body"  :class="showTitle?'':'hidden'">
                         <div class="list-title text-white h-2x">{{postData.title}}</div>

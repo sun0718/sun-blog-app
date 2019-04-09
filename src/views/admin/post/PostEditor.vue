@@ -444,6 +444,17 @@ export default {
   transform: translateX(117.5px) translateY(10px) !important;
 }
 
+.ql-syntax{
+    background-color: #f9f9f9;
+    border: 0px;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 10px 15px;
+    color: #444;
+    overflow: auto;
+    border-radius: 0px;
+}
+
 .editor-btn {
   margin-top: 20px;
 }
