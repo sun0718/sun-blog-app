@@ -142,13 +142,16 @@ export default {
 }
 .con-center {
   margin-top: 2rem;
+  @media screen and (max-width: 992px){
+    margin-top: 1rem;
+  }
   & > .el-col {
     padding: 0 0.5rem;
     display: flex;
     flex-direction: column;
     position: relative;
-    &.sliderBar {
-      @media screen and (max-width: 992px) {
+    @media screen and (max-width: 992px) {
+      &.sliderBar {
         display: none;
       }
     }

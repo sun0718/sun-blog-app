@@ -1,5 +1,5 @@
 <template>
-  <el-aside width='200px' class="blog-navbar">
+  <el-aside width='200' class="blog-navbar">
     <!-- nav icon -->
     <div class="navbar-icon d-flex-row">
       <h1 class="navbar-brand">
@@ -15,10 +15,11 @@
         class="text-white navbar-button"
         style="background: transparent;border: none;"
         icon="fa fa-reorder"
+        @click="menuShow"
       ></el-button>
     </div>
     <!-- main menu -->
-    <div class="main-menu">
+    <div class="main-menu" ref="menu">
       <el-menu
         default-active="dashboard"
         class="el-menu-vertical-demo"
@@ -115,7 +116,10 @@ export default {
   },
   methods: {
     handleOpen: () => {},
-    handleClose: () => {}
+    handleClose: () => {},
+    menuShow() {
+      this.$refs.menu.style.display = this.$refs.menu.style.display == 'none' || this.$refs.menu.style.display == ''? 'block' : 'none';
+    }
   }
 };
 </script>
@@ -131,6 +135,7 @@ export default {
     & {
       width: 100% !important;
       height: auto;
+      text-align: center
     }
   }
   .navbar-icon {
@@ -138,7 +143,12 @@ export default {
     text-align: left;
     @media screen and (max-width: 992px) {
       & {
-        padding: 1rem;
+        padding: 0;
+        line-height: 60px;
+        img{
+          width: 30px;
+          height: 30px;
+        }
       }
     }
     .navbar-brand{
@@ -151,7 +161,7 @@ export default {
     .navbar-button {
       margin-left: auto;
       display: none;
-      font-size: 2rem;
+      font-size: 1rem;
       @media screen and (max-width: 992px) {
         & {
           display: inline-block;
@@ -161,13 +171,22 @@ export default {
   }
   .main-menu {
     @media screen and (max-width: 992px) {
-      & {
-        display: none;
+      .el-menu-vertical-demo{
+        width: 100%  !important;
+        min-height: auto  !important;
+      }
+      .el-menu-vertical-demo>li ,.el-submenu__title{
+        font-weight: blod;
+        text-align: center !important;
+        font-weight: blod;
+        font-size: 1rem;
+        color: #fff !important;
       }
     }
     .el-menu-vertical-demo {
       border-right: none;
       text-align: left;
+      width: 100% !important;
       .el-icon-arrow-down:before {
         content: "·";
         font-weight: 600;
@@ -180,6 +199,7 @@ export default {
       }
     }
     .navbar-share {
+      text-align: center;
       padding-top: 3rem;
       margin: 3rem 1.5rem;
       border-top: 1px solid #404b69;

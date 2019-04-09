@@ -164,8 +164,16 @@ export default {
             flex: 1 1 auto;
             .list-title{
                 max-height: 46px;
-                // margin-top: auto;
                 margin-top: auto;
+                @media screen and (max-width: 768px){
+                        cursor: pointer;
+                        overflow: hidden;
+                        font-size: .75rem;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                }
             }
             &.hidden{
                 visibility: hidden;

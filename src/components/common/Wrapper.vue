@@ -286,31 +286,45 @@ export default {
   .container {
     width: 100%;
     padding-top: 2rem;
-    padding-right: 2rem;
-    padding-left: 2rem;
     margin-right: auto;
     margin-left: auto;
-    @media (min-width: 576px) {
+    @media (max-width: 768px) {
       max-width: 540px;
+      padding-right: .5rem;
+      padding-left: .5rem;
+      &>div{
+        margin-right: 0;
+      }
     }
     @media (min-width: 768px) {
       max-width: 720px;
+      padding-right: 1rem;
+      padding-left: 1rem;
+      &>div{
+        margin-right: 0;
+      }
     }
     @media (min-width: 992px) {
       max-width: 960px;
+      padding-right: 1rem;
+      padding-left: 1rem;
     }
-    @media (min-width: 992px) {
+    @media (min-width: 1200px) {
       max-width: 1140px;
+      padding-right: 2rem;
+      padding-left: 2rem;
     }
     .other-inner {
       width: 100%;
       padding: 2rem;
       margin: auto;
-      @media (min-width: 576px) {
+      @media (max-width: 768px) {
         max-width: 540px;
+        padding: .5rem;
       }
       @media (min-width: 768px) {
         max-width: 720px;
+        padding: 1rem;
       }
       @media (min-width: 992px) {
         max-width: 860px;

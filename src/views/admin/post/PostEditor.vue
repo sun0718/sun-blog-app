@@ -14,7 +14,7 @@
           <el-input v-model="form.title"></el-input>
         </el-form-item>
         <el-form-item label="文章分类">
-          <el-cascader placeholder="请输入" :options="cateList" v-model="form.categorie" filterable></el-cascader>
+          <el-cascader placeholder="请输入" :options="cateList" :show-all-levels="true" change-on-select v-model="form.categorie" filterable></el-cascader>
           <a style="cursor:pointer" @click="addCate">
             <i class="fa fa-plus ml-1x" style></i>
             添加分类

@@ -96,8 +96,17 @@ export default {
                 -webkit-line-clamp: 2;
                 -webkit-box-orient: vertical;
             }
+            @media screen and (max-width: 768px){
+                .list-title{
+                    font-size: 1rem;
+                }
+                .list-text{
+                    font-size: .75rem;
+                }
+            } 
         }
         .list-footer{
+            margin-top: 1rem;
             display: flex;
         }
     }

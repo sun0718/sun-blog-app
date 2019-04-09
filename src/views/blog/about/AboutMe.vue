@@ -37,6 +37,7 @@
     img {
       border-radius: 10px;
       max-width: 400px;
+      width: 100%;
     }
     p {
       margin-top: 0;
