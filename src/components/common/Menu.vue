@@ -26,6 +26,7 @@
         router
         @open="handleOpen"
         @close="handleClose"
+        @select="menuShow"
         background-color="#283149"
         text-color="#7a8b9a"
         active-text-color="#00818a"
