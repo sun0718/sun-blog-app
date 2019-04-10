@@ -6,53 +6,11 @@
       </div>
       <div class="post-content">
         <div class="archives">
-          <div class="archives_item">
-            <h2>2018年07月</h2>
+          <div class="archives_item" v-for="(items,indexs) in postData" :key="indexs">
+            <h2>{{`${indexs.slice(0,4)}年${indexs.slice(5-7)}日`}}</h2>
             <ul class="archives_list">
-              <li>
-                30日
-                <a href="http://www.ptbird.cn/weex-module-dom.html">weex 内置模块 dom</a>
-              </li>
-              <li>
-                29日
-                <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
-              </li>
-              <li>
-                29日
-                <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
-              </li>
-              <li>
-                29日
-                <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
-              </li>
-              <li>
-                29日
-                <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
-              </li>
-            </ul>
-          </div>
-          <div class="archives_item">
-            <h2>2018年07月</h2>
-            <ul class="archives_list">
-              <li>
-                30日
-                <a href="http://www.ptbird.cn/weex-module-dom.html">weex 内置模块 dom</a>
-              </li>
-              <li>
-                29日
-                <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
-              </li>
-              <li>
-                29日
-                <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
-              </li>
-              <li>
-                29日
-                <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
-              </li>
-              <li>
-                29日
-                <a href="http://www.ptbird.cn/weex-instance-variable.html">weex 实例属性的使用</a>
+              <li v-for="(item,index) in items" :key="index">
+                {{item.createTime.slice(9-11)}}日<a href="http://www.ptbird.cn/weex-module-dom.html">{{item.title}}</a>
               </li>
             </ul>
           </div>
@@ -66,7 +24,32 @@
 export default {
   name: "timeline",
   data() {
-    return {};
+    return {
+      postData:[]
+    };
+  },
+  mounted(){
+    this.getData(1000)
+  },
+  methods:{
+    getData(query){
+      this.$get('/getPosts',{
+        pagesize:query
+      }).then((res)=>{
+        var postData = res.result.list.allPost
+        var postTimeLine = {}
+        for(var item of postData){
+          if(postTimeLine[item.createTime.slice(0,7)]){
+             postTimeLine[item.createTime.slice(0,7)].push(item)
+          }else{
+            postTimeLine[item.createTime.slice(0,7)]=[]
+            postTimeLine[item.createTime.slice(0,7)].push(item)
+          }
+        }
+        console.log(postTimeLine)
+        this.postData = postTimeLine
+      })
+    }
   }
 };
 </script>

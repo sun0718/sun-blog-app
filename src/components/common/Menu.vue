@@ -1,5 +1,5 @@
 <template>
-  <el-aside width='200' class="blog-navbar">
+  <el-aside width='200px' class="blog-navbar">
     <!-- nav icon -->
     <div class="navbar-icon d-flex-row">
       <h1 class="navbar-brand">

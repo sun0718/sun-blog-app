@@ -14,14 +14,14 @@
         <ArticleShow v-for="(item) in postData" :key="item.id" :postData="item">
           <sun-imageShow :key="item.id" :postData="item" :showTitle='false' :num="1"></sun-imageShow>
         </ArticleShow>
-        <div class="mt-2x">
+        <div class="mb-2x">
           <el-pagination
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
             :current-page.sync="currentPage"
             :page-size="10"
             layout="prev, pager, next"
-            :total="94">
+            :total="total">
           </el-pagination>
         </div>
       </el-col>
@@ -69,15 +69,16 @@ export default {
   name: "home",
   data() {
     return {
+      searchData:'',
+      postData: [],
+      adList: [],
+      total:'',
       fixedStyle: {
         position: "",
         top: "",
         left: "",
         width: ""
-      },
-      searchData:'',
-      postData: [],
-      adList: []
+      }
     };
   },
   components: {
@@ -96,6 +97,7 @@ export default {
       getAd: true
     }).then(res => {
       var allList = res.result.list;
+      this.total = res.result.count -3;
       if (allList.overHead.length < 3) {
         self.adList = res.result.list.overHead.concat(
           res.result.list.allPost.slice(0, 3 - allList.overHead.length)

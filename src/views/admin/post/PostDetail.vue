@@ -24,9 +24,9 @@ export default {
     getData() {
       this.$get("/postArticle/" + this.$route.params.id)
         .then(res => {
-          this.title = res.data.title;
-          this.preface = res.data.preface;
-          this.article = res.data.con;
+          this.title = res.data.result.title;
+          this.preface = res.data.result.preface;
+          this.article = res.data.result.con;
         })
         .catch(err => {
           console.log(err);
@@ -61,9 +61,15 @@ export default {
     }
     p {
       margin: 0 0 1.5rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: .5rem;
       font-size: 1rem;
       line-height: 1.8;
+      text-indent: 2rem;
+    }
+    h4,h5,h6{
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-weight: bold;
     }
     h2 {
       font-size: 1.5rem;
@@ -72,11 +78,17 @@ export default {
       font-weight: bold;
     }
     blockquote {
-      margin-left: 1em;
-      margin-right: 1em;
+      margin: 2em .5rem;
       padding: 0.25em 1em;
       color: #777;
       border-left: 0.25em solid #ddd;
+    }
+    ul{
+      text-indent: 2rem;
+          list-style: square inside;
+    }
+    li{
+      margin-bottom: .5rem;
     }
     img {
       max-width: 100%;

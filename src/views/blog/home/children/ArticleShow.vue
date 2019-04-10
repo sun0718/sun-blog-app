@@ -16,12 +16,12 @@
                     <div class="text-xs text-muted">
                         <span class="d-inline-block text-dark" v-if="postData.overHead">置顶</span>
                         <i class="text-primary pl-half pr-half" v-if="postData.overHead">•</i>                
-                        <span class="d-inline-block">{{ postData.createTime|formatCreateTime }}</span>
+                        <span class="d-inline-block">{{ postData.createTime }}</span>
                     </div>
                     <div class="ml-auto text-xs">
                         <a href="javascript:" class="d-inline-block pl-half text-dark">
                             <i class="fa fa-heart"></i> 
-                            <span class="pl-half">51</span>
+                            <span class="pl-half">{{ postData.like }}</span>
                         </a>
                     </div>
                 </div>

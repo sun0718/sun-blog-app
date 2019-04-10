@@ -60,8 +60,7 @@ export default {
         }
     },
     mounted(){
-        console.log(this.postData)
-        // console.log(this.half)
+        // console.log(this.postData)
     },
     props:{
         num:Number,

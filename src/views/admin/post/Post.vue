@@ -21,7 +21,7 @@
             <el-table :data="datalist" border class="table" ref="multipleTable" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="categorie" label="分类" align="center" width="120"></el-table-column>
-                <el-table-column prop="createTime" label="创建日期" align="center" sortable width="150" :formatter="formatCreateTime"></el-table-column>
+                <el-table-column prop="createTime" label="创建日期" align="center" sortable width="150"></el-table-column>
                 <el-table-column prop="title" label="标题"  align="center">
                     <template slot-scope="scope">
                         <router-link :to="{path:'detail/'+scope.row.id}" append>{{ scope.row.title  }}</router-link>
@@ -52,7 +52,7 @@
                 </el-table-column>
             </el-table>
             <div class="pagination">
-                <el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="1000">
+                <el-pagination background @current-change="handleCurrentChange" layout="prev, pager, next" :total="total">
                 </el-pagination>
             </div>
         </div>
@@ -98,6 +98,7 @@ export default {
     data() {
         return {
             tableData: [],
+            total:'',
             cur_page: 1,
             multipleSelection: [],
             select_cate: '',
@@ -144,10 +145,14 @@ export default {
         // 分页导航
         handleCurrentChange(val) {
             this.cur_page = val;
-            this.getData();
+            this.getData({
+                currentPage:val,
+            });
         },
-        getData() {
-            this.$get('/postList').then((res)=>{
+        getData(query) {
+            this.$get('/postList',query).then((res)=>{
+                console.log(res)
+                this.total = res.result.count
                 this.tableData = [].concat(res.result.list.overHead, res.result.list.allPost)
                 console.log(res.result.list.overHead)
                 console.log(res.result.list.allPost)

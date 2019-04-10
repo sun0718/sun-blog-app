@@ -288,6 +288,9 @@ export default {
     padding-top: 2rem;
     margin-right: auto;
     margin-left: auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     @media (max-width: 768px) {
       max-width: 540px;
       padding-right: .5rem;
@@ -318,6 +321,7 @@ export default {
       width: 100%;
       padding: 2rem;
       margin: auto;
+      flex: 1;
       @media (max-width: 768px) {
         max-width: 540px;
         padding: .5rem;

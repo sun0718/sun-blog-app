@@ -13,7 +13,7 @@
       </div>
       <ArticleLikes/>
       <ArticleShare/>
-      <ArticleSibing/>
+      <ArticleSiblings :sibling="sibling"/>
       <ArticleComment/>
     </div>
   </sun-Wrapper>
@@ -23,18 +23,19 @@
 import ArticleComment from "@/views/blog/article/ArticleComment.vue";
 import ArticleLikes from "@/views/blog/article/ArticleLikes.vue";
 import ArticleShare from "@/views/blog/article/ArticleShare.vue";
-import ArticleSibing from "@/views/blog/article/ArticleSibings.vue";
+import ArticleSiblings from "@/views/blog/article/ArticleSiblings.vue";
 
 export default {
   name: "",
   components: {
-    ArticleComment,ArticleShare,ArticleLikes,ArticleSibing
+    ArticleComment,ArticleShare,ArticleLikes,ArticleSiblings
   },
   data(){
     return{
       title:'',
       preface:'',
-      article:''
+      article:'',
+      sibling:{}
     }
   },
   mounted() {
@@ -44,10 +45,10 @@ export default {
     getData() {
       this.$get("/getPost/" + this.$route.params.id)
         .then(res => {
-          console.log(res.data)
-          this.title = res.data.title;
-          this.preface = res.data.preface;
-          this.article = res.data.con;
+          this.title = res.data.result.title;
+          this.preface = res.data.result.preface;
+          this.article = res.data.result.con;
+          this.sibling = res.data.sibling;
         })
         .catch(err => {
           console.log(err);
