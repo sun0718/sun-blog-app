@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar style="height:100%;" ref="elscrollbar" class="flex">
+  <el-scrollbar style="height:100%;" ref="elscrollbar" class="flex scrollBar">
     <el-main class="main">
       <div class="container">
         <slot></slot>
@@ -34,35 +34,35 @@ export default {
   },
   mounted() {
     // 获取元素
-    if(this.$slots.default[1]){
+    if (this.$slots.default[1]) {
       var sliderBar = this.$slots.default[1].context.$refs["sliderBar"].$el;
-        var aside = this.$slots.default[1].context.$refs["aside"];
-        // 获取滚动的盒子
-        var wrap = this.$refs["elscrollbar"].$refs["wrap"];
+      var aside = this.$slots.default[1].context.$refs["aside"];
+      // 获取滚动的盒子
+      var wrap = this.$refs["elscrollbar"].$refs["wrap"];
 
-        this.sliderBar = sliderBar;
-        this.wrap = wrap;
-        this.aside = aside;
-        // 获取元素数据和初始位置
-        this.box.height = aside.offsetHeight;
-        this.box.width = aside.offsetWidth;
-        this.box.outwidth = sliderBar.offsetWidth - 16;
-        this.box.offsetY = aside.getBoundingClientRect().bottom;
-        this.box.offsetT = aside.getBoundingClientRect().top;
-        this.box.offsetX = aside.getBoundingClientRect().left;
-        // 临界点
-        this.sliderBarHeight = sliderBar.getBoundingClientRect().bottom;
-        // 获取滚动初始位置
-        this.beforeY = wrap.scrollTop;
-        // 获取屏幕高度
-        this.screenY = document.body.clientHeight;
-        if (this.sliderBarHeight !== this.box.offsetY) {
-          // 监听滚动事件
-          window.addEventListener("scroll", this.handleScroll, true);
-          this.wrap.addEventListener("scroll", this.handleScroll, true);
-          // 监听resize事件
-          window.addEventListener("resize", this.handleResize);
-        }
+      this.sliderBar = sliderBar;
+      this.wrap = wrap;
+      this.aside = aside;
+      // 获取元素数据和初始位置
+      this.box.height = aside.offsetHeight;
+      this.box.width = aside.offsetWidth;
+      this.box.outwidth = sliderBar.offsetWidth - 16;
+      this.box.offsetY = aside.getBoundingClientRect().bottom;
+      this.box.offsetT = aside.getBoundingClientRect().top;
+      this.box.offsetX = aside.getBoundingClientRect().left;
+      // 临界点
+      this.sliderBarHeight = sliderBar.getBoundingClientRect().bottom;
+      // 获取滚动初始位置
+      this.beforeY = wrap.scrollTop;
+      // 获取屏幕高度
+      this.screenY = document.body.clientHeight;
+      if (this.sliderBarHeight !== this.box.offsetY) {
+        // 监听滚动事件
+        window.addEventListener("scroll", this.handleScroll, true);
+        this.wrap.addEventListener("scroll", this.handleScroll, true);
+        // 监听resize事件
+        window.addEventListener("resize", this.handleResize);
+      }
     }
   },
   methods: {
@@ -275,9 +275,11 @@ export default {
 
 
 <style lang="less">
-.el-scrollbar__wrap {
-  overflow: visible !important;
-  overflow-x: hidden !important;
+.scrollBar {
+  .el-scrollbar__wrap {
+    overflow: visible !important;
+    overflow-x: hidden !important;
+  }
 }
 
 .main {
@@ -291,11 +293,12 @@ export default {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
     @media (max-width: 768px) {
       max-width: 540px;
-      padding-right: .5rem;
-      padding-left: .5rem;
-      &>div{
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+      & > .ml-N-half.mr-N-half {
         margin-right: 0;
       }
     }
@@ -303,7 +306,7 @@ export default {
       max-width: 720px;
       padding-right: 1rem;
       padding-left: 1rem;
-      &>div{
+      & > .ml-N-half.mr-N-half {
         margin-right: 0;
       }
     }
@@ -324,7 +327,7 @@ export default {
       flex: 1;
       @media (max-width: 768px) {
         max-width: 540px;
-        padding: .5rem;
+        padding: 0.5rem;
       }
       @media (min-width: 768px) {
         max-width: 720px;

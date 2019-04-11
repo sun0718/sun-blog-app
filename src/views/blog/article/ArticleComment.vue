@@ -12,7 +12,7 @@
         class="comment-form"
       >
         <div class="d-flex-row w-100">
-          <div class="mr-2x avatar-div comment-avatar-author">
+          <div class="mr-1x avatar-div comment-avatar-author">
             <img
               alt
               src="//cdn.v2ex.com/gravatar/?s=50&amp;d=mm&amp;r=g"
@@ -55,7 +55,7 @@
     <ul class="comment-list">
       <li id="comment-12" class="mt-2x">
         <article id="div-comment-12" class="d-flex-row w-100">
-          <div class="avatar-div mr-2x">
+          <div class="avatar-div mr-1x">
             <img
               alt
               src="//cdn.v2ex.com/gravatar/280e47295928e97fc02d6310d3bed79a?s=50&amp;d=mm&amp;r=g"

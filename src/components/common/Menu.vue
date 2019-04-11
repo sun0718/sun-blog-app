@@ -3,14 +3,15 @@
     <!-- nav icon -->
     <div class="navbar-icon d-flex-row">
       <h1 class="navbar-brand">
-        <a href="https://demo.nicetheme.xyz/ashley-style-2">
+        <a href="https://sunfafa.cn">
           <img
-            src="https://demo.nicetheme.xyz/ashley-style-2/wp-content/themes/Ashley/images/logo.png"
+            src="@public/img/logo.png"
             alt=""
           >
         </a>
       </h1>
       <el-button
+        ref="hBtn"
         type="button"
         class="text-white navbar-button"
         style="background: transparent;border: none;"
@@ -119,7 +120,9 @@ export default {
     handleOpen: () => {},
     handleClose: () => {},
     menuShow() {
-      this.$refs.menu.style.display = this.$refs.menu.style.display == 'none' || this.$refs.menu.style.display == ''? 'block' : 'none';
+      if(this.$refs.hBtn.$el.style.display == 'inline-block' || this.$refs.hBtn.$el.style.display == ''){
+        this.$refs.menu.style.display = this.$refs.menu.style.display == 'none' || this.$refs.menu.style.display == ''? 'block' : 'none';
+      }
     }
   }
 };
@@ -162,7 +165,8 @@ export default {
     .navbar-button {
       margin-left: auto;
       display: none;
-      font-size: 1rem;
+      font-size: 1.2rem;
+      margin-right: 10px;
       @media screen and (max-width: 992px) {
         & {
           display: inline-block;

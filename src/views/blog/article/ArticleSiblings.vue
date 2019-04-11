@@ -1,10 +1,10 @@
 <template>
-  <div class="blog-router clearfix">
-    <div v-if="Object.keys(prevBlog) !== 0" class="fl">
+  <div class="blog-router d-flex-row clearfix">
+    <div v-if="Object.keys(prevBlog) !== 0" class="prev flex text-center">
       上一篇：
       <router-link :to="{path:'/blog',query:{id:prevBlog.id}}">{{prevBlog.title}}</router-link>
     </div>
-    <div v-if="Object.keys(nextBlog) !== 0" class="fr">
+    <div v-if="Object.keys(nextBlog) !== 0" class="next flex text-center">
       下一篇：
       <router-link :to="{path:'/blog',query:{id:nextBlog.id}}">{{nextBlog.title}}</router-link>
     </div>
@@ -41,6 +41,7 @@ export default {
     width: 80%;
     margin: 2rem auto 1rem;
     font-size: .85rem;
+    flex-wrap: wrap;
     a{
       font-size: .85rem;
     }

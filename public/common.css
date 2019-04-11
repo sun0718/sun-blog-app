@@ -256,6 +256,7 @@
 
 .avatar-div{
     width: 50px;
+    flex-shrink: 0;
 }
 
 .avatar {

@@ -7,7 +7,7 @@
                 </a>
             </div>
             <div class="list-item-content">
-                <router-link :to="'post/some/'+postData.categorie">
+                <router-link :to="'/blog/post/some/'+postData.categorie">
                     <span class="badge badge-md text-uppercase bg-white-overlay">{{postData.categorie.slice(-1)[0]}}</span>
                 </router-link>
                 <router-link :to="'/blog/post/'+postData.id" class="list-body"  :class="showTitle?'':'hidden'">
@@ -37,7 +37,7 @@
                 </a>
             </div>
             <div class="list-item-content">
-                <a target="_blank" class="list-body" :class="showTitle?'':'hidden'">
+                <router-link :to="'/blog/post/'+postData.id" class="list-body" :class="showTitle?'':'hidden'">
                     <div class="list-title text-white text-normal h-2x">巴塞罗那：凯旋门、城堡公园与中国太极——西班牙、法国圣诞之旅jjjjj</div>
                     <div class="list-meta mt-half d-flex-row text-xs text-white">
                         <span class="d-inline-block">2019-02-03</span>
@@ -45,7 +45,7 @@
                             <i class="text-sm fa fa-heart"></i> <span class="like-count ml-half">52</span>
                         </span>
                     </div>
-                </a>
+                </router-link>
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@
             <div class="list-content">
                 <div class="list-body">
                     <div class="list-title">
-                        <router-link :to="'/post/'+postData.id">{{postData.title}}</router-link>
+                        <router-link :to="'/blog/post/'+postData.id">{{postData.title}}</router-link>
                         <!-- <a href="" target="_blank" class="list-title">{{postData.title}}</a> -->
                     </div>
                     <div class="list-text"><div class="h-2x">{{postData.preface}}</div></div>

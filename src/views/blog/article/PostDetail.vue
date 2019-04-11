@@ -1,21 +1,35 @@
 <template>
   <sun-Wrapper>
-    <div class="post">
-      <h2 class="post-title">{{title}}</h2>
-      <p class="post-readInfo">
+    <article class="post">
+      <!-- seo优化 -->
+      <meta itemprop="url" content="https://juejin.im/post/5cae9de95188251ae2324ec3">
+      <meta itemprop="headline" content="前端想要了解的Nginx">
+      <meta itemprop="keywords" content="Nginx">
+      <meta itemprop="datePublished" content="2019-04-11T01:54:19.534Z">
+      <meta itemprop="image" content="https://b-gold-cdn.xitu.io/icon/icon-128.png">
+      <div itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="name" content="快狗打车前端团队"><meta itemprop="url" content="https://juejin.im/user/5c90d966f265da61173a2cd8"></div>
+      <div itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="掘金"><div itemprop="logo" itemscope="itemscope" itemtype="https://schema.org/ImageObject"><meta itemprop="url" content="https://b-gold-cdn.xitu.io/icon/icon-white-180.png"><meta itemprop="width" content="180"><meta itemprop="height" content="180"></div></div>
+      <!-- 正文 -->
+      <div class="post-content">
+        <h2 class="title">{{title}}</h2>
+        <p class="readInfo">
           <span>评论：{{3}}</span>
           <span>阅读：{{24}}</span>
           <span>喜欢：{{0}}</span>
-      </p>
-      <div class="post-content">
-        <blockquote>{{preface || '数据有问题啊'}}</blockquote>
-        <div v-html="article"></div>
+        </p>
+        <div class="content">
+          <blockquote>
+            <code>{{preface || '数据有问题啊'}}</code>
+          </blockquote>
+          <div v-html="article"></div>
+        </div>
+        <ArticleLikes/>
+        <ArticleShare/>
+        <ArticleSiblings :sibling="sibling"/>
+        <ArticleComment/>
       </div>
-      <ArticleLikes/>
-      <ArticleShare/>
-      <ArticleSiblings :sibling="sibling"/>
-      <ArticleComment/>
-    </div>
+        <ArticleCatalog></ArticleCatalog>
+    </article>
   </sun-Wrapper>
 </template>
 
@@ -24,19 +38,24 @@ import ArticleComment from "@/views/blog/article/ArticleComment.vue";
 import ArticleLikes from "@/views/blog/article/ArticleLikes.vue";
 import ArticleShare from "@/views/blog/article/ArticleShare.vue";
 import ArticleSiblings from "@/views/blog/article/ArticleSiblings.vue";
+import ArticleCatalog from "@/views/blog/article/ArticleCatalog.vue";
 
 export default {
   name: "",
   components: {
-    ArticleComment,ArticleShare,ArticleLikes,ArticleSiblings
+    ArticleComment,
+    ArticleShare,
+    ArticleLikes,
+    ArticleSiblings,
+    ArticleCatalog
   },
-  data(){
-    return{
-      title:'',
-      preface:'',
-      article:'',
-      sibling:{}
-    }
+  data() {
+    return {
+      title: "",
+      preface: "",
+      article: "",
+      sibling: {}
+    };
   },
   mounted() {
     this.getData();
@@ -61,82 +80,96 @@ export default {
 
 <style lang="less">
 .post {
-  background-color: #fff;
-  margin: 0 auto 3rem;
-  padding: 2rem 2rem 3rem;
-  .post-title {
-    color: #16a085;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-  }
-  .post-readInfo{
-    span{
-      font-size: .75rem;
-      line-height: 2rem;
-      margin-left: 1rem;
-      display: inline-block;
-      position: relative;
-    }
-    span:not(:first-of-type):before{
-      content:'·';
-      display: inline-block;
-      position: absolute;
-      top: 0;
-      left: -1rem;
-      width: 1rem;
-      font-size: 1.5rem;
-      text-align: center;
-    }
-  }
+  margin-bottom:3rem;
+  padding-bottom:  3rem;
   .post-content {
-    overflow: hidden;
-    .code, pre {
-        background: #48484a;
+    background-color: #fff;
+    max-width: 790px;
+    padding: 1rem;
+    .title {
+      color: #16a085;
+      font-size: 2rem;
+      margin: 2rem 0;
+    }
+    .readInfo {
+      margin: 1rem 0;
+      span {
+        font-size: 0.75rem;
+        line-height: 2rem;
+        margin-left: 1rem;
+        display: inline-block;
+        position: relative;
+      }
+      span:not(:first-of-type):before {
+        content: "·";
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: -1rem;
+        width: 1rem;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+    }
+    .content {
+      overflow: hidden;
+      .code,
+      pre {
+        background: rgb(248, 248, 248);
         padding: 20px 20px 20px;
         margin-bottom: 30px;
         list-style: none;
         word-break: break-all;
         line-height: 20px;
         word-wrap: break-word;
-        color: #fff;
-        font-size: 14px;
+        color: #333;
+        font-size: .75rem;
         overflow-x: auto;
         white-space: normal;
-    }
-    p{
-        margin: 0 0 1.5rem;
-        margin-bottom: 1.5rem;
-        font-size: 1rem;
+      }
+      p {
+        margin: 0 0 1rem;
+        font-size: .9rem;
         line-height: 1.8;
-    }
-    h2{
+      }
+      ul{
+        list-style: disc inside;
+        li{
+          margin-bottom: 1rem;
+          font-size: .9rem;
+        }
+      }
+      h2 {
         font-size: 1.5rem;
         margin-top: 2rem;
         margin-bottom: 2rem;
         font-weight: bold;
-    }
-    blockquote{
+      }
+      h3,h4,h5,h6 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+      }
+      blockquote {
         margin-left: 1em;
         margin-right: 1em;
         padding: 0.5em 1em;
         color: #777;
         border-left: 0.25em solid #ddd;
+      }
+      img {
+        max-width: 100%;
+        margin: 0 auto;
+        height: auto;
+        display: block;
+        margin-bottom: 20px;
+      }
     }
-    img {
-      max-width: 100%;
-      margin: 0 auto;
-      height: auto;
-      display: block;
-      margin-bottom: 20px;
+    .post-like.current {
+      background: #e45d6a;
+      border-color: #e45d6a;
+      box-shadow: 0px 5px 20px -3px rgba(228, 93, 106, 0.55) !important;
     }
-  }
-  .post-like.current {
-    background: #e45d6a;
-    border-color: #e45d6a;
-    box-shadow: 0px 5px 20px -3px rgba(228, 93, 106, 0.55) !important;
-  }
-  @media (min-width: 992px) {
-    max-width: 850px;
   }
 }
 </style>
