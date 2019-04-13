@@ -34,7 +34,7 @@ httpServers.interceptors.response.use(
     // 状态等于'0000'
     if (data.code == '0000') {
       return Promise.resolve(data)
-    } else {  // 状态等于'0001'
+    } else if(data.code == '0001'){  // 状态等于'0001'
       Vue.prototype.$message({
         type: 'error',
         message: data.msg
@@ -45,6 +45,7 @@ httpServers.interceptors.response.use(
   //请求错误
   err => {
     let msg = ''
+    console.log('status:',err.response.status)
     if (err && err.response) {
       switch (err.response.status) {
         case 400:
@@ -94,6 +95,10 @@ httpServers.interceptors.response.use(
       type: 'error',
       message: msg
     })
+    if(err.response.status == 401){
+      Vue.$router.push('/login')
+    }
+    
     return Promise.reject(err.response)
   })
 

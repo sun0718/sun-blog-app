@@ -1,36 +1,32 @@
 <template>
   <div class="admin">
     <sun-header></sun-header>
-    <sun-sidebar></sun-sidebar>
-    <div class="content-box" :class="{'content-collapse':collapse}">
-      <sun-tags></sun-tags>
-      <el-scrollbar class="content" style="height:100%;overflow-y:hidden">
-        <transition name="move" mode="out-in">
-          <keep-alive :include="tagsList">
-            <router-view></router-view>
-          </keep-alive>
-        </transition>
-      </el-scrollbar>
+    <div class="main-con d-flex-row">
+      <sun-sidebar></sun-sidebar>
+      <div class="content-box">
+        <sun-tags></sun-tags>
+        <el-scrollbar class="content" style="height:100%;overflow-y:hidden">
+          <transition name="move" mode="out-in">
+            <keep-alive :include="tagsList">
+              <router-view></router-view>
+            </keep-alive>
+          </transition>
+        </el-scrollbar>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-
 import bus from "@/store/bus";
 export default {
   data() {
     return {
       tagsList: [],
-      collapse: false,
       isLoading: true
     };
   },
   mounted() {
-    bus.$on("collapse", msg => {
-      this.collapse = msg;
-    });
-
     // 只有在标签页列表里的页面才使用keep-alive，即关闭标签之后就不保存到内存中了。
     bus.$on("tags", msg => {
       let arr = [];
@@ -39,13 +35,6 @@ export default {
       }
       this.tagsList = arr;
     });
-    // console.log(this.$get('/',string))
-    // new Promise((resolve,reject)=>{
-    //     this.$get('/',string)
-    // })
-  },
-  watch:{
-      
   }
 };
 </script>
@@ -58,35 +47,40 @@ export default {
     border: 1px solid #ddd;
     border-radius: 5px;
     margin: 0 auto;
-    @media (min-width: 576px) {
-        max-width: 540px;
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 0.5rem;
     }
     @media (min-width: 768px) {
-        max-width: 720px;
+      max-width: 720px;
     }
     @media (min-width: 992px) {
-        max-width: 992px;
+      max-width: 992px;
     }
   }
 }
-.content-box {
-  position: absolute;
-  left: 200px;
-  right: 0;
-  top: 70px;
-  bottom: 0;
-  padding-bottom: 30px;
-  transition: left 0.3s ease-in-out;
-  background: #f0f0f0;
-  &.content-collapse {
-    left: 65px;
+
+.main-con {
+  height: calc(100% - 4rem);
+  @media screen and (max-width: 992px) {
+    height: auto;
+    display: block;
   }
-  .content {
-    width: auto;
-    height: 100%;
-    padding: 10px;
-    overflow-y: scroll;
-    box-sizing: border-box;
+  .content-box {
+    width: 100%;
+    padding-bottom: 30px;
+    transition: left 0.3s ease-in-out;
+    background: #f0f0f0;
+    .content {
+      width: auto;
+      height: 100%;
+      padding: 0.5rem;
+      overflow-y: scroll;
+      box-sizing: border-box;
+    }
+    @media screen and (max-width: 992px) {
+      position: static;
+    }
   }
 }
 </style>

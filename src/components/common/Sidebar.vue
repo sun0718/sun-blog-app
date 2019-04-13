@@ -1,18 +1,19 @@
 <template>
   <el-aside :width="collapse?'64px':'200px'" style="transition:width .3s" class="blog-navbar">
     <!-- main menu -->
-    <div class="main-menu">
+    <div class="admin-menu" v-if="menuHide">
       <el-menu
-        :default-active="onRoutes()"
         :collapse="collapse"
+        :default-active="onRoutes()"
         class="el-menu-vertical-demo"
         router
         @open="handleOpen"
         @close="handleClose"
+        @select="handleSelect"
         background-color="#283149"
         text-color="#7a8b9a"
         active-text-color="#00818a"
-      >>
+      >
         <template v-for="item in items">
           <template v-if="item.subs">
             <el-submenu :index="item.index" :key="item.index">
@@ -53,6 +54,8 @@ export default {
   data() {
     return {
       collapse: false,
+      menuHide: true,
+      screenWidth: "",
       items: [
         {
           icon: "fa fa-home",
@@ -80,47 +83,67 @@ export default {
   mounted() {
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
     // 从bus获取collapse ,将值赋给collape
-    bus.$on("collapse", msg => {
+    bus.$on("collapseShow", msg => {
       this.collapse = msg;
     });
+    bus.$on("menuHide", msg => {
+      this.menuHide = msg;
+    });
+
+    this.getScreen()
+    var _self = this
+    window.onresize = ()=>{
+      _self.getScreen()
+    };
   },
   methods: {
     onRoutes() {
-      // return this.$route.path.replace("/admin/", "");
       return this.$route.path;
     },
-    handleOpen: () => {},
-    handleClose: () => {}
+    handleOpen() {},
+    handleClose() {},
+    handleSelect() {
+      if (this.screenWidth <= 992) {
+        this.menuHide = false;
+      }
+    },
+    getScreen() {
+      var screenWidth = document.body.clientWidth;
+      var menuHide, collapse;
+      if (screenWidth <= 992) {
+        menuHide = false;
+        collapse = false;
+      } else if (screenWidth <= 1366) {
+        collapse = true;
+        menuHide = true;
+      } else {
+        collapse = false;
+        menuHide = true;
+      }
+      console.log(collapse)
+      bus.$emit("menuHide", menuHide);
+      bus.$emit("collapseShow", collapse);
+    }
   }
 };
 </script>
 
-<style lang="less">
-.admin .blog-navbar {
-  height: calc(100% - 4rem);
-}
-</style>
-
 
 <style lang="less" scope>
 .blog-navbar {
-  overflow: hidden !important;
   @media screen and (max-width: 992px) {
-    & {
+    width: 100%;
+    height: auto;
+    .admin-menu {
       width: 100% !important;
       height: auto;
     }
   }
-  .main-menu {
-    @media screen and (max-width: 992px) {
-      & {
-        display: none;
-      }
-    }
+  .admin-menu {
     .el-menu-vertical-demo {
       border-right: none;
       &:not(.el-menu--collapse) {
-        width: 200px;
+        width: 100%;
         min-height: 400px;
       }
       .el-icon-arrow-down:before {

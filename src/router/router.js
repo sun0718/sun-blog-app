@@ -81,13 +81,13 @@ const router = new Router({
               path: 'dashboard',
               name: '',
               component: resolve => require(['@/views/admin/dashboard/Index.vue'], resolve),
-              meta: { requireAuth: true,title: '系统首页' }
+              meta: { requireAuth: true, title: '系统首页' }
           },
           {
               path: 'post',
               name: '',
               component: resolve => require(['@/views/admin/post/Post.vue'], resolve),
-              meta: { requireAuth: true,title: '文章管理' }
+              meta: { requireAuth: true, title: '文章管理' }
           },
           {
               path: 'post/post-article',

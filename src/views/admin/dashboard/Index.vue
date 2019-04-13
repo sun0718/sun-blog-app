@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <el-row :gutter="20">
-            <el-col :span="8">
+            <el-col :xs="24" :md="8"  :lg="8">
                 <el-card shadow="hover" class="mgb20" style="height:252px;">
                     <div class="user-info">
                         <img src="@assets/img/img.jpg" class="user-avator" alt="">
@@ -27,7 +27,7 @@
                     <el-progress :percentage="0.9" color="#f56c6c"></el-progress>
                 </el-card>
             </el-col>
-            <el-col :span="16">
+            <el-col  :xs="24"  :md="16" :lg="16">
                 <el-row :gutter="20" class="mgb20">
                     <el-col :span="8">
                         <el-card shadow="hover" :body-style="{padding: '0px'}">
@@ -189,9 +189,12 @@
 </script>
 
 
-<style scoped>
+<style lang='less' scoped>
     .el-row {
-        margin-bottom: 20px;
+        margin-bottom: 1.4rem;
+        .el-col{
+            margin-bottom: 1.4rem;
+        }
     }
 
     .grid-content {

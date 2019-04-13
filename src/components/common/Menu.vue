@@ -1,12 +1,19 @@
 <template>
-  <el-aside width='200px' class="blog-navbar">
+  <el-aside width="200px" class="blog-navbar">
     <!-- nav icon -->
     <div class="navbar-icon d-flex-row">
       <h1 class="navbar-brand">
         <a href="https://sunfafa.cn">
-          <img
+          <!-- <img
             src="@public/img/logo.png"
             alt=""
+          >-->
+          <embed
+            src="https://cdn-img.easyicon.net/image/2019/panda-index.svg"
+            width="60"
+            height="60"
+            type="image/svg+xml"
+            pluginspage="http://www.adobe.com/svg/viewer/install/"
           >
         </a>
       </h1>
@@ -107,11 +114,15 @@ export default {
         },
         {
           index: "/blog/timeline",
-          title: "时间轴线",
+          title: "时间轴线"
         },
         {
           index: "/blog/about",
           title: "个人简介"
+        },
+        {
+          index: "/admin",
+          title: "后台管理"
         }
       ]
     };
@@ -120,8 +131,12 @@ export default {
     handleOpen: () => {},
     handleClose: () => {},
     menuShow() {
-      if(this.$refs.hBtn.$el.style.display == 'inline-block' || this.$refs.hBtn.$el.style.display == ''){
-        this.$refs.menu.style.display = this.$refs.menu.style.display == 'none' || this.$refs.menu.style.display == ''? 'block' : 'none';
+      if (document.body.clientWidth <= 992) {
+        this.$refs.menu.style.display =
+          this.$refs.menu.style.display == "none" ||
+          this.$refs.menu.style.display == ""
+            ? "block"
+            : "none";
       }
     }
   }
@@ -139,7 +154,7 @@ export default {
     & {
       width: 100% !important;
       height: auto;
-      text-align: center
+      text-align: center;
     }
   }
   .navbar-icon {
@@ -149,16 +164,13 @@ export default {
       & {
         padding: 0;
         line-height: 60px;
-        img{
-          width: 30px;
-          height: 30px;
-        }
-      }
-    }
-    .navbar-brand{
-      @media screen and (max-width: 992px) {
-        & {
+        .navbar-brand {
           padding: 0 2rem;
+          img,
+          embed {
+            width: 30px;
+            height: 30px;
+          }
         }
       }
     }
@@ -176,11 +188,13 @@ export default {
   }
   .main-menu {
     @media screen and (max-width: 992px) {
-      .el-menu-vertical-demo{
-        width: 100%  !important;
-        min-height: auto  !important;
+      display: none;
+      .el-menu-vertical-demo {
+        width: 100% !important;
+        min-height: auto !important;
       }
-      .el-menu-vertical-demo>li ,.el-submenu__title{
+      .el-menu-vertical-demo > li,
+      .el-submenu__title {
         font-weight: blod;
         text-align: center !important;
         font-weight: blod;
