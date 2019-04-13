@@ -1,6 +1,6 @@
 <template>
-    <div class="list-item d-flex-column mb-1x">
-        <div v-if="num==1" class="d-flex-row flex">
+    <div class="list-item d-flex-column">
+        <div v-if="num==1" class="d-flex-row flex mb-1x">
             <div class="media flex-height-1">
                 <a class="media-content" :style="{backgroundImage:'url('+ postData.imageShow +')'}">
                     <span class="overlay"></span>
@@ -38,11 +38,11 @@
             </div>
             <div class="list-item-content">
                 <router-link :to="'/blog/post/'+postData.id" class="list-body" :class="showTitle?'':'hidden'">
-                    <div class="list-title text-white text-normal h-2x">巴塞罗那：凯旋门、城堡公园与中国太极——西班牙、法国圣诞之旅jjjjj</div>
+                    <div class="list-title text-white text-normal h-2x">{{postData.title}}</div>
                     <div class="list-meta mt-half d-flex-row text-xs text-white">
-                        <span class="d-inline-block">2019-02-03</span>
+                        <span class="d-inline-block">{{postData.createTime}}</span>
                         <span class="flex text-right">
-                            <i class="text-sm fa fa-heart"></i> <span class="like-count ml-half">52</span>
+                            <i class="text-sm fa fa-heart"></i> <span class="like-count ml-half">{{postData.like}}</span>
                         </span>
                     </div>
                 </router-link>
@@ -164,6 +164,7 @@ export default {
             .list-title{
                 max-height: 46px;
                 margin-top: auto;
+                margin-bottom: 1rem;
                 @media screen and (max-width: 768px){
                         cursor: pointer;
                         overflow: hidden;

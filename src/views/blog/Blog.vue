@@ -13,13 +13,11 @@ export default {
     name:'',
     data(){
         return{
-            fullscreenLoading:false
         }
     },
     created(){
     },
     mounted(){
-        
     }
 }
 </script>

@@ -4,16 +4,9 @@
     <div class="navbar-icon d-flex-row">
       <h1 class="navbar-brand">
         <a href="https://sunfafa.cn">
-          <!-- <img
+          <img
             src="@public/img/logo.png"
             alt=""
-          >-->
-          <embed
-            src="https://cdn-img.easyicon.net/image/2019/panda-index.svg"
-            width="60"
-            height="60"
-            type="image/svg+xml"
-            pluginspage="http://www.adobe.com/svg/viewer/install/"
           >
         </a>
       </h1>
@@ -160,6 +153,9 @@ export default {
   .navbar-icon {
     padding: 3em 1.5rem;
     text-align: left;
+    .navbar-brand {
+      cursor: pointer;
+    }
     @media screen and (max-width: 992px) {
       & {
         padding: 0;

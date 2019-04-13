@@ -1,6 +1,6 @@
 <template>
   <sun-Wrapper>
-    <article class="post">
+    <article class="post" v-loading="loading">
       <!-- seo优化 -->
       <meta itemprop="url" content="https://juejin.im/post/5cae9de95188251ae2324ec3">
       <meta itemprop="headline" content="前端想要了解的Nginx">
@@ -29,6 +29,7 @@
         <ArticleComment/>
       </div>
         <ArticleCatalog></ArticleCatalog>
+        <ImageViewer v-if="showImageViewer" @hide="bigImgHide" :imgUrl= "imgUrl" ></ImageViewer>
     </article>
   </sun-Wrapper>
 </template>
@@ -39,6 +40,7 @@ import ArticleLikes from "@/views/blog/article/ArticleLikes.vue";
 import ArticleShare from "@/views/blog/article/ArticleShare.vue";
 import ArticleSiblings from "@/views/blog/article/ArticleSiblings.vue";
 import ArticleCatalog from "@/views/blog/article/ArticleCatalog.vue";
+import ImageViewer from "@/views/blog/article/ImageViewer.vue";
 
 export default {
   name: "",
@@ -47,17 +49,22 @@ export default {
     ArticleShare,
     ArticleLikes,
     ArticleSiblings,
-    ArticleCatalog
+    ArticleCatalog,
+    ImageViewer
   },
   data() {
     return {
       title: "",
       preface: "",
       article: "",
-      sibling: {}
+      sibling: {},
+      showImageViewer:false,
+      imgUrl:'',
+      loading:false
     };
   },
   mounted() {
+    this.loading = true;
     this.getData();
   },
   methods: {
@@ -68,10 +75,48 @@ export default {
           this.preface = res.data.result.preface;
           this.article = res.data.result.con;
           this.sibling = res.data.sibling;
+        }).then(()=>{
+          this.loading = false;
+          this.scaleImage();
         })
         .catch(err => {
           console.log(err);
         });
+    },
+    scaleImage(){
+      var conBox = document.querySelector('.content')
+      var imgs = conBox.querySelectorAll('img')
+      var imgW ,imgH;
+      for(var img of imgs){
+        let realH = img.height;
+        let realW = img.width;
+        var scale = 0.8;
+        if(realH>1280){
+            imgH = 1280
+            imgW = imgH / realH * realH
+        }else if(realW> conBox.offsetWidth){
+            imgW = conBox.offsetWidth * scale
+            imgH = imgW / realW * realH
+        }else{
+            imgW = realW
+            imgH = realH
+        }
+        img.width = imgW
+        img.height = imgH
+        img.style.cursor = 'zoom-in'
+        console.log(img)
+      }
+      var _that = this
+      conBox.addEventListener('click',function(e){
+        if(e.target == img){
+            _that.showImageViewer = true;
+            _that.imgUrl = e.target.src;
+            console.log(2)
+        }
+      })
+    },
+    bigImgHide(){
+      this.showImageViewer = false
     }
   }
 };

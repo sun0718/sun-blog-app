@@ -23,13 +23,15 @@ export default {
   },
   props:["sibling"],
   mounted(){
-    this.prevBlog = this.sibling.prevBlog
-    this.nextBlog = this.sibling.nextBlog
+    console.log(this.sibling.prevBlog)
+    this.prevBlog = this.sibling.prevBlog || {}
+    this.nextBlog = this.sibling.nextBlog || {}
   },
   watch:{
     sibling(value){
-      this.prevBlog = value.prevBlog
-      this.nextBlog = value.nextBlog
+      console.log(value)
+      this.prevBlog = value.prevBlog || {}
+      this.nextBlog = value.nextBlog || {}
     }
   }
 }

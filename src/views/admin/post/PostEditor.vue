@@ -120,7 +120,7 @@ Quill.register("modules/imageResize", ImageResize);
 import AddCate from "@/views/admin/post/AddCate.vue";
 
 import config from "@/config/index";
-import { setTimeout } from 'timers';
+
 export default {
   name: "editor",
   data: function() {

@@ -35,7 +35,7 @@
 export default {
     name:'articleShow',
     mounted(){
-        console.log(this.postData)
+        // console.log(this.postData)
     },
     props:['postData'],
     filters:{

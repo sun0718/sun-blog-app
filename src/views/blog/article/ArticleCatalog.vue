@@ -5,31 +5,18 @@
         <div class="catalog-title">目录</div>
         <div class="catalog-body">
           <ul data-v-3414e7f5 class="catalog-list" style="margin-top: 0px;">
-            <li data-v-3414e7f5 class="item d1">
+            <li data-v-3414e7f5 class="item d1" v-for="items in catalogList" :key="items.id">
               <a
-                href="#heading-0"
-                title="先来看下默认的Nginx配置，我将以此为基础依次介绍Nginx的用法"
-              >先来看下默认的Nginx配置，我将以此为基础依次介绍Nginx的用法</a>
+                :href="items.id"
+                :title="items.title"
+              >{{items.title}}</a>
               <!---->
-            </li>
-            <li data-v-3414e7f5 class="item d1">
-              <a href="#heading-0" title="先来看下默认的Nginx配置，我将以此为基础依次介绍Nginx的用法">配置</a>
-            </li>
-            <li data-v-3414e7f5 class="item d1">
-              <a href="#heading-0" title="先来看下默认的Nginx配置，我将以此为基础依次介绍Nginx的用法">高级</a>
-              <ul class="sub-list">
-                <li class="item d2">
-                  <a href="#heading-3" title="匹配规则">匹配规则</a>
-                  <!---->
-                </li>
-                <li class="item d2">
-                  <a href="#heading-4" title="当然我们还可以通过状态码来过滤请求就像这样">当然我们还可以通过状态码来过滤请求就像这样</a>
+              <ul class="sub-list" v-if="items.child.length>0">
+                <li class="item d2" v-for="item in items.child" :key="item.id">
+                  <a :href="item.id" :title="item.title">{{item.title}}</a>
                   <!---->
                 </li>
               </ul>
-            </li>
-            <li data-v-3414e7f5 class="item d1">
-              <a href="#heading-0" title="先来看下默认的Nginx配置，我将以此为基础依次介绍Nginx的用法">后续</a>
             </li>
           </ul>
         </div>
@@ -37,6 +24,57 @@
     </div>
   </div>
 </template>
+
+<script>
+import { setTimeout } from 'timers';
+export default {
+  name:"",
+  data(){
+    return{
+      catalogList:[]
+    }
+  },
+  mounted(){
+    setTimeout(()=>{
+      this.createCatalog()
+    },1000)
+  },
+  methods:{
+    createCatalog(){
+      var con = document.querySelector('.content').childNodes[1].childNodes
+      var hList = []
+      var catalogList = []
+      var indexCata = 0;
+      for(var i = 0;i<con.length;i++){
+        if(con[i].tagName.substr(0,2) == 'H3' ||con[i].tagName.substr(0,2) == 'H4'){
+          hList.push(con[i])
+        }
+      }
+      for(var j = 0;j<hList.length;j++){
+          if(hList[j].tagName == 'H3'){
+            hList[j].id="catalog-"+j.toString(),
+            catalogList[indexCata] = {
+              id:"#catalog-"+j.toString(),
+              title:con[j].textContent,
+              child:[]
+            }
+            indexCata++
+          }else if(hList[j].tagName == 'H4'){
+            if(catalogList.length>0){
+                hList[j].id="catalog-"+j.toString(),
+                catalogList[catalogList.length-1].child .push({
+                  id:"#catalog-"+j.toString(),
+                  title:con[j].textContent
+                }) 
+            }
+          }
+      }
+      this.catalogList=catalogList
+      console.log(this.catalogList)
+  }
+  }
+}
+</script>
 
 
 <style lang="less">
@@ -54,6 +92,7 @@
     border-radius: 2px;
     .catalog-title {
       font-size: 0.875rem;
+      font-weight: 600;
       color: #000;
     }
     .catalog-body {
