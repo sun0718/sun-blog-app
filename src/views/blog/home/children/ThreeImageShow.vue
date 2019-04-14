@@ -42,11 +42,12 @@
   </el-row>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
 .threeImageShow {
   padding: 1rem 0rem 1rem 1rem;
   position: relative;
   margin-bottom: 1rem;
+  z-index: 1;
   &::after {
     content: "";
     display: block;

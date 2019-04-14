@@ -39,17 +39,17 @@
         </aside>
       </el-col>
     </el-row>
-    <el-row class="con-bottom d-flex-row mr-N-half ml-N-half">
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half">
+    <el-row class="con-bottom d-flex-row d-flex-wrap mr-N-half ml-N-half">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half mb-1x">
         <sun-imageShow :num="2"></sun-imageShow>
       </el-col>
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half mb-1x">
         <sun-imageShow :num="2"></sun-imageShow>
       </el-col>
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half mb-1x">
         <ThreeImageShow></ThreeImageShow>
       </el-col>
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half mb-1x">
         <ThreeImageShow></ThreeImageShow>
       </el-col>
     </el-row>

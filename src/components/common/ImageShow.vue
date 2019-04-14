@@ -1,6 +1,6 @@
 <template>
-    <div class="list-item d-flex-column">
-        <div v-if="num==1" class="d-flex-row flex mb-1x">
+    <div class="list-item d-flex-column mb-1x">
+        <div v-if="num==1" class="d-flex-row flex">
             <div class="media flex-height-1">
                 <a class="media-content" :style="{backgroundImage:'url('+ postData.imageShow +')'}">
                     <span class="overlay"></span>
@@ -15,7 +15,7 @@
                 </router-link>
             </div>
         </div>
-        <div v-if="num==2" class="d-flex-row flex">
+        <div v-if="num==2" class="d-flex-row d-flex-wrap flex">
             <div class="media flex-height-2">
                 <a class="media-content" style="background-image:url(https://demo.nicetheme.xyz/ashley-style-2/wp-content/uploads/sites/23/2019/02/2019020319280481-600x400.jpg)">
                     <span class="overlay"></span>
@@ -103,7 +103,7 @@ export default {
             padding-top: 60%;
         }
         &.flex-height-2:after{
-            padding-top: 30%;
+            padding-top: 40%;
         }
         &::after{
             content: '';

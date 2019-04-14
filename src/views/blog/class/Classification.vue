@@ -92,6 +92,9 @@ export default {
         padding-top: 47.22222%;
       }
     }
+    .mb-1x{
+      margin-bottom: 0 ;
+    }
   }
 }
 </style>

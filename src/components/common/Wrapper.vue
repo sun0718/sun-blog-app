@@ -58,7 +58,7 @@ export default {
       this.screenY = document.body.clientHeight;
       if (this.sliderBarHeight !== this.box.offsetY) {
         // 监听滚动事件
-        window.addEventListener("scroll", this.handleScroll, true);
+        // window.addEventListener("scroll", this.handleScroll, true);
         this.wrap.addEventListener("scroll", this.handleScroll, true);
         // 监听resize事件
         window.addEventListener("resize", this.handleResize);
