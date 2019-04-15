@@ -14,7 +14,14 @@
           <el-input v-model="form.title"></el-input>
         </el-form-item>
         <el-form-item label="文章分类">
-          <el-cascader placeholder="请输入" :options="cateList" :show-all-levels="true" change-on-select v-model="form.categorie" filterable></el-cascader>
+          <el-cascader
+            placeholder="请输入"
+            :options="cateList"
+            :show-all-levels="true"
+            change-on-select
+            v-model="form.categorie"
+            filterable
+          ></el-cascader>
           <a style="cursor:pointer" @click="addCate">
             <i class="fa fa-plus ml-1x" style></i>
             添加分类
@@ -35,35 +42,35 @@
             size="small"
             @keyup.enter.native="handleInputConfirm"
             @blur="handleInputConfirm"
-          >
-          </el-input>
+          ></el-input>
           <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
           <p>
-              <el-tag
-                v-for="tag in tagsName"
-                :key="tag"
-                class="tags"
-                closable
-                @close = "tagsClose"
-                type="">
-                {{tag}}
-              </el-tag>
+            <el-tag
+              v-for="tag in tagsName"
+              :key="tag"
+              class="tags"
+              closable
+              @close="tagsClose"
+              type
+            >{{tag}}</el-tag>
           </p>
         </el-form-item>
         <el-form-item label="文章摘要">
           <el-input type="textarea" v-model="form.preface"></el-input>
         </el-form-item>
-        <el-upload
-          class="upload-demo"
-          action="/api/uploadImage"
-          :on-preview="handlePreview"
-          :on-change="handleChange"
-          :on-remove="handleRemove"
-          :file-list="fileList"
-          list-type="picture">
-          <el-button size="small" type="primary">点击上传封面</el-button>
-          <span slot="tip" class="el-upload__tip ml-1x">只能上传jpg/png/gif文件，且不超过500kb</span>
-        </el-upload>
+        <el-form-item label="文章封面">
+          <el-input type="url" class="mb-1x" v-model="form.imageUrl" placeholder="请输入封面链接"></el-input>
+          <el-upload
+            class="upload-demo"
+            :on-change="handleChange"
+            :file-list="fileList"
+            :auto-upload="false"
+            list-type="picture"
+          >
+            <el-button size="small" type="primary">点击上传封面</el-button>
+            <span slot="tip" class="el-upload__tip ml-1x">只能上传jpg/png/gif文件，且不超过500kb</span>
+          </el-upload>
+        </el-form-item>
       </el-form>
       <el-switch
         v-model="form.switchValue"
@@ -71,8 +78,8 @@
         inactive-color="#13ce66"
         active-text="markdown"
         inactive-text="富文本"
-        class="d-inline-block mb-1x">
-      </el-switch>
+        class="d-inline-block mb-1x"
+      ></el-switch>
       <quill-editor
         v-if="!form.switchValue"
         ref="myTextEditor"
@@ -95,7 +102,7 @@
     </div>
     <!-- 添加分类 -->
     <el-dialog title="编辑分类" :visible.sync="addCateShow" width="30%" :before-close="handleClose">
-      <AddCate :cateList="cateList" :maxId = "maxId" ref="addCate"/>
+      <AddCate :cateList="cateList" :maxId="maxId" ref="addCate"/>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addCateShow = false">取 消</el-button>
         <el-button type="primary" @click="editCate">确 定</el-button>
@@ -120,6 +127,8 @@ Quill.register("modules/imageResize", ImageResize);
 import AddCate from "@/views/admin/post/AddCate.vue";
 
 import config from "@/config/index";
+import compress from "@public/js/compress.js";
+import { Promise } from "q";
 
 export default {
   name: "editor",
@@ -147,7 +156,7 @@ export default {
         mavonCon: "",
         preface: "",
         imageShow: "",
-        tagsId:[],
+        tagsId: []
       },
       quillCon: "", // 富文本
       mavonhtml: "", // markdown
@@ -157,11 +166,11 @@ export default {
       fileList: [],
       addCateShow: false,
       cateList: [],
-      maxId:0,
-      tagsName:[],
-      searchTag:'',
-      newTagVisible:false,
-      newTagValue:''
+      maxId: 0,
+      tagsName: [],
+      searchTag: "",
+      newTagVisible: false,
+      newTagValue: ""
     };
   },
   components: {
@@ -191,33 +200,74 @@ export default {
     },
     // markdown将图片上传到服务器，返回地址替换到md中
     $imgAdd(pos, $file) {
-      var formData = new FormData();
-      formData.append("file", $file);
-      this.$post("/uploadImage", formData, {
-        headers: { "Content-Type": "multipart/form-data" }
-      }).then(res => {
-        this.$refs.md.$img2Url(pos, res.result.path);
-      });
+      var _that = this;
+      const isLt10M = $file.size / 1024 / 1024 < 10;
+      if (!isLt10M) {
+        _that.$message.error("上传图片大小不能超过 10M!");
+        return false;
+      } else {
+        compress
+          .compress($file, 0.7)
+          .then(res => {
+            return compress.blobtoFile(res, $file.name).then(val => val);
+          })
+          .then(file => {
+            var formData = new FormData();
+            formData.append("file", file);
+            _that
+              .$post("/uploadImage", formData, {
+                headers: { "Content-Type": "multipart/form-data" }
+              })
+              .then(res => {
+                _that.$refs.md.$img2Url(pos, res.result.path);
+              });
+          });
+      }
     },
     change(value, render) {
       // render 为 markdown 解析后的结果
       this.mavonhtml = render;
     },
     // 文章主图片上传-----------------------------------------------------------
-    // 文件列表移除文件时的钩子
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
     // 点击文件列表中已上传的文件时的钩子
-    handlePreview(file) {
-      console.log("点击：", file);
-    },
-    // 上传图片
     handleChange(file, fileList) {
-      this.fileList = fileList.slice(-1);
-      if (file.status == "success") {
-        this.form.imageShow = file.response.result.path;
+      console.log(file);
+      if(fileList.length>0){
+        this.fileList = []
       }
+      var selectFileBlob = file;
+      var result;
+      var _that = this;
+      const isLt10M = file.size / 1024 / 1024 < 10;
+      if (!isLt10M) {
+        _that.$message.error("上传图片大小不能超过 10M!");
+        return false;
+      }
+      compress
+        .compress(file.raw, 0.7)
+        .then(res => {
+          return compress.blobtoFile(res, file.name).then(val => val);
+        })
+        .then(file => {
+          var formData = new FormData();
+          formData.append("file", file);
+          _that
+            .$post("/uploadImage", formData, {
+              headers: { "Content-Type": "multipart/form-data" }
+            })
+            .then(res => {
+              selectFileBlob.status = "success";
+              var filed = {
+                name: selectFileBlob.name,
+                url: selectFileBlob.url
+              };
+              this.fileList = [];
+              this.fileList.push(filed);
+              if (file.status == "success") {
+                this.form.imageShow = res.result.path;
+              }
+            });
+        });
     },
 
     // cate---------
@@ -232,13 +282,13 @@ export default {
       };
       this.$post("/editCates", cates).then(res => {
         this.addCateShow = false;
-        this.getCates()
+        this.getCates();
       });
     },
     getCates() {
       this.$get("/getCates").then(res => {
         this.getListData(res.result.data);
-        this.maxId = res.result.maxId
+        this.maxId = res.result.maxId;
       });
     },
     getListData(list) {
@@ -271,13 +321,13 @@ export default {
           if (parentID == Id) {
             //判断是否为儿子节点
             let objTemp = {
-                id: data.id,
-                isEdit: data.isEdit,
-                level: data.level,
-                value: data.label,
-                label: data.label,
-                parentID: parentID,
-                createTime: data.createTime
+              id: data.id,
+              isEdit: data.isEdit,
+              level: data.level,
+              value: data.label,
+              label: data.label,
+              parentID: parentID,
+              createTime: data.createTime
             };
             childrenArray.push(objTemp);
           }
@@ -293,36 +343,40 @@ export default {
     },
 
     // 获得tags ---------------
-    getTags(){
-      this.$get('/tagList').then((res)=>{
-        this.restaurants = res.result
-      })
+    getTags() {
+      this.$get("/tagList").then(res => {
+        this.restaurants = res.result;
+      });
     },
     querySearchAsync(queryString, cb) {
-        var restaurants = this.restaurants.map((d)=>{
-            d['value'] = d.name
-            return d
-        });
-        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants;
-        cb(results);
+      var restaurants = this.restaurants.map(d => {
+        d["value"] = d.name;
+        return d;
+      });
+      var results = queryString
+        ? restaurants.filter(this.createStateFilter(queryString))
+        : restaurants;
+      cb(results);
     },
     createStateFilter(queryString) {
-      return (state) => {
-        return (state.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      return state => {
+        return (
+          state.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+        );
       };
     },
     handleSelect(item) {
-        if(this.tagsName.indexOf(item.name) == 0){
-          return;
-        }
-        this.tagsName.push(item.name)
-        this.form.tagsId.push(item.id)
+      if (this.tagsName.indexOf(item.name) == 0) {
+        return;
+      }
+      this.tagsName.push(item.name);
+      this.form.tagsId.push(item.id);
     },
     // 删除已选标签
     tagsClose(tag) {
-        this.tagsName.splice(this.tagsName.indexOf(tag), 1);
-        this.form.tagsId.splice(this.form.tagsId.indexOf(tag), 1);
-      },
+      this.tagsName.splice(this.tagsName.indexOf(tag), 1);
+      this.form.tagsId.splice(this.form.tagsId.indexOf(tag), 1);
+    },
     showInput() {
       this.newTagVisible = true;
       this.$nextTick(_ => {
@@ -331,17 +385,17 @@ export default {
     },
     handleInputConfirm() {
       let newTagValue = this.newTagValue;
-      if (newTagValue && this.tagsName.indexOf(newTagValue)<0) {
-        this.$post('/addTag',{
-           name: newTagValue,
-           id: new Date().getTime()
-        }).then((res)=>{
-           this.tagsName.push(newTagValue);
-           this.getTags()
-        })
+      if (newTagValue && this.tagsName.indexOf(newTagValue) < 0) {
+        this.$post("/addTag", {
+          name: newTagValue,
+          id: new Date().getTime()
+        }).then(res => {
+          this.tagsName.push(newTagValue);
+          this.getTags();
+        });
       }
       this.newTagVisible = false;
-      this.newTagValue = '';
+      this.newTagValue = "";
     },
 
     handleClose(done) {
@@ -354,7 +408,7 @@ export default {
     submit() {
       this.form.con = this.switchValue ? this.mavonhtml : this.quillCon;
       let params = {
-        aId:sessionStorage.getItem('Autor'),
+        aId: sessionStorage.getItem("Autor"),
         ...this.form
       };
       this.$post("/postArticle", params).then(res => {
@@ -410,13 +464,13 @@ export default {
     }
   }
 
-  .el-form-item__content{
+  .el-form-item__content {
     line-height: 1;
   }
 
-  .el-tag{
-    margin-top: .5rem;
-    margin-right: .75rem;
+  .el-tag {
+    margin-top: 0.5rem;
+    margin-right: 0.75rem;
     cursor: pointer;
   }
 
@@ -444,15 +498,15 @@ export default {
   transform: translateX(117.5px) translateY(10px) !important;
 }
 
-.ql-syntax{
-    background-color: #f9f9f9;
-    border: 0px;
-    border-top: 1px solid #f0f0f0;
-    border-bottom: 1px solid #f0f0f0;
-    padding: 10px 15px;
-    color: #444;
-    overflow: auto;
-    border-radius: 0px;
+.ql-syntax {
+  background-color: #f9f9f9;
+  border: 0px;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 10px 15px;
+  color: #444;
+  overflow: auto;
+  border-radius: 0px;
 }
 
 .editor-btn {

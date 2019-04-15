@@ -2,7 +2,7 @@
   <sun-Wrapper>
     <main class="d-flex-column classification">
       <div class="mb-2x">
-        <h1 class="text-lg">{{cate}}</h1>
+        <h2 class="text-lg post-title">{{cate}}</h2>
       </div>
       <el-row class="d-flex-row flex d-flex-wrap class-list mr-N-1x ml-N-1x">
         <el-col :xs="12" :sm="12" :md="12" :lg="12">
@@ -74,6 +74,10 @@ export default {
 .classification {
   padding-left: 1.5rem !important;
   padding-right: 1.5rem !important;
+  .post-title{
+      font-weight: 700;
+      color: #16a085;
+  }
   .class-list {
     .el-col {
       padding: 1rem;

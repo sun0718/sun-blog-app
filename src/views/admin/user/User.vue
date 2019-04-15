@@ -135,7 +135,6 @@ export default {
   },
   data() {
     return {
-      url: "@public/vuetable.json",
       userData: [],
       currentPage: 1,
       pagesize: 10,
