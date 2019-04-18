@@ -106,6 +106,10 @@ export default {
           ]
         },
         {
+          index: "/blog/html5",
+          title: "H5展示"
+        },
+        {
           index: "/blog/timeline",
           title: "时间轴线"
         },

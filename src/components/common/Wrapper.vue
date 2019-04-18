@@ -284,6 +284,7 @@ export default {
 
 .main {
   width: 100%;
+  flex: 1;
   padding-top: 2rem !important;
   .container {
     width: 100%;
@@ -296,6 +297,7 @@ export default {
     position: relative;
     @media (max-width: 768px) {
       max-width: 540px;
+      min-height: calc(100vh - 60px);
       padding-right: 0.5rem;
       padding-left: 0.5rem;
       & > .ml-N-half.mr-N-half {

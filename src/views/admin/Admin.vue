@@ -7,9 +7,8 @@
         <sun-tags></sun-tags>
         <el-scrollbar class="content" style="height:100%;overflow-y:hidden">
           <transition name="move" mode="out-in">
-            <keep-alive :include="tagsList">
+            <!-- <keep-alive :include="tagsList"> -->
               <router-view></router-view>
-            </keep-alive>
           </transition>
         </el-scrollbar>
       </div>

@@ -64,6 +64,11 @@ const router = new Router({
           path: "timeline",
           name: "timeline",
           component: resolve => require(['@/views/blog/timeline/TimeLine.vue'], resolve),
+        },
+        {
+          path: "html5",
+          name: "html5",
+          component: resolve => require(['@/views/blog/html5/Html5.vue'], resolve),
         }
       ]
     },

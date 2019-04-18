@@ -103,7 +103,7 @@ export default {
     handleOpen() {},
     handleClose() {},
     handleSelect() {
-      if (this.screenWidth <= 992) {
+      if (document.body.clientWidth <= 992) {
         this.menuHide = false;
       }
     },

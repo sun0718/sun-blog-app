@@ -23,10 +23,10 @@
             </div>
             <div class="list-item-content">
                 <a>
-                    <h2 class="d-inline-block text-uppercase text-white">旅行日志</h2>
+                    <h2 class="d-inline-block text-uppercase text-white">{{Numtwo.title}}</h2>
                 </a>
                 <a class="list-body">
-                    <div class="list-title text-white text-xs">12篇文章</div>
+                    <div class="list-title text-white text-xs">{{Numtwo.len}}篇文章</div>
                 </a>
             </div>
         </div>
@@ -69,7 +69,8 @@ export default {
         showTitle:{
             type: Boolean,
             default: true
-        }
+        },
+        Numtwo:Object
     }
 }
 </script>

@@ -3,11 +3,11 @@
     <el-col :span=6 class="d-flex-column flex">
       <div class="threeImageShow-title flex">
         <h2>
-          <a href class="text-dark">旅行日志</a>
+          <a href class="text-dark">{{Numthere.title}}</a>
         </h2>
       </div>
       <div>
-        <span class="text-muted text-xs">7篇文章</span>
+        <span class="text-muted text-xs">{{Numthere.len}}篇文章</span>
       </div>
     </el-col>
     <el-col :span=12 class="d-flex-row">
@@ -41,6 +41,19 @@
     </el-col>
   </el-row>
 </template>
+
+<script>
+export default {
+  name:'',
+  data(){
+    return{
+
+    }
+  },
+  props:['Numthere']
+}
+</script>
+
 
 <style lang="less" scoped>
 .threeImageShow {

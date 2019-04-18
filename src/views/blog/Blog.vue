@@ -1,23 +1,27 @@
 <template>
     <el-container style="height:100%">
-        <sun-Menu></sun-Menu>
-        <transition name="move" mode="out-in">
-            <router-view></router-view>
-        </transition>
+            <sun-loading v-if="loading" />
+            <sun-Menu></sun-Menu>
+            <transition name="move" mode="out-in">
+                <router-view></router-view>
+            </transition>
     </el-container>
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 
 export default {
     name:'',
     data(){
         return{
+            loading:true
         }
     },
     created(){
     },
     mounted(){
+        setTimeout(()=>{this.loading = false},2000)
     }
 }
 </script>

@@ -1,10 +1,10 @@
 <template>
   <sun-Wrapper>
-    <main class="d-flex-column classification">
+    <main class="d-flex-column classification" v-loading="loading">
       <div class="mb-2x">
         <h2 class="text-lg post-title">{{cate}}</h2>
       </div>
-      <el-row class="d-flex-row flex d-flex-wrap class-list mr-N-1x ml-N-1x">
+      <el-row class="d-flex-row flex d-flex-wrap class-list mr-N-1x ml-N-1x" v-if="this.classList.length>0">
         <el-col :xs="12" :sm="12" :md="12" :lg="12">
           <sun-imageShow :postData="firstList" :num="3" :key="firstList._id"/>
         </el-col>
@@ -18,6 +18,11 @@
           <sun-imageShow :postData="item" :num="3" :key="'3'+item._id"/>
         </el-col>
       </el-row>
+      <el-row>
+        <el-col>
+            <p class="text-center">暂无数据！！</p>
+        </el-col>
+      </el-row>
     </main>
   </sun-Wrapper>
 </template>
@@ -27,6 +32,7 @@ export default {
   name: "",
   data() {
     return {
+      loading: true,
       firstList: {},
       classList: []
     };
@@ -39,18 +45,23 @@ export default {
         ? "生活旅游"
         : "前端学习";
     this.getData();
-    console.log(this.cate);
   },
   methods: {
     getData() {
       this.$get("/getclassList", {
-        class: "前端学习"
+        class: this.cate
       }).then(res => {
-        var result = res.result;
-        this.firstList = result.shift();
-        this.classList = result;
-        console.log(this.firstList)
-      });
+        if(res.result.length>0){
+          var result = res.result;
+          this.firstList = result.shift();
+          this.classList = result;
+        }else{
+          this.firstList = [];
+          this.classList = [];
+        }
+      }).then(()=>{
+        this.loading = false
+      })
     }
   },
   watch: {

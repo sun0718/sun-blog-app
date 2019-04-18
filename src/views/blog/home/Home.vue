@@ -34,23 +34,23 @@
             v-model="searchData"
           ></el-input>
           <AboutMe/>
-          <RecentPosts/>
+          <RecentPosts :postList ="recentPosts" />
           <TagCloud/>
         </aside>
       </el-col>
     </el-row>
     <el-row class="con-bottom d-flex-row d-flex-wrap mr-N-half ml-N-half">
       <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half mb-1x">
-        <sun-imageShow :num="2"></sun-imageShow>
+        <sun-imageShow :Numtwo="{title:'旅游日志',len:'15'}" :num="2"></sun-imageShow>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half mb-1x">
-        <sun-imageShow :num="2"></sun-imageShow>
+        <sun-imageShow :Numtwo="{title:'健身跑步',len:'18'}" :num="2"></sun-imageShow>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half mb-1x">
-        <ThreeImageShow></ThreeImageShow>
+        <ThreeImageShow :Numthere="{title:'周末时光',len:'45'}"></ThreeImageShow>
       </el-col>
       <el-col :xs="24" :sm="24" :md="12" :lg="12" class="d-flex-row pl-half pr-half mb-1x">
-        <ThreeImageShow></ThreeImageShow>
+        <ThreeImageShow :Numthere="{title:'朋友集合',len:'67'}"></ThreeImageShow>
       </el-col>
     </el-row>
   </sun-wrapper>
@@ -78,7 +78,8 @@ export default {
         top: "",
         left: "",
         width: ""
-      }
+      },
+      recentPosts:[]
     };
   },
   components: {
@@ -106,6 +107,8 @@ export default {
           3 - allList.overHead.length,
           res.result.list.allPost.length
         );
+        self.recentPosts = res.result.list.allPost.slice(0,9)
+        console.log(self.recentPosts)
       } else {
         self.adList = res.result.list.overHead;
         self.postData = res.result.list.allPost;

@@ -11,6 +11,7 @@ import Menu from '@/components/common/Menu'
 import Sidebar from '@/components/common/Sidebar'
 import Tags from '@/components/common/Tags'
 import ImageShow from '@/components/common/ImageShow'
+import Loading from '@/components/common/Loading'
 
 const components = [
     Footer,
@@ -19,7 +20,8 @@ const components = [
     Menu,
     Tags,
     Sidebar,
-    ImageShow
+    ImageShow,
+    Loading
 ]
 
 export default {

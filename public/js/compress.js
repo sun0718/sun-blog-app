@@ -177,6 +177,23 @@ methods.dataURLtoFile  = (dataURL,type) => {
     });
 };
 /**
+ * 将file文件转变为Blob对象和URL
+ */
+
+ methods.filetoBlob = (file) => {
+    return new Promise((resolve,reject)=>{
+      var render = new FileReader();
+      reader.onload= function (e) {
+        var bf = this.result;
+        var blob = new Blob([this.result],{type: 'text/plain'})
+        var str = URL.createObjectURL(blob)
+        resolve(str);
+      }
+      reader.readAsArrayBuffer(file);
+    })
+ }
+
+/**
  * 图片下载到本地
  * file File(Blob)对象
  * fileName 下载后的文件名，不传以时间戳命名

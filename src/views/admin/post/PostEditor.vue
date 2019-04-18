@@ -59,7 +59,7 @@
           <el-input type="textarea" v-model="form.preface"></el-input>
         </el-form-item>
         <el-form-item label="文章封面">
-          <el-input type="url" class="mb-1x" v-model="form.imageUrl" placeholder="请输入封面链接"></el-input>
+          <el-input type="url" class="mb-1x" v-model="form.imageShow" placeholder="请输入封面链接"></el-input>
           <el-upload
             class="upload-demo"
             :on-change="handleChange"
@@ -256,6 +256,7 @@ export default {
               headers: { "Content-Type": "multipart/form-data" }
             })
             .then(res => {
+              debugger
               selectFileBlob.status = "success";
               var filed = {
                 name: selectFileBlob.name,
@@ -263,9 +264,7 @@ export default {
               };
               this.fileList = [];
               this.fileList.push(filed);
-              if (file.status == "success") {
-                this.form.imageShow = res.result.path;
-              }
+              this.form.imageShow = `https://sunfafa.cn/upload/${res.result.path}`;
             });
         });
     },
@@ -411,6 +410,7 @@ export default {
         aId: sessionStorage.getItem("Autor"),
         ...this.form
       };
+      debugger
       this.$post("/postArticle", params).then(res => {
         this.$message.success("提交成功！");
         this.$router.push("/admin/post");
