@@ -119,13 +119,6 @@ const router = new Router({
               meta: { requireAuth: true,title: '消息中心' }
           },
           {
-              // 图片上传组件
-              path: 'form/upload',
-              name: 'upload',
-              component: resolve => require(['@/views/admin/post/Upload.vue'], resolve),
-              meta: { title: '文件上传' }   
-          },
-          {
               // 权限页面
               path: 'permission',
               name: '',

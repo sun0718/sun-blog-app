@@ -46,7 +46,7 @@
           <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
           <p>
             <el-tag
-              v-for="tag in tagsName"
+              v-for="tag in form.tags"
               :key="tag"
               class="tags"
               closable
@@ -156,7 +156,7 @@ export default {
         mavonCon: "",
         preface: "",
         imageShow: "",
-        tagsId: []
+        tags: []
       },
       quillCon: "", // 富文本
       mavonhtml: "", // markdown
@@ -166,11 +166,11 @@ export default {
       fileList: [],
       addCateShow: false,
       cateList: [],
+      searchTag:'',
       maxId: 0,
-      tagsName: [],
-      searchTag: "",
       newTagVisible: false,
-      newTagValue: ""
+      newTagValue: "",
+      isEdit:false
     };
   },
   components: {
@@ -181,6 +181,9 @@ export default {
   mounted() {
     this.getCates();
     this.getTags();
+    if(this.$route.params.id){
+      this.getCurrentDate(this.$route.params.id)
+    }
   },
   methods: {
     onEditorChange(e) {
@@ -197,6 +200,15 @@ export default {
     },
     onEditorReady(editor) {
       // console.log('editor ready!', editor)
+    },
+    // 修改文章，数据回显
+    getCurrentDate(id){
+      var _that = this;
+      this.$get('/postArticle/'+id).then((res)=>{
+          _that.form ={...this.form,...res.data.result}
+          this.quillCon = res.data.result.con
+          _that.isEdit = true
+      })
     },
     // markdown将图片上传到服务器，返回地址替换到md中
     $imgAdd(pos, $file) {
@@ -365,16 +377,15 @@ export default {
       };
     },
     handleSelect(item) {
-      if (this.tagsName.indexOf(item.name) == 0) {
+      if (this.form.tags.indexOf(item.name) == 0) {
         return;
       }
-      this.tagsName.push(item.name);
-      this.form.tagsId.push(item.id);
+      this.form.tags.push(item.name);
+      this.searchTag = '';
     },
     // 删除已选标签
     tagsClose(tag) {
-      this.tagsName.splice(this.tagsName.indexOf(tag), 1);
-      this.form.tagsId.splice(this.form.tagsId.indexOf(tag), 1);
+      this.form.tags.splice(this.form.tags.indexOf(tag), 1);
     },
     showInput() {
       this.newTagVisible = true;
@@ -384,12 +395,12 @@ export default {
     },
     handleInputConfirm() {
       let newTagValue = this.newTagValue;
-      if (newTagValue && this.tagsName.indexOf(newTagValue) < 0) {
+      if (newTagValue && this.tagsform.tags.indexOf(newTagValue) < 0) {
         this.$post("/addTag", {
           name: newTagValue,
           id: new Date().getTime()
         }).then(res => {
-          this.tagsName.push(newTagValue);
+          this.form.tags.push(newTagValue);
           this.getTags();
         });
       }
@@ -407,12 +418,14 @@ export default {
     submit() {
       this.form.con = this.switchValue ? this.mavonhtml : this.quillCon;
       let params = {
-        aId: sessionStorage.getItem("Autor"),
+        author: sessionStorage.getItem("AcountName"),
         ...this.form
       };
       debugger
-      this.$post("/postArticle", params).then(res => {
-        this.$message.success("提交成功！");
+      var url = this.isEdit ? "/updateBlog" : "/postArticle" ;
+      var msg = this.isEdit ? "修改成功！" : "提交成功！" ;
+      this.$post(url, params).then(res => {
+        this.$message.success(msg);
         this.$router.push("/admin/post");
       });
     }

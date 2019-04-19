@@ -113,7 +113,8 @@ export default {
                 date: '',
                 address: ''
             },
-            idx: -1
+            idx: -1,
+            delOne:'',
         }
     },
     mounted(){
@@ -189,19 +190,29 @@ export default {
         handleAdd(){
             return this.addVisible = !this.addVisible
         },
+        // 修改文章，回显
         handleEdit(index, row) {
-            this.idx = index;
-            const item = this.tableData[index];
-            this.form = {
-                name: item.name,
-                date: item.date,
-                address: item.address
-            }
-            this.editVisible = true;
+            // this.reEdit = Object.assign(this.reEdit,row)
+            this.$router.push({
+                name: 'post-article',
+                params: {
+                    id: row.id
+                }
+            })
         },
+        // 删除文章
         handleDelete(index, row) {
-            this.idx = index;
+            this.delOne = row.id
             this.delVisible = true;
+        },
+         // 确定删除
+        deleteRow(){
+            this.delVisible = false;
+            this.$delete('/deleteBlog/'+this.delOne).then((res)=>{
+                this.$message.success('删除成功');
+                this.getData();
+            })
+            
         },
         delAll() {
             const length = this.multipleSelection.length;
@@ -222,12 +233,7 @@ export default {
             this.editVisible = false;
             this.$message.success(`修改第 ${this.idx+1} 行成功`);
         },
-        // 确定删除
-        deleteRow(){
-            this.tableData.splice(this.idx, 1);
-            this.$message.success('删除成功');
-            this.delVisible = false;
-        }
+       
     }
 }
 

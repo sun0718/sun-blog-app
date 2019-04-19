@@ -6,15 +6,10 @@
         <div class="catalog-body">
           <ul data-v-3414e7f5 class="catalog-list" style="margin-top: 0px;">
             <li data-v-3414e7f5 class="item d1" v-for="items in catalogList" :key="items.id">
-              <a
-                :href="items.id"
-                :title="items.title"
-              >{{items.title}}</a>
-              <!---->
+              <a :href="items.id" :title="items.title" :data-id="items.id">{{items.title}}</a>
               <ul class="sub-list" v-if="items.child.length>0">
                 <li class="item d2" v-for="item in items.child" :key="item.id">
-                  <a :href="item.id" :title="item.title">{{item.title}}</a>
-                  <!---->
+                  <a :href="item.id" :title="item.title" :data-id="items.id">{{item.title}}</a>
                 </li>
               </ul>
             </li>
@@ -26,54 +21,98 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers';
+import { setTimeout } from "timers";
 export default {
-  name:"",
-  data(){
-    return{
-      catalogList:[]
-    }
+  name: "",
+  data() {
+    return {
+      catalogList: [],
+      catalogOffsetTop: []
+    };
   },
-  mounted(){
-    setTimeout(()=>{
-      this.createCatalog()
-    },1000)
+  mounted() {
+    this.createCatalog();
+    var _that = this;
+    document.querySelector(".scrollBar").addEventListener(
+      "scroll",
+      function(e) {
+        var arr = _that.catalogOffsetTop;
+
+        Array.from(document.querySelectorAll(`a[data-id]`)).map(item => {
+          item.className = "";
+        });
+        for (var i = 0; i < arr.length; i++) {
+          if (e.target.scrollTop < arr[0].offsetTop) {
+            document.querySelector(`a[data-id='${arr[0].id}']`).className =
+              "current";
+              console.log(1)
+            break;
+          }
+          if (e.target.scrollTop > arr[arr.length-1].offsetTop) {
+            document.querySelector(
+              `a[data-id='${arr[arr.length-1].id}']`
+            ).className = "current";
+            console.log(2)
+            break;
+          }
+          if (
+            e.target.scrollTop >= arr[i].offsetTop &&
+            e.target.scrollTop < arr[i + 1].offsetTop
+          ) {
+            // debugger;
+            document.querySelector(`a[data-id='${arr[i].id}']`).className =
+              "current";
+            break;
+          }
+        }
+      },
+      true
+    );
   },
-  methods:{
-    createCatalog(){
-      var con = document.querySelector('.content').childNodes[1].childNodes
-      var hList = []
-      var catalogList = []
-      var indexCata = 0;
-      for(var i = 0;i<con.length;i++){
-        if(con[i].tagName.substr(0,2) == 'H3' ||con[i].tagName.substr(0,2) == 'H4'){
-          hList.push(con[i])
+  methods: {
+    createCatalog() {
+      var con = document.querySelector(".content").childNodes[1].childNodes;
+      var hList = [],
+        catalogList = [],
+        indexCata = 0,
+        catalogOffsetTop = [];
+      for (var i = 0; i < con.length; i++) {
+        if (
+          con[i].tagName.substr(0, 2) == "H3" ||
+          con[i].tagName.substr(0, 2) == "H4"
+        ) {
+          hList.push(con[i]);
         }
       }
-      for(var j = 0;j<hList.length;j++){
-          if(hList[j].tagName == 'H3'){
-            hList[j].id="catalog-"+j.toString(),
-            catalogList[indexCata] = {
-              id:"#catalog-"+j.toString(),
-              title:con[j].textContent,
-              child:[]
-            }
-            indexCata++
-          }else if(hList[j].tagName == 'H4'){
-            if(catalogList.length>0){
-                hList[j].id="catalog-"+j.toString(),
-                catalogList[catalogList.length-1].child .push({
-                  id:"#catalog-"+j.toString(),
-                  title:con[j].textContent
-                }) 
-            }
+      for (var j = 0; j < hList.length; j++) {
+        if (hList[j].tagName == "H3") {
+          (hList[j].id = "catalog-" + j.toString()),
+            catalogOffsetTop.push({
+              id: "#" + hList[j].id,
+              offsetTop: hList[j].offsetTop
+            });
+          catalogList[indexCata] = {
+            id: "#catalog-" + j.toString(),
+            title: hList[j].innerText,
+            child: []
+          };
+          indexCata++;
+        } else if (hList[j].tagName == "H4") {
+          if (catalogList.length > 0) {
+            (hList[j].id = "catalog-" + j.toString()),
+              catalogList[catalogList.length - 1].child.push({
+                id: "#catalog-" + j.toString(),
+                title: hList[j].innerText
+              });
           }
+        }
       }
-      this.catalogList=catalogList
-      console.log(this.catalogList)
+      console.log(catalogOffsetTop);
+      this.catalogList = catalogList;
+      this.catalogOffsetTop = catalogOffsetTop;
+    }
   }
-  }
-}
+};
 </script>
 
 
@@ -81,13 +120,13 @@ export default {
 .post-catalog {
   position: absolute;
   top: 2rem;
-  right: 2rem;
+  right: 0rem;
   width: 15rem;
   .sidebar-block {
     position: fixed;
     top: 7rem;
     width: inherit;
-    transition: top .2s;
+    transition: top 1s ease-in;
     margin-bottom: 1.5rem;
     border-radius: 2px;
     .catalog-title {
@@ -123,10 +162,14 @@ export default {
               margin-top: -2px;
               width: 4px;
               height: 4px;
-              background-color: currentColor;
+              background-color: #000;
               border-radius: 50%;
             }
             &:hover {
+              background-color: #ebedef;
+            }
+            &.current {
+              color: #00818a;
               background-color: #ebedef;
             }
           }
@@ -175,8 +218,8 @@ export default {
       }
     }
   }
-  @media screen and (max-width: 992px){
-      display: none
+  @media screen and (max-width: 992px) {
+    display: none;
   }
 }
 </style>

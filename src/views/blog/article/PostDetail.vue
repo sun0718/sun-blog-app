@@ -28,7 +28,7 @@
         <ArticleSiblings :sibling="sibling"/>
         <ArticleComment/>
       </div>
-        <ArticleCatalog></ArticleCatalog>
+        <ArticleCatalog v-if="cataLogShow"></ArticleCatalog>
         <ImageViewer v-if="showImageViewer" @hide="bigImgHide" :imgUrl= "imgUrl" ></ImageViewer>
     </article>
   </sun-Wrapper>
@@ -60,7 +60,8 @@ export default {
       sibling: {},
       showImageViewer:false,
       imgUrl:'',
-      loading:false
+      loading:false,
+      cataLogShow:false
     };
   },
   mounted() {
@@ -78,6 +79,8 @@ export default {
         }).then(()=>{
           this.loading = false;
           this.scaleImage();
+        }).then(()=>{
+          this.cataLogShow = true
         })
         .catch(err => {
           console.log(err);
@@ -111,7 +114,6 @@ export default {
         if(e.target == img){
             _that.showImageViewer = true;
             _that.imgUrl = e.target.src;
-            console.log(2)
         }
       })
     },
@@ -126,11 +128,12 @@ export default {
 <style lang="less">
 .post {
   margin-bottom:3rem;
-  padding-bottom:  3rem;
+  padding-bottom:3rem;
+  position: relative;
   .post-content {
     background-color: #fff;
-    max-width: 790px;
-    padding: 1rem;
+    max-width: calc(100% - 272px);
+    padding: 1rem 1rem;
     .title {
       color: #16a085;
       font-size: 2rem;
@@ -170,7 +173,6 @@ export default {
         color: #333;
         font-size: .75rem;
         overflow-x: auto;
-        white-space: normal;
       }
       p {
         margin: 0 0 1rem;

@@ -57,7 +57,6 @@ export default {
       color: #fff;
       font-size: 14px;
       overflow-x: auto;
-      white-space: normal;
     }
     p {
       margin: 0 0 1.5rem;
