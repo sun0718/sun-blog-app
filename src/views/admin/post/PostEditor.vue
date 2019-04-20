@@ -276,7 +276,7 @@ export default {
               };
               this.fileList = [];
               this.fileList.push(filed);
-              this.form.imageShow = `https://sunfafa.cn/upload/${res.result.path}`;
+              this.form.imageShow = `${res.result.path}`;
             });
         });
     },
