@@ -12,7 +12,7 @@
     <el-row class="con-center d-flex-row mr-N-half ml-N-half">
       <el-col :xs="24" :sm="24" :md="18" :lg="18">
         <ArticleShow v-for="(item) in postData" :key="item.id" :postData="item">
-          <sun-imageShow :key="item.id" :postData="item" :showTitle='false' :num="1"></sun-imageShow>
+          <sun-imageShow :key="item.id" :postData="item" :showTitle="false" :num="1"></sun-imageShow>
         </ArticleShow>
         <div class="mb-2x">
           <el-pagination
@@ -21,8 +21,8 @@
             :current-page.sync="currentPage"
             :page-size="10"
             layout="prev, pager, next"
-            :total="total">
-          </el-pagination>
+            :total="total"
+          ></el-pagination>
         </div>
       </el-col>
       <el-col ref="sliderBar" class="sliderBar" :xs="24" :sm="24" :md="6" :lg="6">
@@ -34,7 +34,7 @@
             v-model="searchData"
           ></el-input>
           <AboutMe/>
-          <RecentPosts :postList ="recentPosts" />
+          <RecentPosts :postList="recentPosts"/>
           <TagCloud/>
         </aside>
       </el-col>
@@ -64,22 +64,23 @@ import TagCloud from "@/views/blog/home/children/TagCloud.vue";
 import ThreeImageShow from "@/views/blog/home/children/ThreeImageShow.vue";
 
 import bus from "@/store/bus";
+import { setTimeout } from "timers";
 
 export default {
   name: "home",
   data() {
     return {
-      searchData:'',
+      searchData: "",
       postData: [],
       adList: [],
-      total:'',
+      total: "",
       fixedStyle: {
         position: "",
         top: "",
         left: "",
         width: ""
       },
-      recentPosts:[]
+      recentPosts: []
     };
   },
   components: {
@@ -93,27 +94,30 @@ export default {
     bus.$on("fixedStyle", msg => {
       this.fixedStyle = msg;
     });
-    var self = this;
-    this.$get("/getPosts", {
-      getAd: true
-    }).then(res => {
-      var allList = res.result.list;
-      this.total = res.result.count -3;
-      if (allList.overHead.length < 3) {
-        self.adList = res.result.list.overHead.concat(
-          res.result.list.allPost.slice(0, 3 - allList.overHead.length)
-        );
-        self.postData = res.result.list.allPost.slice(
-          3 - allList.overHead.length,
-          res.result.list.allPost.length
-        );
-        self.recentPosts = res.result.list.allPost.slice(0,9)
-        console.log(self.recentPosts)
-      } else {
-        self.adList = res.result.list.overHead;
-        self.postData = res.result.list.allPost;
-      }
-    });
+    this._homePageData()
+  },
+  methods: {
+    _homePageData() {
+      this.$get("/getPosts", {
+        getAd: true
+      }).then(res => {
+        var allList = res.result.list;
+        this.total = res.result.count - 3;
+        if (allList.overHead.length < 3) {
+          this.adList = res.result.list.overHead.concat(
+            res.result.list.allPost.slice(0, 3 - allList.overHead.length)
+          );
+          this.postData = res.result.list.allPost.slice(
+            3 - allList.overHead.length,
+            res.result.list.allPost.length
+          );
+          this.recentPosts = res.result.list.allPost.slice(0, 9);
+        } else {
+          this.adList = res.result.list.overHead;
+          this.postData = res.result.list.allPost;
+        }
+      });
+    }
   },
   watch: {}
 };
@@ -147,7 +151,7 @@ export default {
 }
 .con-center {
   margin-top: 2rem;
-  @media screen and (max-width: 992px){
+  @media screen and (max-width: 992px) {
     margin-top: 1rem;
   }
   & > .el-col {

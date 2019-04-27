@@ -6,10 +6,10 @@
         <div class="catalog-body">
           <ul data-v-3414e7f5 class="catalog-list" style="margin-top: 0px;">
             <li data-v-3414e7f5 class="item d1" v-for="items in catalogList" :key="items.id">
-              <a :href="items.id" :title="items.title" :data-id="items.id">{{items.title}}</a>
+              <a :href="items.id" :title="items.title" :data-id="items.id" :class="{'current':currentIndex===items.index}">{{items.title}}</a>
               <ul class="sub-list" v-if="items.child.length>0">
                 <li class="item d2" v-for="item in items.child" :key="item.id">
-                  <a :href="item.id" :title="item.title" :data-id="items.id">{{item.title}}</a>
+                  <a :href="item.id" :title="item.title" :data-id="items.id" :class="{'current':currentIndex===item.index}">{{item.title}}</a>
                 </li>
               </ul>
             </li>
@@ -27,49 +27,40 @@ export default {
   data() {
     return {
       catalogList: [],
-      catalogOffsetTop: []
+      catalogOffsetTop: [],
+      currentIndex: 0,
+      screenY:-1
     };
   },
   mounted() {
     this.createCatalog();
-    var _that = this;
-    document.querySelector(".scrollBar").addEventListener(
-      "scroll",
-      function(e) {
-        var arr = _that.catalogOffsetTop;
-
-        Array.from(document.querySelectorAll(`a[data-id]`)).map(item => {
-          item.className = "";
-        });
-        for (var i = 0; i < arr.length; i++) {
-          if (e.target.scrollTop < arr[0].offsetTop) {
-            document.querySelector(`a[data-id='${arr[0].id}']`).className =
-              "current";
-              console.log(1)
-            break;
-          }
-          if (e.target.scrollTop > arr[arr.length-1].offsetTop) {
-            document.querySelector(
-              `a[data-id='${arr[arr.length-1].id}']`
-            ).className = "current";
-            console.log(2)
-            break;
-          }
-          if (
-            e.target.scrollTop >= arr[i].offsetTop &&
-            e.target.scrollTop < arr[i + 1].offsetTop
-          ) {
-            // debugger;
-            document.querySelector(`a[data-id='${arr[i].id}']`).className =
-              "current";
-            break;
-          }
+    console.log(this.catalogOffsetTop)
+    document.querySelector(".scrollBar").addEventListener("scroll",this._scrollEvent,true);
+  },
+  watch:{
+    screenY(newY) {
+      const listHeight = this.catalogOffsetTop;
+      if(newY>0 && newY <= this.catalogOffsetTop[1].offsetTop){
+        this.currentIndex = 0
+        return
+      }
+      // 在中间部分滚动
+      for (let i = 0; i < listHeight.length - 1; i++) {
+        let height1 = listHeight[i].offsetTop
+        let height2 = listHeight[i + 1].offsetTop
+        if (newY >= height1 && newY < height2) {
+          this.currentIndex = i
+          return
         }
-      },
-      true
-    );
+      }
+      // 当滚动到底部，且-newY大于最后一个元素的上限
+      this.currentIndex = listHeight.length - 1
+    }
   },
   methods: {
+    _scrollEvent(e){
+        this.screenY = e.target.scrollTop
+    },
     createCatalog() {
       var con = document.querySelector(".content").childNodes[1].childNodes;
       var hList = [],
@@ -85,14 +76,16 @@ export default {
         }
       }
       for (var j = 0; j < hList.length; j++) {
+        // 存储元素的偏移位置
+        catalogOffsetTop.push({
+          offsetTop: hList[j].offsetTop,
+          index : j
+        });
         if (hList[j].tagName == "H3") {
-          (hList[j].id = "catalog-" + j.toString()),
-            catalogOffsetTop.push({
-              id: "#" + hList[j].id,
-              offsetTop: hList[j].offsetTop
-            });
+          hList[j].id = "catalog-" + j.toString(),
           catalogList[indexCata] = {
             id: "#catalog-" + j.toString(),
+            index: j,
             title: hList[j].innerText,
             child: []
           };
@@ -102,12 +95,12 @@ export default {
             (hList[j].id = "catalog-" + j.toString()),
               catalogList[catalogList.length - 1].child.push({
                 id: "#catalog-" + j.toString(),
+                index: j,
                 title: hList[j].innerText
               });
           }
         }
       }
-      console.log(catalogOffsetTop);
       this.catalogList = catalogList;
       this.catalogOffsetTop = catalogOffsetTop;
     }

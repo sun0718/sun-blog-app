@@ -11,6 +11,7 @@
 
 <script>
 import bus from "@/store/bus";
+import { setTimeout } from "timers";
 
 export default {
   name: "sunWrapper",
@@ -33,39 +34,59 @@ export default {
     };
   },
   mounted() {
-    // 获取元素
-    if (this.$slots.default[1]) {
-      var sliderBar = this.$slots.default[1].context.$refs["sliderBar"].$el;
-      var aside = this.$slots.default[1].context.$refs["aside"];
-      // 获取滚动的盒子
-      var wrap = this.$refs["elscrollbar"].$refs["wrap"];
+    setTimeout(() => {
+      let wrap = this._scrollPos();
 
-      this.sliderBar = sliderBar;
-      this.wrap = wrap;
-      this.aside = aside;
-      // 获取元素数据和初始位置
-      this.box.height = aside.offsetHeight;
-      this.box.width = aside.offsetWidth;
-      this.box.outwidth = sliderBar.offsetWidth - 16;
-      this.box.offsetY = aside.getBoundingClientRect().bottom;
-      this.box.offsetT = aside.getBoundingClientRect().top;
-      this.box.offsetX = aside.getBoundingClientRect().left;
-      // 临界点
-      this.sliderBarHeight = sliderBar.getBoundingClientRect().bottom;
-      // 获取滚动初始位置
-      this.beforeY = wrap.scrollTop;
-      // 获取屏幕高度
-      this.screenY = document.body.clientHeight;
+      this._getScreenSize();
+
+      let sliderBar = this.$slots.default[1].context.$refs["sliderBar"].$el;
+      let aside = this.$slots.default[1].context.$refs["aside"];
+
+      this._getElementSize(sliderBar, aside);
+
       if (this.sliderBarHeight !== this.box.offsetY) {
         // 监听滚动事件
         // window.addEventListener("scroll", this.handleScroll, true);
-        this.wrap.addEventListener("scroll", this.handleScroll, true);
+        wrap.addEventListener("scroll", this.handleScroll, true);
         // 监听resize事件
         window.addEventListener("resize", this.handleResize);
       }
-    }
+    }, 20);
   },
   methods: {
+    //获取滚动位置
+    _scrollPos() {
+      let wrap = this.$refs["elscrollbar"].$refs["wrap"];
+      let beforeY = wrap.scrollTop;
+      this.wrap = wrap;
+      this.beforeY = beforeY;
+      return wrap;
+    },
+    // 获取屏幕大小
+    _getScreenSize() {
+      this.screenY = document.body.clientHeight;
+    },
+    // 获取元素位置
+    _getElementSize(outEl, inEl) {
+      let padd = this._getStyle(outEl, "paddingLeft");
+      // 获取元素数据和初始位置
+      this.box.height = inEl.offsetHeight;
+      this.box.width = inEl.offsetWidth;
+      this.box.offsetY = inEl.getBoundingClientRect().bottom;
+      this.box.offsetT = inEl.getBoundingClientRect().top;
+      this.box.offsetX = inEl.getBoundingClientRect().left;
+      this.box.outwidth = outEl.offsetWidth - padd * 2;
+      // 临界点
+      this.sliderBarHeight = outEl.getBoundingClientRect().bottom;
+    },
+    // 获取属性
+    _getStyle(el, attr) {
+      if (el.currentStyle) el.currentStyle[attr];
+      return document.defaultView
+        .getComputedStyle(el, null)
+        [attr].replace(/px/, "");
+    },
+    // 滚动判断
     handleScroll(e) {
       // console.log(e)
       // 判断上滚还是下滚
@@ -257,6 +278,7 @@ export default {
 
       bus.$emit("fixedStyle", this.fixedStyle);
     },
+    // 改变屏幕大小
     handleResize() {
       var self = this;
       if (self.resizeTimer) clearTimeout(self.resizeTimer);
@@ -279,6 +301,7 @@ export default {
   .el-scrollbar__wrap {
     overflow: visible !important;
     overflow-x: hidden !important;
+    width:100%;
   }
 }
 

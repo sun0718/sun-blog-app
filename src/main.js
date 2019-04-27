@@ -4,6 +4,8 @@ import router from "./router/router";
 import store from "./store/store";
 import axiosApi from './api/axios';
 import ElementUI from 'element-ui';
+import VueLazyLoad from 'vue-lazyload';
+
 import 'element-ui/lib/theme-chalk/display.css';
 import '@/assets/css/main.css';
 import '@public/font-awesome/css/font-awesome.min.css';
@@ -18,6 +20,8 @@ Vue.config.productionTip = false;
 Vue.use(ElementUI)
 Vue.use(axiosApi);
 // Vue.prototype.$axios = axiosApi;
+
+Vue.use(VueLazyLoad)
 
 window.Vue =  new Vue({
   router,

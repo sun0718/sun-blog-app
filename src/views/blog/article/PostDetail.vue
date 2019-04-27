@@ -134,6 +134,15 @@ export default {
     background-color: #fff;
     max-width: calc(100% - 272px);
     padding: 1rem 1rem;
+    @media (max-width: 992px){
+      &{
+        max-width: 100%;
+        padding: .5rem;
+        blockquote{
+          font-size: .875rem
+        }
+      }
+    }
     .title {
       color: #16a085;
       font-size: 2rem;

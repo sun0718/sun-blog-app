@@ -9,13 +9,14 @@ module.exports = {
     // 关闭eslint
     lintOnSave:false,
     devServer: {
+        open:true,
         proxy: {
             '/apis': {
                 target: 'http://localhost:9000/',  // target host
                 ws: true,  // proxy websockets 
                 changeOrigin: true,  // needed for virtual hosted sites
                 pathRewrite: {
-                    '^/apis': ''  // rewrite path
+                    '^/apis': '/'  // rewrite path
                 }
             },
         }

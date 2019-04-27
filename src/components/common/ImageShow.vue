@@ -2,7 +2,8 @@
     <div class="list-item d-flex-column mb-1x">
         <div v-if="num==1" class="d-flex-row flex">
             <div class="media flex-height-1">
-                <a class="media-content" :style="{backgroundImage:'url('+ postData.imageShow +')'}">
+                <!-- <a class="media-content" :style="{backgroundImage:'url('+ postData.imageShow +')'}"> -->
+                <a class="media-content" v-lazy:background-image= "postData.imageShow">
                     <span class="overlay"></span>
                 </a>
             </div>
