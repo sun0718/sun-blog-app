@@ -7,7 +7,7 @@ Vue.use(Router);
 Vue.use(componentUI);
 
 const router = new Router({
-  mode: "history",
+  mode: "hash",
   base: process.env.BASE_URL,
   routes: [
     {
@@ -35,7 +35,7 @@ const router = new Router({
         },
         {
           path: "post/:id",
-          name: "post",
+          name: "postDetail",
           component: resolve => require(['@/views/blog/article/PostDetail.vue'], resolve),
         },
         {
