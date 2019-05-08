@@ -7,7 +7,6 @@ Vue.use(Router);
 Vue.use(componentUI);
 
 const router = new Router({
-  mode: "hash",
   base: process.env.BASE_URL,
   routes: [
     {
