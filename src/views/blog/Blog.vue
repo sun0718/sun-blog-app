@@ -37,14 +37,13 @@
       padding-right: 0;
       padding-left: 0;
       padding-top: 9rem;
-      position: absolute;
+      width: 100%;
     }
   }
 
   @media screen and (max-width: 600px) {
     .home-content {
       padding-top: 9rem;
-      position: absolute;
     }
   }
 }

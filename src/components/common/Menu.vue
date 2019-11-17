@@ -453,6 +453,7 @@ export default {
 }
 @media screen and (max-width: 1100px) {
   .el-aside.blog-navbar {
+    height: 0;
     width: 100% !important;
     background: transparent;
     padding: 0;
@@ -523,8 +524,8 @@ export default {
       height: 100%;
       justify-content: flex-start;
       margin: 0;
-      padding: 164px 60px 64px;
       overflow-y: auto;
+      padding: 164px 60px 64px;;
       .navbar-menu {
         border-top: 1px dotted rgba(255, 255, 255, 0.04);
         li > span,

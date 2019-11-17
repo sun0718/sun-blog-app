@@ -201,6 +201,7 @@ export default {
     // 瀑布流
     mountMenu(arg) {
       var temp = this.postList;
+      if(!temp || !temp.length) return;
       var index = arg || 0;
       var num = this.selectCol();
       if (temp.length > index) {
