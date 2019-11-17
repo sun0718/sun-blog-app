@@ -13,7 +13,6 @@ import '@public/font-awesome/css/font-awesome.min.css';
 // 安装babel-plugin-components插件控制ele按需引入
 
 import 'element-ui/lib/theme-chalk/index.css';
-import '../public/common.css'
 
 Vue.config.productionTip = false;
 

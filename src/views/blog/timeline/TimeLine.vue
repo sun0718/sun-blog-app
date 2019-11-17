@@ -1,23 +1,22 @@
 <template>
-  <sun-wrapper>
-    <div class="other-inner">
-      <div class="post-header">
-        <h2 class="post-title">时间轴线</h2>
-      </div>
-      <div class="post-content">
-        <div class="archives">
-          <div class="archives_item" v-for="(items,indexs) in postData" :key="indexs">
-            <h2>{{`${indexs.slice(0,4)}年${indexs.slice(5-7)}日`}}</h2>
-            <ul class="archives_list">
-              <li v-for="(item,index) in items" :key="index">
-                {{item.createTime.slice(9-11)}}日<a href="http://www.ptbird.cn/weex-module-dom.html">{{item.title}}</a>
-              </li>
-            </ul>
-          </div>
+  <div class="other-inner">
+    <div class="post-header">
+      <h2 class="post-title">时间轴线</h2>
+    </div>
+    <div class="post-content">
+      <div class="archives">
+        <div class="archives_item" v-for="(items,indexs) in postData" :key="indexs">
+          <h2>{{`${indexs.slice(0,4)}年${indexs.slice(5-7)}日`}}</h2>
+          <ul class="archives_list">
+            <li v-for="(item,index) in items" :key="index">
+              {{item.createTime.slice(9-11)}}日
+              <a href="http://www.ptbird.cn/weex-module-dom.html">{{item.title}}</a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-  </sun-wrapper>
+  </div>
 </template>
 
 <script>
@@ -25,30 +24,30 @@ export default {
   name: "timeline",
   data() {
     return {
-      postData:[]
+      postData: []
     };
   },
-  mounted(){
-    this.getData(1000)
+  mounted() {
+    this.getData(1000);
   },
-  methods:{
-    getData(query){
-      this.$get('/getPosts',{
-        pagesize:query
-      }).then((res)=>{
-        var postData = res.result.list.allPost
-        var postTimeLine = {}
-        for(var item of postData){
-          if(postTimeLine[item.createTime.slice(0,7)]){
-             postTimeLine[item.createTime.slice(0,7)].push(item)
-          }else{
-            postTimeLine[item.createTime.slice(0,7)]=[]
-            postTimeLine[item.createTime.slice(0,7)].push(item)
+  methods: {
+    getData(query) {
+      this.$get("/getPosts", {
+        pagesize: query
+      }).then(res => {
+        var postData = res.result.list.allPost;
+        var postTimeLine = {};
+        for (var item of postData) {
+          if (postTimeLine[item.createTime.slice(0, 7)]) {
+            postTimeLine[item.createTime.slice(0, 7)].push(item);
+          } else {
+            postTimeLine[item.createTime.slice(0, 7)] = [];
+            postTimeLine[item.createTime.slice(0, 7)].push(item);
           }
         }
-        console.log(postTimeLine)
-        this.postData = postTimeLine
-      })
+        console.log(postTimeLine);
+        this.postData = postTimeLine;
+      });
     }
   }
 };
@@ -56,6 +55,11 @@ export default {
 
 
 <style lang="less">
+.other-inner {
+  max-width: 900px;
+  padding-bottom: 12rem;
+  margin: 0 auto;
+}
 .post-header {
   margin: 0 0 3rem;
   line-height: 2.5rem;

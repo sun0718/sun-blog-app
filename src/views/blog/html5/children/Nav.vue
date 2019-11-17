@@ -3,31 +3,31 @@
     <nav class="mod_nav_list">
       <a href="#" class="mod_nav_list_item">
         <span class="mod_nav_list_item_logo">
-          <img src="http://jdc.jd.com/img/80">
+          <img src="http://jdc.jd.com/img/80" />
         </span>
         <p class="mod_nav_list_item_name">导航入口</p>
       </a>
       <a href="#" class="mod_nav_list_item">
         <span class="mod_nav_list_item_logo">
-          <img src="http://jdc.jd.com/img/80">
+          <img src="http://jdc.jd.com/img/80" />
         </span>
         <p class="mod_nav_list_item_name">导航入口</p>
       </a>
       <a href="#" class="mod_nav_list_item">
         <span class="mod_nav_list_item_logo">
-          <img src="http://jdc.jd.com/img/80">
+          <img src="http://jdc.jd.com/img/80" />
         </span>
         <p class="mod_nav_list_item_name">导航入口</p>
       </a>
       <a href="#" class="mod_nav_list_item">
         <span class="mod_nav_list_item_logo">
-          <img src="http://jdc.jd.com/img/80">
+          <img src="http://jdc.jd.com/img/80" />
         </span>
         <p class="mod_nav_list_item_name">导航入口</p>
       </a>
       <a href="#" class="mod_nav_list_item">
         <span class="mod_nav_list_item_logo">
-          <img src="http://jdc.jd.com/img/80">
+          <img src="http://jdc.jd.com/img/80" />
         </span>
         <p class="mod_nav_list_item_name">导航入口</p>
       </a>
@@ -48,16 +48,15 @@
       .mod_nav_list_item_logo {
         display: block;
         margin: 0 auto;
-        width: 10.66667vw;
-        height: 10.66667vw;
         img {
           display: block;
           margin: 0 auto;
           max-width: 100%;
         }
-        .mod_nav_list_item_name {
-          margin-top: 0.53333vw;
-        }
+      }
+      .mod_nav_list_item_name {
+        margin-top: 0.53333vw;
+        font-size: 2rem;
       }
     }
   }

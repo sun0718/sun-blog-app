@@ -12,6 +12,7 @@ import Sidebar from '@/components/common/Sidebar'
 import Tags from '@/components/common/Tags'
 import ImageShow from '@/components/common/ImageShow'
 import Loading from '@/components/common/Loading'
+import Page from '@/components/common/Page'
 
 const components = [
     Footer,
@@ -21,7 +22,8 @@ const components = [
     Tags,
     Sidebar,
     ImageShow,
-    Loading
+    Loading,
+    Page
 ]
 
 export default {
