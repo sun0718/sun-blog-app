@@ -39,14 +39,17 @@
     .home-content {
       padding-right: 2rem;
       padding-left: 2rem;
-      padding-top: 4rem;
       width: 100%;
+      margin-top: 6.4rem;
+      padding-top: 2rem;
+      height: 100vh;
     }
   }
 
   @media screen and (max-width: 600px) {
     .home-content {
-      padding-top: 9rem;
+      padding-right: 0rem;
+      padding-left: 0rem;
     }
   }
 }

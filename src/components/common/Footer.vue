@@ -4,7 +4,7 @@
       <div class="column large-full footer__content">
         <div class="footer__copyright">
           <span>
-            © Copyright Typerite 2019 -
+            © Copyright 2019 -
             <a
               href="https://sunfafa.cn"
               title="sunfafa"

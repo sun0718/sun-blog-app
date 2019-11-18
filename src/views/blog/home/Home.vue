@@ -1,5 +1,5 @@
 <template>
-  <div class="masonry-wrap" v-loading='homeLoading'>
+  <div class="masonry-wrap" v-loading="homeLoading">
     <div class="masonry">
       <el-row :gutter="30">
         <el-col :span="colSpan" v-if="this.colNum >= 1" ref="col1">
@@ -114,7 +114,7 @@
       <!-- end article -->
     </div>
     <!-- end masonry -->
-    <sun-page v-if="!homeLoading"/>
+    <sun-page v-if="!homeLoading" />
   </div>
   <!-- end masonry-wrap -->
 </template>
@@ -140,7 +140,7 @@ export default {
     var wid = this.getClient().width;
     this.colNum = wid > 1800 ? 4 : wid > 1500 ? 3 : wid > 800 ? 2 : 1;
     this.colSpan = 24 / this.colNum;
-    this._homePageData()
+    this._homePageData();
   },
   mounted() {
     var _that = this;
@@ -183,7 +183,7 @@ export default {
       this.$get("/getPosts", {
         getAd: true
       }).then(res => {
-        this.postList  = res.result.list.allPost
+        this.postList = res.result.list.allPost;
         this.mountMenu();
       });
     },
@@ -203,7 +203,7 @@ export default {
     // 瀑布流
     mountMenu(arg) {
       var temp = this.postList;
-      if(!temp || !temp.length) return;
+      if (!temp || !temp.length) return;
       var index = arg || 0;
       var num = this.selectCol();
       if (temp.length > index) {
@@ -211,7 +211,7 @@ export default {
         this.$nextTick(() => {
           this.mountMenu(index + 1);
         });
-      }else{
+      } else {
         this.homeLoading = false;
       }
     },
@@ -376,6 +376,15 @@ export default {
           }
         }
       }
+    }
+  }
+}
+@media screen and (max-width: 600px) {
+  .masonry-wrap {
+    width: 100%;
+    .masonry {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 }
