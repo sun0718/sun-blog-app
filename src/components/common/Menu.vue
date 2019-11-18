@@ -446,18 +446,15 @@ export default {
 }
 @media screen and (max-width: 1100px) {
   .el-aside.blog-navbar {
-    height: 0;
     width: 100% !important;
     background: transparent;
     padding: 0;
-    position: static;
-    top: 0;
-    bottom: auto;
+    height: 6.4rem;
     .navbar-top {
       z-index: 100;
       background: #111111;
       width: 100%;
-      height: 78px;
+      height: 6.4rem;
       position: fixed;
       top: 0;
       left: 0;
