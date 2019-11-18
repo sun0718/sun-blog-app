@@ -382,13 +382,6 @@ export default {
         font-weight: 600;
         color: #00818a;
       }
-      // .el-submenu.is-opened {
-      //   .el-submenu__title {
-      //     & > span {
-      //       color: #ffffff;
-      //     }
-      //   }
-      // }
       .el-menu-item:hover,
       .el-menu-item:hover span,
       .el-submenu .el-submenu__title:hover span {

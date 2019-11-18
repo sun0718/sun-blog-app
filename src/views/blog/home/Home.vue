@@ -1,5 +1,5 @@
 <template>
-  <div class="masonry-wrap">
+  <div class="masonry-wrap" v-loading='homeLoading'>
     <div class="masonry">
       <el-row :gutter="30">
         <el-col :span="colSpan" v-if="this.colNum >= 1" ref="col1">
@@ -114,7 +114,7 @@
       <!-- end article -->
     </div>
     <!-- end masonry -->
-    <sun-page />
+    <sun-page v-if="!homeLoading"/>
   </div>
   <!-- end masonry-wrap -->
 </template>
@@ -131,7 +131,8 @@ export default {
       listCon1: [],
       listCon2: [],
       listCon3: [],
-      listCon4: []
+      listCon4: [],
+      homeLoading: false
     };
   },
   components: {},
@@ -143,6 +144,7 @@ export default {
   },
   mounted() {
     var _that = this;
+    this.homeLoading = true;
     this.mountMenu();
     window.addEventListener(
       "resize",
@@ -209,6 +211,8 @@ export default {
         this.$nextTick(() => {
           this.mountMenu(index + 1);
         });
+      }else{
+        this.homeLoading = false;
       }
     },
     selectCol() {

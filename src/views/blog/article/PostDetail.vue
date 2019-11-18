@@ -46,13 +46,13 @@
             <div class="entry__prev">
               <a href="#0" rel="prev">
                 <span>Previous Post</span>
-                Tips on Minimalist Design
+                前端开发之路
               </a>
             </div>
             <div class="entry__next">
               <a href="#0" rel="next">
                 <span>Next Post</span>
-                Less Is More
+                哈尔滨之行
               </a>
             </div>
           </div>
@@ -563,7 +563,6 @@ export default {
         margin-top: 10.2rem;
         padding-top: 2rem;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
-        position: relative;
         overflow: hidden;
         h3 {
           margin-top: 0;
@@ -577,11 +576,12 @@ export default {
         }
         .related {
           list-style: none;
-          margin-left: -4rem;
+          margin-left: 0;
           .related__item {
-            float: left;
-            width: 33.33333%;
             padding-left: 4rem;
+              &:last-child{
+                padding-right: 4rem;
+              }
             margin-bottom: 3.2rem;
             .related__link {
               display: block;
@@ -721,8 +721,17 @@ export default {
   }
 }
 @media screen and (max-width: 1400px) {
-  .content-header-title {
-    font-size: 5.2rem;
+  .post-content {
+    .content__page {
+      padding: 0 2rem;
+      .format-standard {
+        .content__page-header {
+          .content-header-title {
+            font-size: 5.2rem;
+          }
+        }
+      }
+    }
   }
 }
 @media screen and (max-width: 1000px) {
@@ -751,68 +760,113 @@ export default {
 }
 
 @media screen and (max-width: 800px) {
-  .content-header-title {
-    font-size: 4.6rem;
-  }
-  .entry__header-meta {
-    font-size: 1.7rem;
-  }
-  .entry__prev,
-  .entry__next {
-    width: auto;
-    float: none;
-    padding-right: 0;
-  }
-  .entry__nav [class*="entry__"] + [class*="entry__"] {
-    margin-top: 2rem;
-  }
-  .related {
-    margin-left: -4.4rem;
-  }
-
-  .related__item {
-    padding-left: 4.4rem;
-    width: 50%;
-  }
-
-  .related__item:nth-child(2n + 1) {
-    clear: both;
-  }
-  .comment__avatar img {
-    margin-top: 0;
-    height: 5.2rem;
-    width: 5.2rem;
+  .post-content {
+    .content__page {
+      .format-standard {
+        .content__page-header {
+          .content-header-title {
+            font-size: 4rem;
+          }
+          .entry__header-meta {
+            font-size: 1.7rem;
+          }
+        }
+        .entry__pagenav {
+          margin-top: 4rem;
+          .entry__prev,
+          .entry__next {
+            width: auto;
+            float: none;
+            padding-right: 0;
+            a{
+              font-size: 3rem;
+            }
+          }
+        }
+        .entry__related {
+          margin-top: 4rem;
+          .related {
+            .related__item{
+              padding-left: 1rem;
+              &:last-child{
+                padding-right: 1rem;
+              }
+            }
+            .related__item:nth-child(2n + 1) {
+              clear: both;
+            }
+          }
+        }
+      }
+    }
+    .comments-wrap {
+      .comment__avatar img {
+        margin-top: 0;
+        height: 5.2rem;
+        width: 5.2rem;
+      }
+    }
   }
 }
 @media screen and (max-width: 600px) {
-  .content-header-title {
-    font-size: 4.2rem;
-  }
-  .related {
-    margin-left: -2rem;
-  }
-  .related__item {
-    padding-left: 2rem;
-  }
-  .commentlist > .comment {
-    padding-top: 0;
-    padding-left: 0;
-  }
-  .comment__avatar {
-    display: none;
-  }
-  .comment ul.children li {
-    margin-top: calc(3.2rem + 0rem);
+  .post-content {
+    .content__page {
+      .format-standard {
+        .content__page-header {
+          .content-header-title {
+            font-size: 3rem;
+          }
+          .entry__header-meta {
+            font-size: 1.7rem;
+          }
+        }
+        .entry__pagenav {
+          .entry__prev,
+          .entry__next {
+            width: auto;
+            float: none;
+            padding-right: 0;
+          }
+        }
+        .entry__related {
+          .related {
+            margin-left: -2rem;
+            .related__item {
+              padding-left: 2rem;
+            }
+            .related__item:nth-child(2n + 1) {
+              clear: both;
+            }
+          }
+        }
+      }
+    }
+    .comments-wrap {
+      .commentlist > .comment {
+        padding-top: 0;
+        padding-left: 0;
+      }
+      .comment__avatar {
+        display: none;
+      }
+      .comment ul.children li {
+        margin-top: calc(3.2rem + 0rem);
+      }
+    }
   }
 }
 @media screen and (max-width: 500px) {
-  .comment ul.children li {
-    border-left: none;
+  .post-content {
+    .comments-wrap {
+      .comment ul.children li {
+        border-left: none;
+      }
+    }
   }
 }
 @media screen and (max-width: 460px) {
   .related {
-    margin-left: 0;
+    margin-left: 0 !important;
   }
   .related__item {
     float: none;
@@ -822,10 +876,10 @@ export default {
 }
 @media screen and (max-width: 400px) {
   .content-header-title {
-    font-size: 4rem;
+    font-size: 4rem !important;
   }
   .comment-respond form {
-    padding-top: 3.2rem;
+    padding-top: 3.2rem !important;
   }
 }
 </style>
